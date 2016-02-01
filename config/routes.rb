@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+
   root 'welcome#index'
-  resources :users
+  devise_for :users
+  resources :users, only: [:show, :edit]
   resources :comments
   resources :tankas
   resources :dais

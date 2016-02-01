@@ -3,7 +3,7 @@ class CreateDais < ActiveRecord::Migration
     create_table :dais do |t|
       t.string :title
       t.string :comment
-      t.date :due
+      t.datetime :due
 
       t.timestamps null: false
     end

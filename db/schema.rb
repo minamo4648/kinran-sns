@@ -15,16 +15,15 @@ ActiveRecord::Schema.define(version: 20160201034716) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "body"
-    t.string   "comment"
-    t.date     "due"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "deleted",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "dais", force: :cascade do |t|
     t.string   "title"
     t.string   "comment"
-    t.date     "due"
+    t.datetime "due"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
