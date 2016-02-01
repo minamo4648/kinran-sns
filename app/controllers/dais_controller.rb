@@ -1,0 +1,2 @@
+class DaisController < ApplicationController
+end

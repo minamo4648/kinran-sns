@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body: MyString
+  comment: MyString
+  due: 2016-02-01
+
+two:
+  body: MyString
+  comment: MyString
+  due: 2016-02-01

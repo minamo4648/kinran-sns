@@ -1,0 +1,2 @@
+class TankasController < ApplicationController
+end
