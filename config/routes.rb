@@ -1,11 +1,37 @@
 Rails.application.routes.draw do
 
+  devise_for :users, :controllers => {
+  #:sessions      => "users/sessions",
+  :registrations => "users/registrations",
+  :passwords     => "users/passwords"
+}
+
   root 'welcome#index'
-  devise_for :users
-  resources :users, only: [:show, :edit]
+  get   'vote_redo' , to: 'voterships#redo'
+  resources :voterships, only: [:create, :destroy]
+  resources :users  do
+  collection do
+    get 'import_csv_new'
+    post 'import_csv'
+  end
+  end
   resources :comments
-  resources :tankas
-  resources :dais
+  resources :tankas do
+  member do
+    get 'soul'
+    get 'unsoul'
+    get 'expose'
+  end
+  end
+  resources :dais do
+  member do
+    get 'vote'
+  end
+  end
+
+#http://easyramble.com/cutomize-controllers-on-rails-devise.html
+  
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

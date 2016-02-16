@@ -1,0 +1,6 @@
+<div class="vertical">
+    <p><%= @tanka.body %></p>
+    <p Align="right"><%= render partial: "shared/name", locals: {user: @tanka.user} %>
+    <%= render partial: "shared/vgg", locals: {user: @tanka.user} %></p>
+</div>
+

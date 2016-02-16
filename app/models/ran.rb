@@ -1,0 +1,2 @@
+class Ran < Votership
+end

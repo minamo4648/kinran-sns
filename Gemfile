@@ -45,5 +45,7 @@ group :development do
   gem 'spring'
   gem 'kaminari'
   gem 'devise'
+  gem 'pry-byebug', group: :development
+  gem 'i18n'
 end
 

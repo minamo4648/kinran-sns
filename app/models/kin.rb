@@ -1,0 +1,2 @@
+class Kin < Votership
+end

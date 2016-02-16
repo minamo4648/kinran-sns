@@ -1,0 +1,11 @@
+<!-- render partial: "shared/name", locals: {user: @user} -->
+
+<% if user.nickname.present? %>
+
+    <%= user.nickname %>
+
+<% else %>
+
+    <font color="#0000ff"><%= user.name %></font>
+
+<% end %>

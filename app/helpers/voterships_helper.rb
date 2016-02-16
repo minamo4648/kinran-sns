@@ -1,0 +1,2 @@
+module VotershipsHelper
+end

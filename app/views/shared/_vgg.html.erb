@@ -1,0 +1,21 @@
+<!-- render partial: "shared/vgg", locals: {user: @user} -->
+
+(
+
+<% if user.grade.present? %>
+
+    <span style="text-combine : horizontal ; -webkit-text-combine : horizontal ;"><%= user.grade %></span>期
+
+<% end %>
+
+<% if user.gender == 1 then %>
+
+    男
+    
+<% elsif user.gender == 2 then %>
+    
+    女
+
+<% end %>
+
+)

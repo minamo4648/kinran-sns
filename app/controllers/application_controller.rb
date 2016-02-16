@@ -7,6 +7,22 @@ class ApplicationController < ActionController::Base
   # deviceのコントローラーのときに、下記のメソッドを呼ぶ
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+# http://morizyun.github.io/blog/devise-customize-login-register-path/
+  # def after_sign_in_path_for(resource)
+  #   root_path
+  # end
+
+  # def after_sign_out_path_for(resource)
+  #   root_path
+  # end
+
+    def listdais
+  
+    return Dai.order(due: :asc).where("target_gender = ? or target_gender = ?",0,current_user.gender)
+        .where("target_grade like ? or target_grade = ?",  "%" + current_user.grade.to_s,"0").limit(30)
+  
+    end
+
   protected
 
     def configure_permitted_parameters
@@ -15,7 +31,8 @@ class ApplicationController < ActionController::Base
       # sign_upのときに、usernameも許可する
       devise_parameter_sanitizer.for(:sign_up) << :name
       #  account_updateのときに、usernameも許可する
-      devise_parameter_sanitizer.for(:account_update) << :name
+      devise_parameter_sanitizer.for(:account_update) << [:name, :nickname, :nickname_update, :password, :password_confirmation ]
+      
     end
   
 end

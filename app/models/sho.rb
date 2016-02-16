@@ -1,0 +1,2 @@
+class Sho < Votership
+end

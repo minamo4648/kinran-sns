@@ -1,0 +1,16 @@
+      <tr>
+        <td><%= tanka.body %></td>
+        
+        <td><%= render partial: "shared/namelink", locals: {user: tanka.user} %>
+        <%= render partial: "shared/name", locals: {user: tanka.user} %>
+        <%= render partial: "shared/gg", locals: {user: tanka.user} %></td>
+        
+      </tr>
+      
+      <tr>
+        <td>  
+            金：<%= tanka.kin_cnt %>
+            　蘭：<%= tanka.ran_cnt %>
+            　笑：<%= tanka.sho_cnt %>
+        </td>  
+      </tr>

@@ -1,0 +1,48 @@
+<h2>題：「<%= @tankas.first.dai.title %>」</h2>
+
+<div class="container-fluid col-md-offset-1 col-md-10" >
+    
+    <div class="vertical col-md-offset-1 col-md-10">
+        <br /><br />
+        <p id="seki">一席</p><br />
+        <p><%= @tankas.first.body %></p>
+        <div align="right"><%= render partial: "shared/namelink", locals: {user: @tankas.first.user} %>
+        <%= render partial: "shared/name", locals: {user: @tankas.first.user} %>
+        <%= render partial: "shared/gg", locals: {user: @tankas.first.user} %></div><br />
+        
+        <p id="seki">二席</p><br />
+        <p><%= @tankas.second.body %></p>
+        <div align="right"><%= render partial: "shared/namelink", locals: {user: @tankas.second.user} %>
+        <%= render partial: "shared/name", locals: {user: @tankas.second.user} %>
+        <%= render partial: "shared/gg", locals: {user: @tankas.second.user} %></div><br />
+        
+        <p id="seki">三席</p><br />
+        <p><%= @tankas.third.body %></p>
+        <div align="right"><%= render partial: "shared/namelink", locals: {user: @tankas.third.user} %>
+        <%= render partial: "shared/name", locals: {user: @tankas.third.user} %>
+        <%= render partial: "shared/gg", locals: {user: @tankas.third.user} %></div><br /><br />
+                
+        <p id="seki">蘭</p><br />
+        <p><%= @ran_tanka.body %></p>
+        <div align="right"><%= render partial: "shared/namelink", locals: {user: @ran_tanka.user} %>
+        <%= render partial: "shared/name", locals: {user: @ran_tanka.user} %>
+        <%= render partial: "shared/gg", locals: {user: @ran_tanka.user} %></div><br />
+        
+        <p id="seki">笑</p><br />
+        <p><%= @sho_tanka.body %></p>
+        <div align="right"><%= render partial: "shared/namelink", locals: {user: @sho_tanka.user} %>
+        <%= render partial: "shared/name", locals: {user: @sho_tanka.user} %>
+        <%= render partial: "shared/gg", locals: {user: @sho_tanka.user} %></div><br /> 
+    </div>    
+    
+<table class="table table-bordered" id="voted_tanka_list">
+
+  <tbody>
+
+	<%= render @tankas %>
+
+  </tbody>
+  
+</table>
+</div>
+

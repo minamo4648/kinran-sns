@@ -1,0 +1,33 @@
+<h1>投稿</h1>
+
+<div class="panel panel-default col-md-8 col-md-offset-2" id="daipanel">
+	<div class="panel-heading">
+		題：「<%= @dai.title %>」
+	</div>
+	<div class="panel-body">
+		<%= @dai.comment %>
+	</div>
+	<div class="panel-footer">
+        <% if @dai.due.nil? %>
+            締切設定なし
+        <% else %>    
+            締切：　<%= @dai.due.to_s(:wa) %>
+        <% end %>
+	</div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for @tanka do |f| %>
+
+      <%= f.label :body, "短歌" %>
+      <%= f.text_field :body , class: "form-control" %>
+    
+      <%= f.hidden_field :dai_id, value: @dai_id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :exposed, value: true %>
+
+      <%= f.submit "投稿", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+    <% @tankas.each do |tanka| %>
+
+    <tr>
+
+    <td class="col-md-8">
+
+      <%= tanka.body %>
+    
+    </td>
+
+    <td class="col-md-4">
+      
+        <% if current_user.kin?(tanka) %>
+        
+            <font color = "red">金</font>
+    
+        <% elsif current_user.ran?(tanka) or current_user.sho?(tanka) %>
+          
+            <font color = "#aaa">金</font>
+        
+        <% else %>
+        
+            <%= link_to "金" , voterships_path(tanka_id: tanka.id , type: "Kin") ,
+                                                               :method => :post %>
+    
+        <% end %>
+        
+        <% if current_user.ran?(tanka) %>
+        
+            <font color = "red">蘭</font>
+    
+        <% elsif current_user.kin?(tanka) or current_user.sho?(tanka) %>
+          
+            <font color = "#aaa">蘭</font>
+        
+        <% else %>
+        
+            <%= link_to "蘭" , voterships_path(tanka_id: tanka.id , type: "Ran") ,
+                                                               :method => :post %>
+    
+        <% end %>
+    
+        <% if current_user.sho?(tanka) %>
+        
+            <font color = "red">笑</font>
+    
+        <% elsif current_user.ran?(tanka) or current_user.kin?(tanka) %>
+          
+            <font color = "#aaa">笑</font>
+        
+        <% else %>
+        
+            <%= link_to "笑" , voterships_path(tanka_id: tanka.id , type: "Sho") ,
+                                                               :method => :post %>
+    
+        <% end %>
+    
+    </td>
+
+    </tr>
+
+    
+<% end %>

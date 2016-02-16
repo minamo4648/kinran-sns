@@ -1,0 +1,53 @@
+<div class="panel panel-default col-md-8 col-md-offset-2" id="daipanel">
+	<div class="panel-heading">
+		題：「<%= @dai.title %>」
+		
+		<% if @dai.target_grade != "0"%>
+		
+			<font color="#ff00000">学年制限：<%= @dai.target_grade %></font>
+		
+		<% end %>
+		
+		<% if @dai.target_gender == 1 %>
+		
+			<font color="#ff00000">男子のみ</font>
+		
+		<% end %>
+
+		<% if @dai.target_gender == 2 %>
+		
+			<font color="#ff00000">女子のみ</font>
+		
+		<% end %>
+		
+	</div>
+	<div class="panel-body">
+		<%= @dai.comment %>
+		<br />
+		<% if @dai.user.present? %>
+		出題：<%= render partial: "shared/name", locals: {user: @dai.user} %>
+		<% end %>
+	</div>
+	<div class="panel-footer">
+        <% if @dai.due.nil? %>
+            締切設定なし
+        <% else %>    
+            締切：　<%= @dai.due.to_s(:wa) %>
+        <% end %>
+	</div>
+</div>
+
+<div class="col-md-8 col-md-offset-2">
+
+<% if @dai.user == current_user %>
+	<%= link_to "管理", edit_dai_path(@dai.id) %>
+<% end %>
+<% if current_user.tankas.where(dai_id: @dai.id).present? %>
+	<%= link_to "推敲", edit_tanka_path(id: current_user.tankas.where(dai_id: @dai.id).first.id , dai_id: @dai.id)%>
+<% else %>
+	<%= link_to "投稿", new_tanka_path(:dai_id => @dai.id) %>
+<% end %>
+	<%= link_to "投票", vote_dai_path %>
+	<%= link_to "一覧", tankas_path(:dai_id => @dai.id) %>
+	<%= link_to "戻る", root_path %>
+</div>

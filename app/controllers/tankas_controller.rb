@@ -1,2 +1,101 @@
 class TankasController < ApplicationController
+
+before_action :authenticate_user!
+    
+  def new
+
+    @tanka = current_user.tankas.build
+    @dai_id = params[:dai_id].to_i
+    @dai = Dai.find(params[:dai_id])
+    
+  end
+  
+  def create
+      
+    @tanka = current_user.tankas.build(tanka_params)
+    
+    if @tanka.save
+      redirect_to root_path, notice: "投稿が完了しました"
+    else
+      redirect_to new_tanka_path
+    end
+
+  end
+  
+  def edit
+    
+    @tanka = Tanka.find(params[:id])
+    @dai_id = params[:dai_id].to_i
+    @dai = Dai.find(params[:dai_id])
+  
+  end
+
+  def update
+      
+    @tanka = Tanka.find(params[:id])
+    
+    if @tanka.update(tanka_params)
+      redirect_to root_path, notice: "投稿が完了しました"
+    else
+      redirect_to edit_tanka_path
+    end
+
+  end
+
+  def index
+    
+      Dai.find(params[:dai_id]).vote_count #フェイズ切り替わりのときだけのほうがよい
+
+      @tankas = Dai.find(params[:dai_id]).tankas.order(kin_cnt: :desc, created_at: :asc)
+      @ran_tanka = Dai.find(params[:dai_id]).tankas.order(ran_cnt: :desc,updated_at: :asc).first
+      @sho_tanka = Dai.find(params[:dai_id]).tankas.order(sho_cnt: :desc,updated_at: :asc).first
+
+  end  
+  
+  def show
+  
+    @tanka = Tanka.find(params[:id])
+  
+  end
+  
+  def soul
+    
+    current_user.update(soultanka_id: params[:id])
+    
+    redirect_to :back
+    
+  end
+
+  def unsoul
+    
+    current_user.update(soultanka_id: nil)
+    
+    redirect_to :back
+    
+  end
+
+  def expose
+    
+    @tanka = Tanka.find(params[:id])
+    
+    if @tanka.exposed != true
+    
+      @tanka.update(exposed: true)
+    
+    else
+    
+      @tanka.update(exposed: false)
+    
+    end
+    
+    redirect_to :back
+    
+  end
+
+  private
+
+    def tanka_params
+      params.require(:tanka).permit(:body, :dai_id, :exposed)
+    end
+    
 end

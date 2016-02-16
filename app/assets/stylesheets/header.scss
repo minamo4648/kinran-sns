@@ -5,7 +5,7 @@ header {
     margin: 0;
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     &.navbar-default {
-      background-color: #d4dcd6 !important;
+      background-color: #e4ece6 !important;
     }
     .container-fluid {
       margin: 0 !important;
@@ -19,14 +19,12 @@ header {
           margin: 0 !important;
           padding: 10px 0 0 0 !important;
           a {
+            font-size: 1.3em;
             width: 200px;
             height: 40px !important;
             margin: 0;
-            background: image-url("") no-repeat 0 0;
-            background-size: contain;
             display: block;
             white-space: nowrap;
-            text-indent: 99999px;
           }
         }
       }

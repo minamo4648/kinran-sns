@@ -1,0 +1,74 @@
+<h2><%= @user.name %>さんの歌
+<% if @user == current_user and @user.soultanka_id.present? %>
+    <%= link_to "自撰を取り下げる" , unsoul_tanka_path , class: "btn btn-sm btn-default" %>
+<% end %></h2>
+
+
+
+<div class="container-fluid col-md-offset-1 col-md-10">
+
+<% if @user.soultanka_id.present? %>
+    <div class="vertical col-md-12">
+        自撰<br />
+        <p><%= @soultanka.body %></p>
+    </div>
+<% end %>
+    
+<table class="table table-bordered">
+    
+    <% @tankas.each do |t| %>
+
+        <% if t.exposed == true or current_user == @user %>
+        
+            <tr>    
+        
+                <td>
+                    <% if t.dai.present? %>
+                    「<%= t.dai.title %>」
+                    <% end %>
+                
+                </td>
+            
+                <td>
+                    
+                    <%= link_to t.body, t %> 
+                
+                </td>
+                <td>
+                    
+                    <%= t.updated_at.strftime("%Y/%m/%d") %> 
+                
+                </td>
+                <td>    
+                    <% if t.user == current_user %>
+                    
+                        <% if t.id == current_user.soultanka_id %>
+                        
+                            自撰済み
+                        
+                        <% else %>
+                        
+                            <%= link_to "自撰", soul_tanka_path(id: t) %>
+                    
+                        <% end %>
+                        
+                        <% if t.exposed == true %>
+                        
+                            <%= link_to "隠す", expose_tanka_path(id: t) %>
+                        
+                        <% else %>
+                        
+                            <%= link_to "公開する", expose_tanka_path(id: t) %>
+                    
+                        <% end %>
+                    
+                    <% end %></td>
+            
+            </tr>
+        
+        <% end %>
+        
+    <% end %>
+
+</table>    
+</div>
