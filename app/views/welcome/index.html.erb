@@ -1,8 +1,7 @@
 <% if user_signed_in? %>
 
-<h2><%= current_user.name %>さん、ようこそ</h2>
-
 <div class="container-fluid col-md-offset-1 col-md-10"  style="height:600px; overflow:auto;">
+  <%= current_user.name %>さん、ようこそ
 <table class="table table-bordered">
   <thead>
     <tr>

@@ -1,0 +1,20 @@
+<div>
+    <tr>
+        <td>
+            <%= user.id %>
+        </td>
+        <td>
+            <%= link_to user.name, edit_user_path(user) %>
+            <small><%= "(#{user.nickname})" if user.nickname.present? %></small>
+        </td>
+        <td>
+            <%= user.grade %>
+            <%= gen(user) %>
+        </td>
+        <td>
+            <%= "管" if user.admin %>
+            <%= "題" if user.holder %>
+            <%= "投" if user.contributor %>
+        </td>
+    </tr>
+</div>

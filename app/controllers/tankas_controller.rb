@@ -55,7 +55,9 @@ before_action :authenticate_user!
   def show
   
     @tanka = Tanka.find(params[:id])
-  
+    @comments = @tanka.comments.order(created_at: :desc)
+    @comment = @comments.build
+
   end
   
   def soul
@@ -92,10 +94,45 @@ before_action :authenticate_user!
     
   end
 
+  def select
+    
+    @tanka = Tanka.find(params[:id])
+    
+    if @tanka.selected != true
+    
+      @tanka.update(selected: true)
+    
+    else
+    
+      @tanka.update(selected: false)
+    
+    end
+    
+    redirect_to "/dais/" + params[:dai_id] + "/edit#t"
+    
+  end
+
   private
 
     def tanka_params
       params.require(:tanka).permit(:body, :dai_id, :exposed)
     end
+
+    def comment_params
+      params.require(:comment).permit(:body, :user_id)
+    end
     
+    def tanka_judge!
+    
+      @tanka = Tanka.find(params[:id])
+      
+      if @tanka.exposed == false
+    
+        redirect_to :back, alert: 'その短歌は非公開です'
+        return
+    
+      end
+    
+    end
+
 end

@@ -1,7 +1,9 @@
 class Comment < ActiveRecord::Base
     
-  belongs_to :author, class_name: "User"
+  belongs_to :user
   
   belongs_to :tanka
+
+validates :body, presence: true, length: { maximum: 140 }
     
 end

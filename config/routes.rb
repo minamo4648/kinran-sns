@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get 'soul'
     get 'unsoul'
     get 'expose'
+    get 'select'
   end
   end
   resources :dais do

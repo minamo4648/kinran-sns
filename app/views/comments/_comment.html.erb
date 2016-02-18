@@ -1,0 +1,26 @@
+<div>
+    <% if comment.deleted == false %>
+        <%= render partial: "shared/namelink", locals: {user: comment.user} %>
+        <%= render partial: "shared/name", locals: {user: comment.user} %>
+        <%= render partial: "shared/gg", locals: {user: comment.user} %>
+        <% if comment.user == comment.tanka.user %>
+            <small>（作者）</small>
+        <% end %>
+        <%= comment.created_at.to_s(:wa) %>
+        <br />&nbsp;<%= comment.body %>
+        <% if comment.user == current_user %>
+            <%= link_to "削除" , comment , method: :delete, data: { confirm: '削除してもよろしいですか？' } %>
+        <% end %>
+        <hr class="style-one">
+    <% elsif comment.deleted and current_user.admin %>
+        <%= render partial: "shared/namelink", locals: {user: comment.user} %>
+        <%= render partial: "shared/name", locals: {user: comment.user} %>
+        <%= render partial: "shared/gg", locals: {user: comment.user} %>
+        <% if comment.user == comment.tanka.user %>
+            <small>（作者）</small>
+        <% end %>
+        <font color="#aaa"><%= comment.created_at.to_s(:wa) %>
+        <br />&nbsp;<s><%= comment.body %></s></font>
+        <hr class="style-one">
+    <% end %>
+</div>

@@ -1,4 +1,23 @@
-<div class="vertical">
+<div class="container-fluid col-md-offset-2 col-md-6">
+
+<%= form_for @comment do |f| %>
+
+    <%= f.text_area :body, :size=>"50x3" %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.hidden_field :tanka_id, :value => @tanka.id %>
+    <%= f.submit "コメントを投稿（140字まで）", class: "btn btn-sm btn-default" %>
+
+<% end %>
+
+<% if @comments.count > 0 %>
+
+    <hr class="style-one">
+    <%= render @comments.where("body not ?", nil) %>
+
+<% end %>
+
+</div>
+<div class="vertical onetanka col-md-2">
     <p><%= @tanka.body %></p>
     <p Align="right"><%= render partial: "shared/name", locals: {user: @tanka.user} %>
     <%= render partial: "shared/vgg", locals: {user: @tanka.user} %></p>

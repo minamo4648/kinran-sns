@@ -3,6 +3,10 @@
 <% if user.nickname.present? %>
 
     <%= user.nickname %>
+    
+        <% if current_user.admin %>
+            <small><font color="#aaa"><%= user.name %></font></small>
+        <% end %>
 
 <% else %>
 

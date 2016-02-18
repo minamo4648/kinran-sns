@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
       # sign_inのときに、usernameも許可する
       devise_parameter_sanitizer.for(:sign_in) << :name
       # sign_upのときに、usernameも許可する
-      devise_parameter_sanitizer.for(:sign_up) << :name
+      devise_parameter_sanitizer.for(:sign_up) <<  [:name, :nickname, :nickname_update, :password, :password_confirmation, :grade, :gender, :holder ]
       #  account_updateのときに、usernameも許可する
       devise_parameter_sanitizer.for(:account_update) << [:name, :nickname, :nickname_update, :password, :password_confirmation ]
       

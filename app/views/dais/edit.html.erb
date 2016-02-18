@@ -105,6 +105,9 @@ function connectcheck3( ischecked ) {
       <%= f.check_box :all_select %>
       <%= f.label :all_select, "全投稿作品を投票の対象にする" , checked_value: true, unchecked_value: false %>
 
+      <%= f.check_box :vote_closed %>
+      <%= f.label :vote_closed, "投票できるのは投稿者だけ" , checked_value: true, unchecked_value: false %>
+
     <br /><%= f.submit "更新", class: "btn btn-large btn-primary" %>
 
     </div>
@@ -114,4 +117,48 @@ function connectcheck3( ischecked ) {
 
   </div>
 </div>
+</div>
+
+<div class="container-fluid col-md-offset-1 col-md-10">
+
+ここまでの投稿歌
+
+<table class="table table-bordered" id="t">
+
+    <% @tankas.each do |t| %>
+
+            <tr>    
+        
+                <td>
+                    
+                    <%= link_to t.body, t %> 
+                
+                </td>
+                
+                <td>
+                    <% if @dai.all_select == false %>
+
+                        <% if t.selected == true %>
+                        
+                            <%= link_to "入選", select_tanka_path(id: t.id.to_s, dai_id: params[:id]), :style=>"color:red;" %>
+                        
+                        <% else %>
+                        
+                            <%= link_to "落選", select_tanka_path(id: t.id.to_s, dai_id: params[:id]), :style=>"color:#999;" %>
+                    
+                        <% end %>
+                        
+                    <% else %>
+                    
+                        <font color="red">入選</font>
+                    
+                    <% end %>
+                </td>
+                
+            </tr>
+            
+        
+    <% end %>
+
+</table>    
 </div>

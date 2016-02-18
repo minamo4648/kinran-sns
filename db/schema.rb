@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20160212025739) do
 
   create_table "comments", force: :cascade do |t|
-    t.string   "body"
+    t.string   "body",                       null: false
     t.boolean  "deleted",    default: false
     t.integer  "user_id"
     t.integer  "tanka_id"
@@ -26,33 +26,34 @@ ActiveRecord::Schema.define(version: 20160212025739) do
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "dais", force: :cascade do |t|
-    t.string   "title"
-    t.string   "comment"
+    t.string   "title",                         null: false
+    t.string   "comment",                       null: false
     t.datetime "due"
     t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "target_gender", default: 0
     t.string   "target_grade",  default: "0"
-    t.boolean  "all_select"
+    t.boolean  "all_select",    default: true
     t.integer  "fase",          default: 1
     t.datetime "v_due"
+    t.boolean  "vote_closed",   default: false
   end
 
   add_index "dais", ["user_id"], name: "index_dais_on_user_id"
 
   create_table "tankas", force: :cascade do |t|
     t.string   "body"
-    t.boolean  "exposed"
+    t.boolean  "exposed",    default: true
     t.integer  "user_id"
     t.integer  "dai_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.boolean  "selected",   default: true
-    t.integer  "kin_cnt"
-    t.integer  "ran_cnt"
-    t.integer  "sho_cnt"
-    t.integer  "ransho_cnt"
+    t.integer  "kin_cnt",    default: 0
+    t.integer  "ran_cnt",    default: 0
+    t.integer  "sho_cnt",    default: 0
+    t.integer  "ransho_cnt", default: 0
   end
 
   add_index "tankas", ["dai_id"], name: "index_tankas_on_dai_id"
@@ -100,7 +101,7 @@ ActiveRecord::Schema.define(version: 20160212025739) do
 
   add_index "voterships", ["dai_id"], name: "index_voterships_on_dai_id"
   add_index "voterships", ["tanka_id"], name: "index_voterships_on_tanka_id"
-  add_index "voterships", ["user_id", "tanka_id", "dai_id"], name: "index_voterships_on_user_id_and_tanka_id_and_dai_id", unique: true
+  add_index "voterships", ["user_id", "tanka_id", "dai_id", "type"], name: "index_voterships_on_user_id_and_tanka_id_and_dai_id_and_type", unique: true
   add_index "voterships", ["user_id"], name: "index_voterships_on_user_id"
 
 end

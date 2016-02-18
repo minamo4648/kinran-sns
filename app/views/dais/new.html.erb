@@ -106,6 +106,10 @@ function connectcheck3( ischecked ) {
       <%= f.check_box :all_select %>
       <%= f.label :all_select, "全投稿作品を投票の対象にする" , checked_value: true, unchecked_value: false %>
 
+      <%= f.check_box :vote_closed %>
+      <%= f.label :vote_closed, "投票できるのは投稿者だけ" , checked_value: true, unchecked_value: false %>
+
+
     <br /><%= f.submit "出題", class: "btn btn-large btn-primary" %>
 
     </div>

@@ -2,7 +2,7 @@ module DaisHelper
     
     def judge_grade(dai)
         
-        if dai.target_grade.present?
+        if dai.target_grade != "0"
         
             if dai.target_grade.index(current_user.grade.to_s).nil?
             

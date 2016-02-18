@@ -1,10 +1,12 @@
 <!-- render partial: "shared/gg", locals: {user: @user} -->
 
+<% if user.grade != 99 %>
+
 (
 
 <% if user.grade.present? %>
 
-    <%= user.grade %>期
+        <%= user.grade %>期
 
 <% end %>
 
@@ -19,3 +21,9 @@
 <% end %>
 
 )
+
+<% else %>
+
+<font color="orange">*</font>
+
+<% end %>

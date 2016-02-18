@@ -6,10 +6,19 @@
       <%= f.label :name, "名前" %>
       <%= f.text_field :name , class: "form-control" %>
 
-      <%= f.label :grade, "学年" %>
-      <%= f.select :grade, six_year_array %>期
+      <%#= f.label :grade, "学年" %>
+      <%#= f.select :grade, six_year_array %>
+
+      <%= f.label :grade,"学年" %>
+      <%= f.radio_button :grade, six_year_array[0] %> <%= f.label :grade_1, six_year_array[0].to_s + "期" %>
+      <%= f.radio_button :grade, six_year_array[1] %> <%= f.label :grade_2, six_year_array[1].to_s + "期" %>
+      <%= f.radio_button :grade, six_year_array[2] %> <%= f.label :grade_3, six_year_array[2].to_s + "期" %>
+      <%= f.radio_button :grade, six_year_array[3] %> <%= f.label :grade_4, six_year_array[3].to_s + "期" %>
+      <%= f.radio_button :grade, six_year_array[4] %> <%= f.label :grade_5, six_year_array[4].to_s + "期" %>
+      <%= f.radio_button :grade, six_year_array[5] %> <%= f.label :grade_6, six_year_array[5].to_s + "期" %>
+      <%= f.radio_button :grade, "99" %> <%= f.label :grade_7, "教員" %><br />
       (<%= six_year_array[0] %>期生が高３) <br />
-      
+
       <label>性別</label>
       <label><%= f.radio_button :gender, "1" %>男</label>
       <label><%= f.radio_button :gender, "2" %>女</label>
@@ -24,7 +33,7 @@
       <%= f.label :password_confirmation, "パスワード再入力" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>      
 
-      <%= f.label :nickname, "ペンネーム" %>
+      <%= f.label :nickname, "ペンネーム（任意）" %>
       <%= f.text_field :nickname , class: "form-control" %>
       
       <%= f.hidden_field :nickname_update, :value => Date.today %>

@@ -8,4 +8,17 @@ module ApplicationHelper
         
     end
     
+    def gen(user)
+        
+        case user.gender
+        when 1
+            return "男"
+        when 2
+            return "女"
+        else
+            return nil
+        end
+        
+    end
+    
 end

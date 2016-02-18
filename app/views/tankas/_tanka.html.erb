@@ -1,5 +1,7 @@
+    <% if tanka.selected == true %>
       <tr>
-        <td><%= tanka.body %></td>
+        
+        <td><%= link_to tanka.body, tanka %> </td>
         
         <td><%= render partial: "shared/namelink", locals: {user: tanka.user} %>
         <%= render partial: "shared/name", locals: {user: tanka.user} %>
@@ -14,3 +16,4 @@
             　笑：<%= tanka.sho_cnt %>
         </td>  
       </tr>
+    <% end %>
