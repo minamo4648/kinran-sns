@@ -4,7 +4,7 @@ class CreateDais < ActiveRecord::Migration
       t.string :title, :null => false
       t.string :comment, :null => false
       t.datetime :due
-      t.references :user, index: true
+      t.references :user, index: true, foreign_key: true
 
       t.timestamps null: false
     end

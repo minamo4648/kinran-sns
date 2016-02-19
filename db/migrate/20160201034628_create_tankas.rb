@@ -4,7 +4,7 @@ class CreateTankas < ActiveRecord::Migration
       t.string :body
       t.boolean :exposed, default: true
       t.references :user, index: true, foreign_key: true
-      t.references :dai, index: true, foreign_key: true
+      t.references :dai, index: true
       
       t.timestamps null: false
     end

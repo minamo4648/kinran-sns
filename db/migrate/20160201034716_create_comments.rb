@@ -3,8 +3,8 @@ class CreateComments < ActiveRecord::Migration
     create_table :comments do |t|
       t.string :body, :null => false
       t.boolean :deleted, default: false
-      t.references :user, index: true
-      t.references :tanka, index: true
+      t.references :user, index: true, foreign_key: true
+      t.references :tanka, index: true, foreign_key: true
       
       t.timestamps null: false
     end
