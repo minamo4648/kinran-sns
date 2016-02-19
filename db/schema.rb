@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212025739) do
+ActiveRecord::Schema.define(version: 20160219062438) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "body",                       null: false
@@ -41,6 +41,23 @@ ActiveRecord::Schema.define(version: 20160212025739) do
   end
 
   add_index "dais", ["user_id"], name: "index_dais_on_user_id"
+
+  create_table "noteships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "notice_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "noteships", ["notice_id"], name: "index_noteships_on_notice_id"
+  add_index "noteships", ["user_id", "notice_id"], name: "index_noteships_on_user_id_and_notice_id", unique: true
+  add_index "noteships", ["user_id"], name: "index_noteships_on_user_id"
+
+  create_table "notices", force: :cascade do |t|
+    t.string   "body",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "tankas", force: :cascade do |t|
     t.string   "body"
