@@ -1,6 +1,7 @@
 class TankasController < ApplicationController
 
 before_action :authenticate_user!
+before_action :toko_judge!, only: [:new] 
     
   def new
 
@@ -44,11 +45,12 @@ before_action :authenticate_user!
 
   def index
     
-      Dai.find(params[:dai_id]).vote_count #フェイズ切り替わりのときだけのほうがよい
+      @dai = Dai.find(params[:dai_id])
+      @dai.vote_count #フェイズ切り替わりのときだけのほうがよい
 
-      @tankas = Dai.find(params[:dai_id]).tankas.order(kin_cnt: :desc, created_at: :asc)
-      @ran_tanka = Dai.find(params[:dai_id]).tankas.order(ran_cnt: :desc,updated_at: :asc).first
-      @sho_tanka = Dai.find(params[:dai_id]).tankas.order(sho_cnt: :desc,updated_at: :asc).first
+      @tankas = Dai.find(params[:dai_id]).tankas.where(selected: true).order(kin_cnt: :desc, ransho_cnt: :desc, created_at: :asc)
+      @ran_tanka = Dai.find(params[:dai_id]).tankas.order(ran_cnt: :desc, kin_cnt: :desc, ransho_cnt: :desc, updated_at: :asc).first
+      @sho_tanka = Dai.find(params[:dai_id]).tankas.order(sho_cnt: :desc, kin_cnt: :desc, ransho_cnt: :desc, updated_at: :asc).first
 
   end  
   
@@ -129,6 +131,19 @@ before_action :authenticate_user!
       if @tanka.exposed == false
     
         redirect_to :back, alert: 'その短歌は非公開です'
+        return
+    
+      end
+    
+    end
+
+    def toko_judge!
+    
+      @dai = Dai.find(params[:dai_id])
+
+      if @dai.fase != 1
+    
+        redirect_to root_path, alert: '投稿期間ではありません'
         return
     
       end

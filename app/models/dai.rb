@@ -29,14 +29,11 @@ class Dai < ActiveRecord::Base
     
     tankas.each do |tanka|
       
-      tanka.kin_cnt = tanka.kins.count
-      tanka.ran_cnt = tanka.rans.count
-      tanka.sho_cnt = tanka.shos.count
+      tanka.update(kin_cnt: tanka.kins.count)
+      tanka.update(ran_cnt: tanka.rans.count)
+      tanka.update(sho_cnt: tanka.shos.count)
       
-      tanka.ransho_cnt = tanka.rans.count + tanka.shos.count
-      
-      tanka.save
-      
+      tanka.update(ransho_cnt: tanka.rans.count + tanka.shos.count)
     end
   
   end

@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     
-     if authenticate_user!
+     if user_signed_in?
          # @dais = Dai.all.order(due: :asc)
          @dais = listdais
 

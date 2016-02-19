@@ -61,46 +61,26 @@ function connectcheck3( ischecked ) {
       <%= f.text_area :comment , :maxlength => "400" , :size => "20x10" ,class: "form-control" %>
       <br />
 
-        <%= f.label :due, "投稿締切" %>
-        <%= f.datetime_select(
-            :due,
-            start_year: Time.now.year,
-            end_year:   (Time.now.year + 1),
-            default:    Date.today + 3) %>
-      <label><input type="checkbox" name="no_due" value="checked" onclick="connectcheck(this.checked);" />締切を設定しない</label>
+        <%= f.label :due, "投稿締切" %><%= " 設定なし" if @dai.due.nil? %>
+        <%= @dai.due.to_s(:wa) if @dai.due.present? %>
       <br />
       
-        <%= f.label :due, "投票締切" %>
-        <%= f.datetime_select(
-            :v_due,
-            start_year: Time.now.year,
-            end_year:   (Time.now.year + 1),
-            default:    Date.today + 6) %>
-      <label><input type="checkbox" name="no_due2" value="checked" onclick="connectcheck3(this.checked);" />締切を設定しない</label>
+        <%= f.label :due, "投票締切" %><%= " 設定なし" if @dai.v_due.nil? %>
+        <%= @dai.v_due.to_s(:wa) if @dai.v_due.present? %>
       <br /><br />
 
-    <div class="col-md-6 last-row">
-          <label title="ctrlを押しながらで複数選択可能">投稿制限（学年）</label> 
-          <%= select_tag "grades[]", 
-            options_for_select(six_year_array, @selected ),
-            {:multiple => true, :size =>6 } %>
-          <label><input type="checkbox" name="no_target" onclick="connectcheck2(this.checked);" />学年制限なし</label>
+        <%= f.label :target_grade, "投稿制限（学年）" %><%= " 設定なし" if @dai.target_grade== "0" %>
+        <%= @dai.target_grade if @dai.target_grade != "0" %>
       <br />
-    </div>
-    
-    <div class="col-md-6">
-      
-      <label>投稿制限（性別）</label>
-      <label><%= f.radio_button :target_gender, "0" %>なし</label>
-      <label><%= f.radio_button :target_gender, "1" %>男</label>
-      <label><%= f.radio_button :target_gender, "2" %>女</label>
-      <br />
-    
-          <%= f.hidden_field :user_id, value: current_user.id %>
-
-    </div>
-
-    <div class="col-md-12">
+        <%= f.label :target_grade, "投稿制限（性別）" %>
+        <% case @dai.target_gender %>
+        <% when 1 %>
+            男子のみ
+        <% when 2 %>
+            女子のみ
+        <% else %>
+            設定なし
+        <% end %><br /><br />
         
       <%= f.check_box :all_select %>
       <%= f.label :all_select, "全投稿作品を投票の対象にする" , checked_value: true, unchecked_value: false %>
@@ -108,9 +88,9 @@ function connectcheck3( ischecked ) {
       <%= f.check_box :vote_closed %>
       <%= f.label :vote_closed, "投票できるのは投稿者だけ" , checked_value: true, unchecked_value: false %>
 
-    <br /><%= f.submit "更新", class: "btn btn-large btn-primary" %>
-
-    </div>
+    <br /><%= f.submit "更新", class: "btn btn-large btn-default" %>
+        <%= link_to "投稿を締め切る", proceed_dai_path(@dai) , class: "btn btn-sm btn-warning" if @dai.fase == 1 %>
+        <%= link_to "投票を締め切る", proceed_dai_path(@dai) , class: "btn btn-sm btn-warning" if @dai.fase == 2 %>
     
         <% end %>
     
@@ -121,7 +101,7 @@ function connectcheck3( ischecked ) {
 
 <div class="container-fluid col-md-offset-1 col-md-10">
 
-ここまでの投稿歌
+<br />ここまでの投稿歌<%= "はありません" if @tankas.count == 0 %>
 
 <table class="table table-bordered" id="t">
 

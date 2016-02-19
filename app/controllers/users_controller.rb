@@ -24,7 +24,11 @@ before_action :authenticate_user!
 
     @user = User.find(params[:id])
     @soultanka = Tanka.find_by(id: @user.soultanka_id)
-    @tankas = Tanka.where(user_id: @user.id).order(created_at: :desc)
+    @tankas = @user.tankas.order(created_at: :desc)
+    @best_tanka = @tankas.order(kin_cnt: :desc, ransho_cnt: :desc, created_at: :asc).first if @tankas.count > 0
+
+
+
 
   end
   

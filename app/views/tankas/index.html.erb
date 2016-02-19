@@ -1,6 +1,8 @@
-<h2>題：「<%= @tankas.first.dai.title %>」</h2>
+<h2>題：「<%= @dai.title %>」</h2>
 
 <div class="container-fluid col-md-offset-1 col-md-10" >
+
+<% if @tankas.count >= 3 %>
     
     <div class="vertical rewarded">
         <p id="seki">一席</p><br />
@@ -33,7 +35,14 @@
         <%= render partial: "shared/name", locals: {user: @sho_tanka.user} %>
         <%= render partial: "shared/vgg", locals: {user: @sho_tanka.user} %></div><br /> 
     </div>    
-    
+
+<% else %>
+
+    このお題は３首以上入選しませんでした
+
+<% end %>
+
+入選作一覧
 <table class="table table-bordered" id="voted_tanka_list">
 
   <tbody>

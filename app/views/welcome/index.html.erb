@@ -1,7 +1,14 @@
 <% if user_signed_in? %>
 
-<div class="container-fluid col-md-offset-1 col-md-10"  style="height:600px; overflow:auto;">
+<div class="container-fluid col-md-offset-1 col-md-8"  style="height:600px; overflow:auto;">
   <%= current_user.name %>さん、ようこそ
+  <div class="issen col-md-offset-1 col-md-10">
+    
+    《一撰評》<br />
+    <p>かくかくしかじかあれこれうんぬん</p>
+    <p class="text-right">評者の名前</p>
+  </div>
+  
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -18,6 +25,16 @@
   </tbody>
 </table>
 </div>
+
+<div class="vertical onetanka issen col-md-2">
+  <br />
+    <p>《今日の一撰》</p>
+    <p>　<%= Tanka.first.body %></p>
+    <p Align="right"><%= render partial: "shared/namelink", locals: {user: Tanka.first.user} %>
+        <%= render partial: "shared/name", locals: {user: Tanka.first.user} %>
+    <%= render partial: "shared/vgg", locals: {user: Tanka.first.user} %></p>
+</div>
+
 
 <% else %>
 

@@ -47,6 +47,18 @@ before_action :voter_judge!, only: [:vote]
   if @dai.all_select == true
       @tankas.update_all(selected: true)
   end
+
+  if params[:no_due] == "checked"
+  
+    params[:dai][:due] = nil
+  
+  end
+  
+  if params[:no_due2] == "checked"
+  
+    params[:dai][:v_due] = nil
+  
+  end
     
     if @dai.update(dai_params)
       redirect_to root_path, notice: "更新が完了しました"
@@ -76,6 +88,22 @@ before_action :voter_judge!, only: [:vote]
     
   end
   
+  def manage
+  
+    @dais = Dai.where(user_id: current_user.id).limit(20)
+  
+  end
+
+  def proceed
+    
+    @dai = Dai.find(params[:id])
+    
+    @dai.update(fase: @dai.fase + 1)
+    
+    redirect_to root_path
+    
+  end
+  
   private
 
     def dai_params
@@ -101,7 +129,14 @@ before_action :voter_judge!, only: [:vote]
       
       if @dai.vote_closed == true and @dai.tankas.where(user_id: current_user.id).present? == false
     
-        redirect_to dais_path, alert: '投稿者しか投票できないお題です'
+        redirect_to root_path, alert: '投稿者しか投票できないお題です'
+        return
+    
+      end
+      
+      if @dai.fase != 2
+    
+        redirect_to root_path, alert: '投票期間ではありません'
         return
     
       end

@@ -17,9 +17,11 @@
 <% end %>
 
 </div>
-<div class="vertical onetanka col-md-2">
-    <p><%= @tanka.body %></p>
-    <p Align="right"><%= render partial: "shared/name", locals: {user: @tanka.user} %>
-    <%= render partial: "shared/vgg", locals: {user: @tanka.user} %></p>
+<div class="container-fluid col-md-2">
+    <div class="vertical onetanka" >
+        <p><%= @tanka.body %></p>
+        <p Align="right"><%= render partial: "shared/namelink", locals: {user: @tanka.user} %>
+            <%= render partial: "shared/name", locals: {user: @tanka.user} %>
+        <%= render partial: "shared/vgg", locals: {user: @tanka.user} %></p>
+    </div>
 </div>
-

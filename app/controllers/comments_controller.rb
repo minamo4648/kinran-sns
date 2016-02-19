@@ -13,6 +13,24 @@ class CommentsController < ApplicationController
     end
 
   end
+  
+  def edit
+  
+    @comment = Comment.find(params[:id])
+    @tanka = @comment.tanka
+
+  end
+  
+  def update
+    @comment = Comment.find(params[:id])
+    @tanka = @comment.tanka
+    
+    if @comment.update(comment_params)
+      redirect_to @tanka, notice: "更新が完了しました"
+    else
+      redirect_to :back
+    end
+  end  
 
   def destroy
     

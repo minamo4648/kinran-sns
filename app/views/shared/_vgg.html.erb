@@ -1,5 +1,7 @@
 <!-- render partial: "shared/gg", locals: {user: @user} -->
 
+<% if user.grade != 99 %>
+
 (
 
 <% if user.grade.present? %>
@@ -19,3 +21,9 @@
 <% end %>
 
 )
+
+<% else %>
+
+<font color="orange">*</font>
+
+<% end %>

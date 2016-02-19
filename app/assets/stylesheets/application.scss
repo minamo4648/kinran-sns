@@ -25,6 +25,7 @@ body {
   font-size: 14px;
 }
 
+
 .dropdown:hover .dropdown-menu {
         display: block;
     }
@@ -105,7 +106,7 @@ div.last-row label {
 .rewarded {
   margin: 0px 10% 30px;
   padding: 20px 10px 10px 10px;
-  background-color: #fef263;
+  background-color: #f5e56b;
   height: 500px;
   width: 750px;
   margin: 0 auto;  
@@ -122,9 +123,16 @@ text-combine: horizontal;
   height: 650px;
 }
 
+.issen{
+  background-color: #f5e56b;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 hr.style-one {
   height: 1px;
   background-color: #888;
   border: none;
   //color: #0000ff;
 }
+

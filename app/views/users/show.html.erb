@@ -1,4 +1,5 @@
-<h2><%= @user.name %>さんの歌
+<h2><%= render partial: "shared/name", locals: {user: @user} %>
+<%= render partial: "shared/gg", locals: {user: @user}%>さんの歌 
 <% if @user == current_user and @user.soultanka_id.present? %>
     <%= link_to "自撰を取り下げる" , unsoul_tanka_path , class: "btn btn-sm btn-default" %>
 <% end %></h2>
@@ -6,14 +7,17 @@
 
 
 <div class="container-fluid col-md-offset-1 col-md-10">
-
-<% if @user.soultanka_id.present? %>
-    <div class="vertical col-md-12">
-        自撰<br />
-        <p><%= @soultanka.body %></p>
+    <div class="vertical col-md-offset-5 col-md-2">
+        <% if @user.soultanka_id.present? %>
+                自撰　題「<%=@soultanka.dai.title %>」<br />
+                <p><%= @soultanka.body %></p>
+        <% end %>
+        <% if @best_tanka.present? %>
+                 <br />代表作　題「<%=@best_tanka.dai.title %>」<br />
+                <p><%= @best_tanka.body %></p>
+        <% end %>
     </div>
-<% end %>
-    
+
 <table class="table table-bordered">
     
     <% @tankas.each do |t| %>
@@ -31,12 +35,19 @@
                 <td>
                     
                     <%= link_to t.body, t %> 
-                
+                    <span class="badge pull-right"><%= Comment.where(tanka_id: t.id, deleted: false).count %></span>
                 </td>
                 <td>
                     
                     <%= t.updated_at.strftime("%Y/%m/%d") %> 
                 
+                </td>
+                <td>
+                    <% if t.dai.fase == 3 and t.selected %>
+                        金：<%= t.kin_cnt %> 
+                        蘭：<%= t.ran_cnt %> 
+                        笑：<%= t.sho_cnt %>
+                    <% end %>
                 </td>
                 <td>    
                     <% if t.user == current_user %>

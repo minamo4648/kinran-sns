@@ -10,24 +10,28 @@ Rails.application.routes.draw do
   get   'vote_redo' , to: 'voterships#redo'
   resources :voterships, only: [:create, :destroy]
   resources :users  do
-  collection do
-    get 'import_csv_new'
-    post 'import_csv'
-  end
+    collection do
+      get 'import_csv_new'
+      post 'import_csv'
+    end
   end
   resources :comments
   resources :tankas do
-  member do
-    get 'soul'
-    get 'unsoul'
-    get 'expose'
-    get 'select'
-  end
+    member do
+      get 'soul'
+      get 'unsoul'
+      get 'expose'
+      get 'select'
+    end
   end
   resources :dais do
-  member do
-    get 'vote'
-  end
+    member do
+      get 'vote'
+      get 'proceed'
+    end
+    collection do
+      get 'manage'
+    end   
   end
 
 #http://easyramble.com/cutomize-controllers-on-rails-devise.html

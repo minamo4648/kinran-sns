@@ -11,6 +11,9 @@
         <% if comment.user == current_user %>
             <%= link_to "削除" , comment , method: :delete, data: { confirm: '削除してもよろしいですか？' } %>
         <% end %>
+        <% if comment.user == current_user %>
+            <%= link_to "編集" , edit_comment_path(comment) %>
+        <% end %>
         <hr class="style-one">
     <% elsif comment.deleted and current_user.admin %>
         <%= render partial: "shared/namelink", locals: {user: comment.user} %>

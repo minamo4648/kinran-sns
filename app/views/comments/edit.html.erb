@@ -1,0 +1,12 @@
+<div class="container-fluid col-md-offset-1 col-md-6">
+
+「<%= @tanka.body %>」へのコメントの修正
+
+<%= form_for @comment do |f| %>
+
+    <%= f.text_area :body, :size=>"50x3" %>
+    <%= f.submit "コメントを投稿（140字まで）", class: "btn btn-sm btn-default" %>
+
+<% end %>
+
+</div>
