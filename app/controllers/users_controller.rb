@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
 before_action :authenticate_user!
-# before_action :admin_only, only: [:edit, :update, :index]  
+before_action :admin_only, only: [:edit, :update, :index]  
   
   def edit
     @user = User.find(params[:id])
@@ -34,7 +34,7 @@ before_action :authenticate_user!
   
   def index
     
-    @users = User.all
+    @users = User.all.order(last_sign_in_at: :desc)
     
   end
 
