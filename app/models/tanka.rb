@@ -1,6 +1,6 @@
 class Tanka < ActiveRecord::Base
 
-  validates :body, length: { maximum: 40 }, presence: true
+  validates :body, length: { maximum: 45 }, presence: true
 
   has_many :voterships, dependent: :destroy
   has_many :users, through: :voterships
@@ -10,6 +10,8 @@ class Tanka < ActiveRecord::Base
   belongs_to :user
   
   belongs_to :dai
+  
+  has_many :issens  
 
   has_many :kins, class_name: "Kin", foreign_key: "tanka_id", dependent: :destroy
   has_many :kin_users , through: :kins, source: :user

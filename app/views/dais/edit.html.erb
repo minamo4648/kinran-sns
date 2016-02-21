@@ -47,7 +47,6 @@ function connectcheck3( ischecked ) {
 }
 </script>
 <h2>出題管理</h2>
-
 <div class="container-fluid col-md-12">
 
 <div class="row">
@@ -57,16 +56,30 @@ function connectcheck3( ischecked ) {
 
      <h4> 題：「<%= @dai.title %>」</h4><br />
 
-      <%= f.label :comment, "コメント" %>
-      <%= f.text_area :comment , :maxlength => "400" , :size => "20x10" ,class: "form-control" %>
-      <br />
+        <% if @dai.fase == 1 %>
+          <%= f.label :comment, "コメント" %>
+          <%= f.text_area :comment , :maxlength => "400" , :size => "20x10" ,class: "form-control" %>
+          <br />
+        <% end %>
 
-        <%= f.label :due, "投稿締切" %><%= " 設定なし" if @dai.due.nil? %>
-        <%= @dai.due.to_s(:wa) if @dai.due.present? %>
+        <%= f.label :due, "投稿締切" %>
+        <%= f.datetime_select(
+            :due,
+            start_year: Time.zone.now.year,
+            end_year:   (Time.zone.now.year + 1),
+            include_blank: true,
+            minute_step: 10) %>
+      <label><input type="checkbox" name="no_due" value="checked" onclick="connectcheck(this.checked);" />締切を設定しない</label>
       <br />
       
-        <%= f.label :due, "投票締切" %><%= " 設定なし" if @dai.v_due.nil? %>
-        <%= @dai.v_due.to_s(:wa) if @dai.v_due.present? %>
+        <%= f.label :due, "投票締切" %>
+        <%= f.datetime_select(
+            :v_due,
+            start_year: Time.zone.now.year,
+            end_year:   (Time.zone.now.year + 1),
+            include_blank: true,
+            minute_step: 10) %>
+      <label><input type="checkbox" name="no_due2" value="checked" onclick="connectcheck3(this.checked);" />締切を設定しない</label>
       <br /><br />
 
         <%= f.label :target_grade, "投稿制限（学年）" %><%= " 設定なし" if @dai.target_grade== "0" %>
@@ -88,9 +101,17 @@ function connectcheck3( ischecked ) {
       <%= f.check_box :vote_closed %>
       <%= f.label :vote_closed, "投票できるのは投稿者だけ" , checked_value: true, unchecked_value: false %>
 
+        <% if @dai.fase == 2 and @dai.selecting == false %>
+          <br /><br /><%= f.label :comment2, "投票後のコメント（講評）" %>
+          <%= f.text_area :comment2 , :maxlength => "2000" , :size => "20x10" ,class: "form-control" %>
+          <br />
+        <% end %>
+
     <br /><%= f.submit "更新", class: "btn btn-large btn-default" %>
-        <%= link_to "投稿を締め切る", proceed_dai_path(@dai) , class: "btn btn-sm btn-warning" if @dai.fase == 1 %>
-        <%= link_to "投票を締め切る", proceed_dai_path(@dai) , class: "btn btn-sm btn-warning" if @dai.fase == 2 %>
+        <%= f.submit "投稿を締め切る", class: "btn btn-sm btn-warning" if @dai.fase == 1 and @dai.all_select %>
+        <%= f.submit "入選歌を確定し、投稿を締め切る", class: "btn btn-sm btn-warning" if @dai.fase == 1 and @dai.all_select == false %>
+        <%= link_to "入選歌を確定する", proceed_dai_path(@dai) , class: "btn btn-sm btn-warning" if @dai.fase == 2 and @dai.selecting == true %>
+        <%= f.submit "投票を締め切る", class: "btn btn-sm btn-warning" if @dai.fase == 2 and @dai.selecting == false %>
     
         <% end %>
     
@@ -116,8 +137,6 @@ function connectcheck3( ischecked ) {
                 </td>
                 
                 <td>
-                    <% if @dai.all_select == false %>
-
                         <% if t.selected == true %>
                         
                             <%= link_to "入選", select_tanka_path(id: t.id.to_s, dai_id: params[:id]), :style=>"color:red;" %>
@@ -127,12 +146,6 @@ function connectcheck3( ischecked ) {
                             <%= link_to "落選", select_tanka_path(id: t.id.to_s, dai_id: params[:id]), :style=>"color:#999;" %>
                     
                         <% end %>
-                        
-                    <% else %>
-                    
-                        <font color="red">入選</font>
-                    
-                    <% end %>
                 </td>
                 
             </tr>

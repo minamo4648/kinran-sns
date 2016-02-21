@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       get 'manage'
     end   
   end
+  resources :issens
 
 #http://easyramble.com/cutomize-controllers-on-rails-devise.html
   

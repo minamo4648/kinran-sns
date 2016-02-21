@@ -6,6 +6,7 @@
 # db      => "2014-10-01 00:00:00"
 
 # カスタムフォーマットを定義
-Time::DATE_FORMATS[:wa] = "%Y年%m月%d日 %H時%M分"
-Date::DATE_FORMATS[:default]      = "%Y年%m月d日"
-Date::DATE_FORMATS[:date] = '%Y/%m/%d'
+Time::DATE_FORMATS[:wa] = "%y年%-m月%-d日 %H時%M分"
+Time::DATE_FORMATS[:po] = "%y-%-m-%-d %H:%M"
+Date::DATE_FORMATS[:default]      = "%-y年%-m月%-d日"
+Date::DATE_FORMATS[:date] = '%y/%-m/%-d'

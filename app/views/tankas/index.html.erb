@@ -5,19 +5,19 @@
 <% if @tankas.count >= 3 %>
     
     <div class="vertical rewarded">
-        <p id="seki">一席</p><br />
+        <p id="seki">天</p><br />
         <p><%= @tankas.first.body %></p>
         <div align="right"><%= render partial: "shared/namelink", locals: {user: @tankas.first.user} %>
         <%= render partial: "shared/name", locals: {user: @tankas.first.user} %>
         <%= render partial: "shared/vgg", locals: {user: @tankas.first.user} %></div><br />
         
-        <p id="seki">二席</p><br />
+        <p id="seki">地</p><br />
         <p><%= @tankas.second.body %></p>
         <div align="right"><%= render partial: "shared/namelink", locals: {user: @tankas.second.user} %>
         <%= render partial: "shared/name", locals: {user: @tankas.second.user} %>
         <%= render partial: "shared/vgg", locals: {user: @tankas.second.user} %></div><br />
         
-        <p id="seki">三席</p><br />
+        <p id="seki">人</p><br />
         <p><%= @tankas.third.body %></p>
         <div align="right"><%= render partial: "shared/namelink", locals: {user: @tankas.third.user} %>
         <%= render partial: "shared/name", locals: {user: @tankas.third.user} %>
@@ -42,6 +42,20 @@
 
 <% end %>
 
+<% if @dai.comment2.present? %>
+
+    <br /><br /><div class="col-md-offset-1 col-md-10 review">
+        出題者
+        <%= render partial: "shared/namelink", locals: {user: @dai.user} %>
+        <%= render partial: "shared/name", locals: {user: @dai.user} %>
+        <%= render partial: "shared/gg", locals: {user: @dai.user} %>
+        さんからのコメント：<br />
+        <%= @dai.comment2 %>
+        </div><br />
+
+<% end %>
+
+<div class="col-md-12">
 入選作一覧
 <table class="table table-bordered" id="voted_tanka_list">
 
@@ -52,5 +66,6 @@
   </tbody>
   
 </table>
+</div>
 </div>
 

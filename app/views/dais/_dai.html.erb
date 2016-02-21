@@ -15,7 +15,11 @@
             <% when 1 %>
               投稿受付中
             <% when 2 %>
-              投票受付中
+                <% if dai.selecting %>
+                    撰歌中
+                <% else %>
+                    投票受付中
+                <% end %>
             <% else %>
               投票終了
             <% end %>

@@ -59,6 +59,32 @@ before_action :voter_judge!, only: [:vote]
     params[:dai][:v_due] = nil
   
   end
+
+  if params[:commit] == "投稿を締め切る" or params[:commit] == "入選歌を確定し、投稿を締め切る"
+    @dai.update(fase: 2)
+    
+    @notice = Notice.new
+    @notice.body = "「#{@dai.title}」の投稿が締め切られました"
+    @notice.link = "/dais/#{@dai.id}"
+    @notice.save
+    @users = User.where('id in (?)', Tanka.where('dai_id = ?', @dai.id).pluck(:user_id))
+    if @users.count > 0
+      @notice.note(@users)
+    end
+  end  
+  
+  if params[:commit] == "投票を締め切る"
+    @dai.update(fase: 3)
+    
+    @notice = Notice.new
+    @notice.body = "「#{@dai.title}」の投票が締め切られました"
+    @notice.link = "/dais/#{@dai.id}"
+    @notice.save
+    @users = User.where('id in (?)', Tanka.where('dai_id = ?', @dai.id).pluck(:user_id))
+    if @users.count > 0
+      @notice.note(@users)   
+    end
+  end  
     
     if @dai.update(dai_params)
       redirect_to root_path, notice: "更新が完了しました"
@@ -98,7 +124,19 @@ before_action :voter_judge!, only: [:vote]
     
     @dai = Dai.find(params[:id])
     
-    @dai.update(fase: @dai.fase + 1)
+    if @dai.fase == 2 and @dai.selecting
+      @dai.update(selecting: false)
+      @notice = Notice.new
+      @notice.body = "「#{@dai.title}」の撰歌が終わりました"
+      @notice.link = "dais/#{@dai.id}"
+      @notice.save
+      @users = User.where('id in (?)', Tanka.where('dai_id = ?', @dai.id).pluck(:user_id))
+      if @users.count > 0
+        @notice.note(@users)
+      end
+    else 
+      @dai.update(fase: @dai.fase + 1)
+    end
     
     redirect_to root_path
     
@@ -107,7 +145,8 @@ before_action :voter_judge!, only: [:vote]
   private
 
     def dai_params
-    params.require(:dai).permit(:title, :comment, :due, :dai_id, :target_grade, :target_gender, :user_id, :v_due, :all_select, :vote_closed)
+    params.require(:dai).permit(:title, :comment, :due, :dai_id, :target_grade, :target_gender, 
+    :user_id, :v_due, :all_select, :vote_closed, :comment2)
     end
     
     def dai_judge!
@@ -119,6 +158,11 @@ before_action :voter_judge!, only: [:vote]
         redirect_to dais_path, alert: 'そのお題は見られません'
         return
     
+      end
+      
+      if @dai.fase == 3
+        redirect_to tankas_path(dai_id: params[:id])
+        return
       end
     
     end
@@ -137,6 +181,13 @@ before_action :voter_judge!, only: [:vote]
       if @dai.fase != 2
     
         redirect_to root_path, alert: '投票期間ではありません'
+        return
+    
+      end
+
+      if @dai.selecting
+    
+        redirect_to root_path, alert: 'ただいま撰歌中です'
         return
     
       end

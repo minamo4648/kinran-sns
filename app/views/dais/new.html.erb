@@ -65,18 +65,20 @@ function connectcheck3( ischecked ) {
         <%= f.label :due, "投稿締切" %>
         <%= f.datetime_select(
             :due,
-            start_year: Time.now.year,
-            end_year:   (Time.now.year + 1),
-            default:    Date.today + 3) %>
+            start_year: Time.zone.now.year,
+            end_year:   (Time.zone.now.year + 1),
+            default:    Time.zone.today + 3,
+            minute_step: 10 ) %>
       <label><input type="checkbox" name="no_due" value="checked" onclick="connectcheck(this.checked);" />締切を設定しない</label>
       <br />
       
         <%= f.label :due, "投票締切" %>
         <%= f.datetime_select(
             :v_due,
-            start_year: Time.now.year,
-            end_year:   (Time.now.year + 1),
-            default:    Date.today + 6) %>
+            start_year: Time.zone.now.year,
+            end_year:   (Time.zone.now.year + 1),
+            default:    Time.zone.today + 6,
+            minute_step: 10 ) %>
       <label><input type="checkbox" name="no_due2" value="checked" onclick="connectcheck3(this.checked);" />締切を設定しない</label>
       <br /><br />
 

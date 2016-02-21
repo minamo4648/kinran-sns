@@ -98,16 +98,19 @@ before_action :toko_judge!, only: [:new]
 
   def select
     
+    @dai = Dai.find(params[:dai_id])
     @tanka = Tanka.find(params[:id])
     
     if @tanka.selected != true
     
-      @tanka.update(selected: true)
+        @tanka.update(selected: true)
     
     else
-    
-      @tanka.update(selected: false)
-    
+      
+      if @dai.all_select == false    
+        @tanka.update(selected: false)
+      end 
+      
     end
     
     redirect_to "/dais/" + params[:dai_id] + "/edit#t"

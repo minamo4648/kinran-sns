@@ -1,21 +1,38 @@
 
 <div class="container-fluid col-md-offset-1 col-md-10">
-
-<h4>題：「<%= @dai.title %>」</h4>    
     
-<table class="table table-bordered">
-
-<%= render 'tankas/tanka_vote' %>
-
-</table>
-
-    <%= link_to "戻る" , @dai , class: "btn btn-sm btn-default" %>
-
-    <% if current_user.kin_tankas.where(dai_id: params[:id].to_i).present? or
-    current_user.ran_tankas.where(dai_id: params[:id].to_i).present? or
-    current_user.sho_tankas.where(dai_id: params[:id].to_i).present? %>
+    <div class="col-md-offset-3 col-md-6" id="vote_inst">
+        
+        <b>金</b>：このお題の中でもっとも「好き」「いいな」と思う一首に<br />
+        <b>蘭</b>：このお題の中でもっとも「きれい」「美しい」と思う一首に<br />
+        <b>笑</b>：このお題の中でもっとも「ユーモアがある」「笑っちゃった」と思う一首に<br />
+        <br />
+        投票してください<br />
+        <br />
+        一首に「金と蘭」「金と笑」など重ねて投じることも可能です<br />
+        <br />
+        「該当なし」でもいいですが……できるかぎり三賞ともどれかにあげてください
+        
+    </div>
     
-    <%= link_to "投票をやりなおす" , vote_redo_path(dai_id: params[:id]) , class: "btn btn-sm btn-default" %>
+    <div class="col-md-offset-2 col-md-8">
+    
+    <h4>題：「<%= @dai.title %>」</h4>    
+        
+    <table class="table table-bordered">
+    
+    <%= render 'tankas/tanka_vote' %>
+    
+    </table>
+    
+        <%= link_to "戻る" , @dai , class: "btn btn-sm btn-default" %>
+    
+        <% if current_user.kin_tankas.where(dai_id: params[:id].to_i).present? or
+        current_user.ran_tankas.where(dai_id: params[:id].to_i).present? or
+        current_user.sho_tankas.where(dai_id: params[:id].to_i).present? %>
+        
+        <%= link_to "投票をやりなおす" , vote_redo_path(dai_id: params[:id]) , class: "btn btn-sm btn-default" %>
+    </div>
 
 </div>
     

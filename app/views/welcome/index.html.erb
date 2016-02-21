@@ -1,14 +1,18 @@
 <% if user_signed_in? %>
 
 <div class="container-fluid col-md-offset-1 col-md-8"  style="height:600px; overflow:auto;">
-  <%= current_user.name %>さん、ようこそ
+
+  <% if Issen.count > 0 %>
   <div class="issen col-md-offset-1 col-md-10">
     
     《一撰評》<br />
-    <p>かくかくしかじかあれこれうんぬん</p>
-    <p class="text-right">評者の名前</p>
+    <p><%=@issen.body %></p>
+    <p class="text-right">評：<%= render partial: "shared/name", locals: {user: @issen.user} %></p>
   </div>
-  
+  <% end %>
+
+  <div class="col-md-12">
+    新着お題一覧
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -24,22 +28,37 @@
 
   </tbody>
 </table>
+  </div>
 </div>
 
 <div class="vertical onetanka issen col-md-2">
-  <br />
-    <p>《今日の一撰》</p>
-    <p>　ここにピックアップされた短歌が入る</p>
-    <p Align="right"><%#= render partial: "shared/namelink", locals: {user: Tanka.first.user} %>
-        <%#= render partial: "shared/name", locals: {user: Tanka.first.user} %>
-    <%#= render partial: "shared/vgg", locals: {user: Tanka.first.user} %></p>
+  <% if Issen.count > 0 %>
+    <br /><br />
+      <p>《
+      <% if @issen.tanka.exposed or @issen.tanka.user == current_user %>
+      <%= link_to "一撰" , @issen.tanka %>
+      <% else %>
+      一撰
+      <% end %>
+      》</p>
+      <p>　<%= @issen.tanka.body %></p>
+      <% if @issen.tanka.exposed %>
+        <p Align="right"><%= render partial: "shared/namelink", locals: {user: @issen.tanka.user} %>
+        <%= render partial: "shared/name", locals: {user: @issen.tanka.user} %>
+        <%= render partial: "shared/vgg", locals: {user: @issen.tanka.user} %></p>
+      <% end %>
+  <% else %>
+    「一撰」欄は、出題者たちが特に紹介したい一首を掲載します。
+  <% end %>
 </div>
 
 
 <% else %>
 
-<h1>KAKAI</h1>
+<div class="container-fluid col-md-offset-2 col-md-8" id="toptitle">
 
 <p>KAKAIは、オンラインで歌会をひらくためのサイトです。</p>
+
+</div>
 
 <% end %>

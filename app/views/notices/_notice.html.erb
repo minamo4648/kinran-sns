@@ -1,0 +1,9 @@
+      <li>
+        　<%= notice.created_at.to_s(:po) %>
+        　<% if notice.link == "" %>
+            <br /><span class="notice"><%= notice.body %></span>
+          <% else %>
+            <br /><span class="notice"><%= link_to notice.body, notice.link %></span>
+          <% end %>
+      </li>
+      <li role="separator" class="divider"></li>

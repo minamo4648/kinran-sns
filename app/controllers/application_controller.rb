@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
     def listdais
   
-    return Dai.order(due: :asc).where("target_gender = ? or target_gender = ?",0,current_user.gender)
+    return Dai.where('created_at >= ?', Time.zone.now - 1.week).order(due: :asc).where("target_gender = ? or target_gender = ?",0,current_user.gender)
         .where("target_grade like ? or target_grade = ?",  "%" + current_user.grade.to_s,"0").limit(30)
   
     end

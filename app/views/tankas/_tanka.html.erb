@@ -1,7 +1,9 @@
     <% if tanka.selected == true %>
       <tr>
         
-        <td><%= link_to tanka.body, tanka %> </td>
+        <td><%= link_to tanka.body, tanka %> 
+        <span class="badge pull-right"><%= Comment.where(tanka_id: tanka.id, deleted: false).count %></span></td>
+        
         
         <td><%= render partial: "shared/namelink", locals: {user: tanka.user} %>
         <%= render partial: "shared/name", locals: {user: tanka.user} %>

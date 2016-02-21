@@ -6,6 +6,14 @@ class CommentsController < ApplicationController
     @comments = @tanka.comments
     @comment = @comments.build(comment_params)   
     
+    @notice = Notice.new
+    @notice.body = "「#{@tanka.body[0,15]}...」に新しくコメントがつきました"
+    @notice.link = "/tankas/#{@tanka.id}"
+    @notice.save
+    @users = User.where('id in (?)', @tanka.comments.group(:user_id).pluck(:user_id) | [ @tanka.user.id ])
+                  .where('id != ?',current_user.id)
+    @notice.note(@users)
+    
     if @comment.save
       redirect_to :back, notice: "投稿が完了しました"
     else

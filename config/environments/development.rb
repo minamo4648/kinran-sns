@@ -38,7 +38,22 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  
+
+  config.active_record.raise_in_transactional_callbacks = true
+
   config.action_mailer.default_url_options = { host: 'techacademy-minamo4648.c9users.io' }
-  
+
+    
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.smtp_settings = {
+      :enable_starttls_auto => true,
+      :address => 'smtp.gmail.com',
+      :port => '587',
+      :domain => 'smtp.gmail.com',
+      :authentication => 'plain',
+      :user_name => 'kinrantanka@gmail.com' ,
+      :password => 'lvjaymlrwrnpxljh'
+}
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219062438) do
+ActiveRecord::Schema.define(version: 20160221000706) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "body",                       null: false
@@ -38,9 +38,23 @@ ActiveRecord::Schema.define(version: 20160219062438) do
     t.integer  "fase",          default: 1
     t.datetime "v_due"
     t.boolean  "vote_closed",   default: false
+    t.boolean  "selecting",     default: false
+    t.string   "comment2",      default: ""
   end
 
   add_index "dais", ["user_id"], name: "index_dais_on_user_id"
+
+  create_table "issens", force: :cascade do |t|
+    t.string   "body",       null: false
+    t.integer  "user_id"
+    t.integer  "tanka_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "issens", ["tanka_id"], name: "index_issens_on_tanka_id"
+  add_index "issens", ["user_id", "tanka_id"], name: "index_issens_on_user_id_and_tanka_id", unique: true
+  add_index "issens", ["user_id"], name: "index_issens_on_user_id"
 
   create_table "noteships", force: :cascade do |t|
     t.integer  "user_id"
@@ -54,9 +68,10 @@ ActiveRecord::Schema.define(version: 20160219062438) do
   add_index "noteships", ["user_id"], name: "index_noteships_on_user_id"
 
   create_table "notices", force: :cascade do |t|
-    t.string   "body",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "body",                    null: false
+    t.string   "link",       default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "tankas", force: :cascade do |t|

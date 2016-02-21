@@ -13,12 +13,17 @@ class User < ActiveRecord::Base
   
   has_many :voterships, dependent: :destroy
   has_many :tankas, through: :voterships
+  
+  has_many :noteships, dependent: :destroy
+  has_many :notices, through: :noteships
 
   has_many :dais
 
   has_many :tankas
 
   has_many :comments
+
+  has_many :issens
 
   has_many :kins, class_name: "Kin", foreign_key: "user_id", dependent: :destroy
   has_many :kin_tankas , through: :kins, source: :tanka

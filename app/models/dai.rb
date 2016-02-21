@@ -41,18 +41,52 @@ class Dai < ActiveRecord::Base
   def fase_check!
 
     if self.due.present?  
-      if self.fase == 1 and self.due < Time.now
+      if self.fase == 1 and self.due < Time.zone.now
         
         self.fase = 2
+        
+          if self.all_select == false
+            
+                @notice = Notice.new
+                @notice.body = "「#{self.title}」の投稿が締め切られ、撰歌に入りました"
+                @notice.save
+                @users = User.where('id in (?)', Tanka.where('dai_id = ?', self.id).pluck(:user_id))
+                if @users.count > 0
+                  @notice.note(@users)
+                end
+            
+            self.selecting = true
+          
+          else
+            
+                @notice = Notice.new
+                @notice.body = "「#{self.title}」の投稿が締め切られました"
+                @notice.link = "/dais/#{@dai.id}"
+                @notice.save
+                @users = User.where('id in (?)', Tanka.where('dai_id = ?', self.id).pluck(:user_id))
+                if @users.count > 0
+                  @notice.note(@users)
+                end
+                
+          end
         
         self.save
       end
     end
     
     if self.v_due.present?  
-      if self.fase == 2 and self.v_due < Time.now
+      if self.fase == 2 and self.v_due < Time.zone.now
         
         self.fase = 3
+        
+                @notice = Notice.new
+                @notice.body = "「#{self.title}」の投票が締め切られました"
+                @notice.link = "/dais/#{@dai.id}"
+                @notice.save
+                @users = User.where('id in (?)', Tanka.where('dai_id = ?', self.id).pluck(:user_id))
+                if @users.count > 0
+                  @notice.note(@users)
+                end
         
         self.save
       end
