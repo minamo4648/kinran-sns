@@ -1,0 +1,15 @@
+<div class="container-fluid col-md-offset-2 col-md-8">
+
+    <div class="col-md-12">
+    
+        ※機能の不具合や改善の要望などお寄せ下さい。
+    
+    </div>
+
+    <%= form_tag("/inquiry", method: "post") do %>
+      <%= label_tag(:body, "送信内容:") %><br />
+      <%= text_area_tag :body, "" , :maxlength => "2000" , :size => "50x4" %>
+      <%= submit_tag "送信", class: "btn btn-large btn-default" %>
+    <% end %>
+
+</div>

@@ -34,6 +34,9 @@
                   <li>
                     <%= link_to '歌の履歴', current_user %>
                   </li>                  
+                  <li role="separator" class="divider"></li>                  <li>
+                    <%= link_to '管理者に連絡', inquiry_path %>
+                  </li>                  
                   <li role="separator" class="divider"></li>
                   <li>
                     <%= link_to 'ログアウト', destroy_user_session_path, method: 'DELETE' %>

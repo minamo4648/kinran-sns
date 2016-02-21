@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   get   'vote_redo' , to: 'voterships#redo'
+  get   'inquiry' , to: 'welcome#inquiry'
+  post  'inquiry' , to: 'welcome#send_message'
   resources :voterships, only: [:create, :destroy]
   resources :users  do
     collection do
