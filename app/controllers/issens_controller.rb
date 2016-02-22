@@ -15,7 +15,7 @@ class IssensController < ApplicationController
     if @issen.save
             
         @notice = Notice.new
-        @notice.body = "「#{@tanka.body[0,15]}...」に一撰評がつきました！"
+        @notice.body = "「#{shorten(@tanka.body, 15)}」に一撰評がつきました！"
         @notice.link = "/issens?tanka_id=#{@tanka.id}"
         @notice.save
         @users = [@tanka.user]

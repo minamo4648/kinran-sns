@@ -21,4 +21,18 @@ module ApplicationHelper
         
     end
     
+    def shorten(str, num)
+
+        if str.length >= num
+    
+            str[0,num] + "..."
+    
+        else
+    
+            str
+    
+        end
+    
+    end
+    
 end
