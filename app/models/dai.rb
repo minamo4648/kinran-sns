@@ -18,6 +18,12 @@ class Dai < ActiveRecord::Base
   has_many :shos, class_name: "Sho", foreign_key: "dai_id", dependent: :destroy
   has_many :sho_users , through: :shos, source: :user
   has_many :sho_tankas , through: :shos, source: :tanka
+
+  def genre_name
+
+    ["短歌","俳句","川柳","都々逸","その他"][genre]
+  
+  end
   
   def top3_ids
     

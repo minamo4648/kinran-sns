@@ -8,6 +8,7 @@
         <% dai.fase_check! %>
 
       <tr>
+        <td><b><%= dai.genre_name %></b></td>  
         <td><%= link_to dai.title, dai %>
         <span class="badge pull-right"><%= Tanka.where(dai_id: dai.id).count %></span></td>
         <td>

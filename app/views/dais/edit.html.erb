@@ -54,7 +54,7 @@ function connectcheck3( ischecked ) {
     <%= form_for @dai do |f| %>
       <%#= render 'shared/error_messages', object: f.object %>
 
-     <h4> 題：「<%= @dai.title %>」</h4><br />
+     <h4> 題：「<%= @dai.title %>」（<%= @dai.genre_name %>）</h4><br />
 
         <% if @dai.fase == 1 %>
           <%= f.label :comment, "コメント" %>

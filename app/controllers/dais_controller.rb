@@ -20,7 +20,7 @@ before_action :voter_judge!, only: [:vote]
   end
     
     if @dai.save
-      redirect_to dais_path, notice: "出題が完了しました"
+      redirect_to root_path, notice: "出題が完了しました"
     else
       redirect_to new_dai_path
     end
@@ -146,7 +146,7 @@ before_action :voter_judge!, only: [:vote]
 
     def dai_params
     params.require(:dai).permit(:title, :comment, :due, :dai_id, :target_grade, :target_gender, 
-    :user_id, :v_due, :all_select, :vote_closed, :comment2)
+    :user_id, :v_due, :all_select, :vote_closed, :comment2, :genre)
     end
     
     def dai_judge!

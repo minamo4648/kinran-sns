@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221000706) do
+ActiveRecord::Schema.define(version: 20160222063305) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "body",                       null: false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20160221000706) do
     t.boolean  "vote_closed",   default: false
     t.boolean  "selecting",     default: false
     t.string   "comment2",      default: ""
+    t.integer  "genre",         default: 0,     null: false
   end
 
   add_index "dais", ["user_id"], name: "index_dais_on_user_id"

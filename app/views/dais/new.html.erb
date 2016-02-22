@@ -57,6 +57,14 @@ function connectcheck3( ischecked ) {
 
       <%= f.label :title, "題" %>
       <%= f.text_field :title , class: "form-control" %>
+      
+      <br /><label>種類</label>
+      <label><%= f.radio_button :genre, "0", {:checked=>true} %>短歌</label>
+      <label><%= f.radio_button :genre, "1" %>俳句</label>
+      <label><%= f.radio_button :genre, "2" %>川柳</label>
+      <label><%= f.radio_button :genre, "3" %>都々逸</label>
+      <label><%= f.radio_button :genre, "4" %>その他</label>
+      <br /><br />
 
       <%= f.label :comment, "コメント" %>
       <%= f.text_area :comment , :maxlength => "400" , :size => "20x10" ,class: "form-control" %>
