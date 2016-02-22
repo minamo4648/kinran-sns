@@ -16,6 +16,10 @@
                  <br />代表作　題「<%=@best_tanka.dai.title %>」<br />
                 <p><%= @best_tanka.body %></p>
         <% end %>
+        <% if !@best_tanka.present? and ! @user.soultanka_id.present? %>
+                 <br />（自撰・代表歌の掲示はありません）<br />
+        <% end %>
+        
     </div>
 
 <table class="table table-bordered">
@@ -52,14 +56,16 @@
                 <td>    
                     <% if t.user == current_user %>
                     
-                        <% if t.id == current_user.soultanka_id %>
+                        <% if t.exposed == true %>
+                            <% if t.id == current_user.soultanka_id %>
+                            
+                                自撰済み
+                            
+                            <% else %>
+                            
+                                <%= link_to "自撰", soul_tanka_path(id: t) %>
                         
-                            自撰済み
-                        
-                        <% else %>
-                        
-                            <%= link_to "自撰", soul_tanka_path(id: t) %>
-                    
+                            <% end %>
                         <% end %>
                         
                         <% if t.exposed == true %>

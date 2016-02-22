@@ -26,6 +26,9 @@ before_action :admin_only, only: [:edit, :update, :index]
     @soultanka = Tanka.find_by(id: @user.soultanka_id)
     @tankas = @user.tankas.order(created_at: :desc)
     @best_tanka = @tankas.order(kin_cnt: :desc, ransho_cnt: :desc, created_at: :asc).first if @tankas.count > 0
+    if @best_tanka.exposed == false
+      @best_tanka = nil
+    end
 
 
 

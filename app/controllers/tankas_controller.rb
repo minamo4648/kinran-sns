@@ -89,7 +89,11 @@ before_action :toko_judge!, only: [:new]
     else
     
       @tanka.update(exposed: false)
-    
+      
+      if current_user.soultanka_id == @tanka.id
+        current_user.update(soultanka_id: nil)
+      end      
+        
     end
     
     redirect_to :back
