@@ -1,5 +1,5 @@
   <div class="issen col-md-offset-1 col-md-10">
     
-    <p><%= issen.body %></p>
+    <p><%= simple_format(issen.body) %></p>
     <p class="text-right">評：<%= render partial: "shared/name", locals: {user: issen.user} %></p>
   </div>

@@ -22,7 +22,7 @@
 		
 	</div>
 	<div class="panel-body">
-		<%= @dai.comment %>
+		<%= simple_format(@dai.comment) %>
 		<br />
 		<% if @dai.user.present? %>
 		出題：<%= render partial: "shared/name", locals: {user: @dai.user} %>
