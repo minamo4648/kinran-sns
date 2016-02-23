@@ -7,7 +7,7 @@ class AddTargetToDais < ActiveRecord::Migration
     add_column :dais, :v_due, :datetime
     add_column :dais, :vote_closed, :boolean, :default => false
     add_column :dais, :selecting, :boolean, :default => false
-    add_column :dais, :comment2, :string, :default => ""
+
 
 
   end
