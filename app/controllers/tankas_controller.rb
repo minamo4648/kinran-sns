@@ -166,7 +166,7 @@ before_action :edit_judge!, only: [:edit]
     
       end
 
-      if @dai.fase != 1
+      if @tanka.dai.fase != 1
           redirect_to root_path, alert: '投稿期間を過ぎました'
         return
       end
