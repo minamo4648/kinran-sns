@@ -1,3 +1,5 @@
-UserMailer#petition
+「KAKAI」ユーザーから
 
-<%= @body %>
+from:<%= @name %>(<%= @email %>)
+
+<%= simple_format(@body) %>

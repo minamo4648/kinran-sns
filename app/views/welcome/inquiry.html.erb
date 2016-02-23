@@ -6,7 +6,11 @@
     
     </div>
 
+    <b>from:</b>　<%= current_user.name%>(<%= current_user.email%>)
+
     <%= form_tag("/inquiry", method: "post") do %>
+      <%= hidden_field_tag :name, current_user.name %>
+      <%= hidden_field_tag :email, current_user.email %>
       <%= label_tag(:body, "送信内容:") %><br />
       <%= text_area_tag :body, "" , :maxlength => "2000" , :size => "50x4" %>
       <%= submit_tag "送信", class: "btn btn-large btn-default" %>

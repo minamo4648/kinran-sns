@@ -1,5 +1,6 @@
-<h1>UserMailer#petition</h1>
+<h1>「KAKAI」ユーザーから</h1>
 
-<p>
-  <%= @body %>
-</p>
+from:<%= @name %>(<%= @email %>)
+
+  <%= simple_format(@body) %>
+

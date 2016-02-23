@@ -5,8 +5,11 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.petition.subject
   #
-  def petition(body)
+  def petition(body,name,email)
     @body= body
+    @name= name
+    @email= email
+
 
     mail to: "minamo.kawano@nifty.com"
   end
