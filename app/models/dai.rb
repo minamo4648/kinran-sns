@@ -52,7 +52,7 @@ class Dai < ActiveRecord::Base
         self.fase = 2
         
           if self.all_select == false
-            
+            # ここでエラーがあった
                 @notice = Notice.new
                 @notice.body = "「#{self.title}」の投稿が締め切られ、撰歌に入りました"
                 @notice.save
@@ -64,7 +64,6 @@ class Dai < ActiveRecord::Base
             self.selecting = true
           
           else
-            binding.pry
                 @notice = Notice.new
                 @notice.body = "「#{self.title}」の投稿が締め切られました"
                 @notice.link = "/dais/#{self.id}"
