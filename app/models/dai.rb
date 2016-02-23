@@ -63,9 +63,10 @@ class Dai < ActiveRecord::Base
             self.selecting = true
           
           else
-                        binding.pry
+
                 @notice = Notice.new
                 @notice.body = "「#{self.title}」の投稿が締め切られました"
+                        binding.pry
                 @notice.link = "/dais/#{self.id}"
                 @notice.save
                 @users = User.where('id in (?)', Tanka.where('dai_id = ?', self.id).pluck(:user_id))
