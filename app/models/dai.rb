@@ -67,7 +67,7 @@ class Dai < ActiveRecord::Base
             binding.pry
                 @notice = Notice.new
                 @notice.body = "「#{self.title}」の投稿が締め切られました"
-                @notice.link = "/dais/#{@dai.id}"
+                @notice.link = "/dais/#{self.id}"
                 @notice.save
                 @users = User.where('id in (?)', Tanka.where('dai_id = ?', self.id).pluck(:user_id))
                 if @users.count > 0
@@ -87,7 +87,7 @@ class Dai < ActiveRecord::Base
         
                 @notice = Notice.new
                 @notice.body = "「#{self.title}」の投票が締め切られました"
-                @notice.link = "/dais/#{@dai.id}"
+                @notice.link = "/dais/#{@self.id}"
                 @notice.save
                 @users = User.where('id in (?)', Tanka.where('dai_id = ?', self.id).pluck(:user_id))
                 if @users.count > 0
