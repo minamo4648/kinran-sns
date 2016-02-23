@@ -38,11 +38,9 @@ gem 'bootstrap-sass'
   gem 'devise'
   gem 'pry-byebug'
   gem 'i18n'
-
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-end
+
+  gem 'taps'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
