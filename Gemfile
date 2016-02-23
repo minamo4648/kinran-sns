@@ -36,7 +36,7 @@ gem 'bootstrap-sass'
 
   gem 'kaminari'
   gem 'devise'
-  gem 'pry-byebug', group: :development
+  gem 'pry-byebug'
   gem 'i18n'
 
 group :development, :test do
