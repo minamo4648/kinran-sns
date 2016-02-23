@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment = @comments.build(comment_params)   
     
     @notice = Notice.new
-    @notice.body = "「#{@tanka.body[0,15]}...」に新しくコメントがつきました"
+    @notice.body = "「#{shorten(@tanka.body, 15)}」に新しくコメントがつきました"
     @notice.link = "/tankas/#{@tanka.id}"
     @notice.save
     @users = User.where('id in (?)', @tanka.comments.group(:user_id).pluck(:user_id) | [ @tanka.user.id ])
