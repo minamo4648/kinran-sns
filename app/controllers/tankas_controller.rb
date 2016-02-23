@@ -150,10 +150,8 @@ before_action :edit_judge!, only: [:edit]
       @dai = Dai.find(params[:dai_id])
 
       if @dai.fase != 1
-    
-        redirect_to root_path, alert: '投稿期間ではありません'
+          redirect_to root_path, alert: '投稿期間を過ぎました'
         return
-    
       end
     
     end
@@ -163,12 +161,17 @@ before_action :edit_judge!, only: [:edit]
       @tanka = Tanka.find(params[:id])
 
       if @tanka.user != current_user and current_user.admin == false
-    
-        redirect_to root_path, alert: '他の人の短歌は推敲できません'
+         redirect_to root_path, alert: '他の人の短歌は推敲できません'
         return
     
       end
+
+      if @dai.fase != 1
+          redirect_to root_path, alert: '投稿期間を過ぎました'
+        return
+      end
     
     end
+
 
 end
