@@ -64,7 +64,7 @@ class Dai < ActiveRecord::Base
             self.selecting = true
           
           else
-            
+            binding.pry
                 @notice = Notice.new
                 @notice.body = "「#{self.title}」の投稿が締め切られました"
                 @notice.link = "/dais/#{@dai.id}"
