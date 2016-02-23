@@ -2,6 +2,7 @@ class TankasController < ApplicationController
 
 before_action :authenticate_user!
 before_action :toko_judge!, only: [:new] 
+before_action :edit_judge!, only: [:edit] 
     
   def new
 
@@ -151,6 +152,19 @@ before_action :toko_judge!, only: [:new]
       if @dai.fase != 1
     
         redirect_to root_path, alert: '投稿期間ではありません'
+        return
+    
+      end
+    
+    end
+
+    def edit_judge!
+    
+      @tanka = Tanka.find(params[:id])
+
+      if @tanka.user != current_user and current_user.admin == false
+    
+        redirect_to root_path, alert: '他の人の短歌は推敲できません'
         return
     
       end
