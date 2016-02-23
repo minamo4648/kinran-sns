@@ -24,6 +24,7 @@
       
       <%= f.hidden_field :nickname_update, :value => Date.today %>
       
+    <% if current_user.admin %>  
       <%= f.check_box :admin %>
       <%= f.label :admin, "管理者" , checked_value: true, unchecked_value: false %>
       
@@ -32,6 +33,7 @@
       
       <%= f.check_box :contributor %>
       <%= f.label :contributor, "投稿者" , checked_value: true, unchecked_value: false %>
+    <% end %>
       
       <br />
 
