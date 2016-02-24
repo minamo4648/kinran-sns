@@ -1,6 +1,6 @@
 class Issen < ActiveRecord::Base
 
-  validates :body, length: { maximum: 2000 }, presence: true
+  validates :body, length: { maximum: 800 }, presence: true
     
   belongs_to :user
   
