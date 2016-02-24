@@ -19,7 +19,7 @@ class IssensController < ApplicationController
         @notice.body = "「#{view_context.shorten(@tanka.body, 15)}」に一撰評がつきました！"
         @notice.link = "/issens?tanka_id=#{@tanka.id}"
         @notice.save
-        @users = @tanka.user
+        @users = User.where(id: @tanka.user.id)
         @notice.note(@users)        
         
       redirect_to @tanka, notice: "投稿が完了しました"
