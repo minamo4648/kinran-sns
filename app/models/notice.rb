@@ -4,8 +4,7 @@ class Notice < ActiveRecord::Base
   has_many :users, through: :noteships
   
     def note(users)
-
-        if self.same_one.present?
+        if Noteship.find_by(notice_id: self.same_one.id).present?
             self.same_one.unnote(User.where('id in (?)', users.pluck(:id) & self.same_one.users.pluck(:user_id)))
         end
         users.each do |user|

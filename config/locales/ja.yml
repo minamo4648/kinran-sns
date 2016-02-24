@@ -3,6 +3,7 @@ ja:
   attributes:
     title:   題名
     comment: コメント
+    body:    本文
   activerecord:
     errors:
       messages:

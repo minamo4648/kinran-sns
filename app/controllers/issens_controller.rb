@@ -15,15 +15,17 @@ class IssensController < ApplicationController
     if @issen.save
             
         @notice = Notice.new
-        @notice.body = "「#{shorten(@tanka.body, 15)}」に一撰評がつきました！"
+        #binding.pry
+        @notice.body = "「#{view_context.shorten(@tanka.body, 15)}」に一撰評がつきました！"
         @notice.link = "/issens?tanka_id=#{@tanka.id}"
         @notice.save
-        @users = [@tanka.user]
+        @users = @tanka.user
         @notice.note(@users)        
         
       redirect_to @tanka, notice: "投稿が完了しました"
     else
-      redirect_to new_issen_path, alert: "投稿できませんでした"
+      @error_messages = @issen.errors.full_messages
+      render new_issen_path, alert: "投稿できませんでした"
     end
     
     end    
@@ -43,7 +45,8 @@ class IssensController < ApplicationController
     if @issen.update(issen_params)
       redirect_to @tanka, notice: "投稿が完了しました"
     else
-      redirect_to :back, alert: "投稿できませんでした"
+      @error_messages = @issen.errors.full_messages
+      render :edit, alert: "投稿できませんでした"
     end
     
     end    
