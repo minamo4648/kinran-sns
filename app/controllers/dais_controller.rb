@@ -22,7 +22,8 @@ before_action :voter_judge!, only: [:vote]
     if @dai.save
       redirect_to root_path, notice: "出題が完了しました"
     else
-      redirect_to new_dai_path
+      @error_messages = @dai.errors.full_messages
+      render new_dai_path
     end
 
   end

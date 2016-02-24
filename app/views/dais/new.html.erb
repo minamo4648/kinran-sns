@@ -48,10 +48,14 @@ function connectcheck3( ischecked ) {
 </script>
 <h1>出題</h1>
 
+    <%= render 'shared/em', error_messages: @error_messages %>
+
 <div class="container-fluid col-md-12">
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    
+      
     <%= form_for @dai do |f| %>
       <%#= render 'shared/error_messages', object: f.object %>
 

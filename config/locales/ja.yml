@@ -1,5 +1,8 @@
 ---
 ja:
+  attributes:
+    title:   題名
+    comment: コメント
   activerecord:
     errors:
       messages:

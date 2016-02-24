@@ -1,0 +1,12 @@
+<%#= render 'shared/em', error_messages: @error_messages %>
+
+    <% if error_messages.present? %>
+    
+      
+        <% error_messages.each do |error_message| %>
+          <p class="error_message">
+            <%= error_message %></p>
+        
+        <% end %>
+
+    <% end %>
