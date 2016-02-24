@@ -30,6 +30,9 @@
 		<% end %>
 	</div>
 	<div class="panel-footer">
+	<% if current_user.tankas.where(dai_id: @dai.id).present? %>
+		投稿済：　<b><%= current_user.tankas.where(dai_id: @dai.id).take.body %></b><br />
+	<% end %>
         <% if @dai.due.nil? %>
             締切設定なし
         <% else %>    
@@ -40,9 +43,7 @@
 
 <div class="col-md-10 col-md-offset-2">
 
-	<% if current_user.tankas.where(dai_id: @dai.id).present? %>
-		投稿済：　<b><%= current_user.tankas.where(dai_id: @dai.id).take.body %></b><br /><br />
-	<% end %>
+
 	
 </div>
 
