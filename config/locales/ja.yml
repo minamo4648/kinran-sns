@@ -7,6 +7,15 @@ ja:
       previous: "前"
       next: "次"
       truncate: "..."
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "該当するデータが見つかりませんでした。"
+          one: "全1件中、1-1件のデータを表示しています。"
+          other: "全%{count}件中、1-%{count}件のデータを表示しています。"
+      more_pages:
+        display_entries: "全%{total}件中、%{first}-%{last}件のデータを表示しています。"
   attributes:
     title:   題名
     comment: コメント
