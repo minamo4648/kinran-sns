@@ -1,15 +1,15 @@
 <% if user_signed_in? %>
 
-<div class="container-fluid col-md-offset-1 col-md-8"  style="height:600px; overflow:auto;">
-
   <% if Issen.count > 0 %>
-  <div class="issen col-md-offset-1 col-md-10">
+  <div class="container-fluid col-md-offset-2 col-md-8 issen">
     
     《一撰評》<br />
     <p><%= simple_format(@issen.body) %></p>
     <p class="text-right">評：<%= render partial: "shared/name", locals: {user: @issen.user} %></p>
   </div>
   <% end %>
+
+<div class="container-fluid col-md-offset-1 col-md-8"  style="height:600px; overflow:auto;">
 
 <div class="col-md-offset-2 col-md-8 emer">
 
