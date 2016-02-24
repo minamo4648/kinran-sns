@@ -90,7 +90,8 @@ before_action :voter_judge!, only: [:vote]
     if @dai.update(dai_params)
       redirect_to root_path, notice: "更新が完了しました"
     else
-      redirect_to new_dai_path
+      @error_messages = @dai.errors.full_messages
+      render :edit
     end
 
   end
