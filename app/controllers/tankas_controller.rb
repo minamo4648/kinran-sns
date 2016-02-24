@@ -27,8 +27,7 @@ before_action :edit_judge!, only: [:edit]
   def edit
     
     @tanka = Tanka.find(params[:id])
-    @dai_id = params[:dai_id].to_i
-    @dai = Dai.find(params[:dai_id])
+    @dai = @tanka.dai
   
   end
 
@@ -164,6 +163,10 @@ before_action :edit_judge!, only: [:edit]
       if @dai.fase != 1
           redirect_to root_path, alert: '投稿期間を過ぎました'
         return
+      end
+      
+      if @dai.tankas.where(user_id: current_user.id).present?
+        redirect_to edit_tanka_path(@dai.tankas.where(user_id: current_user.id).first)
       end
     
     end
