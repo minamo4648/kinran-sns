@@ -37,7 +37,7 @@ before_action :admin_only, only: [:edit, :update, :index]
   
   def index
     
-    @users = User.all.order(last_sign_in_at: :desc)
+    @users = User.all.order(last_sign_in_at: :desc).page(params[:page])
     
   end
 
