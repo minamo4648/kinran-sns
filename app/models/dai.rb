@@ -1,6 +1,6 @@
 class Dai < ActiveRecord::Base
 
-  validates :title, length: { maximum: 15 }, presence: true
+  validates :title, length: { maximum: 30 }, presence: true
   validates :comment, length: { maximum: 2000 }, presence: true
 
   belongs_to :user

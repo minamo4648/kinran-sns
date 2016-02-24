@@ -65,7 +65,7 @@ before_action :voter_judge!, only: [:vote]
     @dai.update(fase: 2)
     
     @notice = Notice.new
-    @notice.body = "「#{@dai.title}」の投稿が締め切られました"
+    @notice.body = "「#{shorten(@dai.title,15)}」の投稿が締め切られました"
     @notice.link = "/dais/#{@dai.id}"
     @notice.save
     @users = User.where('id in (?)', Tanka.where('dai_id = ?', @dai.id).pluck(:user_id))
@@ -78,7 +78,7 @@ before_action :voter_judge!, only: [:vote]
     @dai.update(fase: 3)
     
     @notice = Notice.new
-    @notice.body = "「#{@dai.title}」の投票が締め切られました"
+    @notice.body = "「#{shorten(@dai.title,15)}」の投票が締め切られました"
     @notice.link = "/dais/#{@dai.id}"
     @notice.save
     @users = User.where('id in (?)', Tanka.where('dai_id = ?', @dai.id).pluck(:user_id))
@@ -129,7 +129,7 @@ before_action :voter_judge!, only: [:vote]
     if @dai.fase == 2 and @dai.selecting
       @dai.update(selecting: false)
       @notice = Notice.new
-      @notice.body = "「#{@dai.title}」の撰歌が終わりました"
+      @notice.body = "「#{shorten(@dai.title,15)}」の撰歌が終わりました"
       @notice.link = "dais/#{@dai.id}"
       @notice.save
       @users = User.where('id in (?)', Tanka.where('dai_id = ?', @dai.id).pluck(:user_id))

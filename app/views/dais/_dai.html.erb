@@ -9,7 +9,7 @@
 
       <tr>
         <td><b><%= dai.genre_name %></b></td>  
-        <td><%= link_to dai.title, dai %>
+        <td><%= link_to shorten(dai.title,12) , dai %>
         <span class="badge pull-right"><%= Tanka.where(dai_id: dai.id).count %></span></td>
         <td>
             <% case dai.fase %>
