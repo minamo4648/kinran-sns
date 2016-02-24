@@ -50,20 +50,19 @@
 	
 <% if @dai.fase == 1 %>
 	<% if current_user.tankas.where(dai_id: @dai.id).present? %>
-		<%= link_to "推敲", edit_tanka_path(id: current_user.tankas.where(dai_id: @dai.id).first.id , dai_id: @dai.id) , class: "btn btn-sm btn-default" %>
+		<%= link_to "推敲", edit_tanka_path(id: current_user.tankas.where(dai_id: @dai.id).first.id , dai_id: @dai.id) , class: "btn btn-large btn-default" %>
 	<% else %>
-		<%= link_to "投稿", new_tanka_path(:dai_id => @dai.id) , class: "btn btn-sm btn-default" %>
+		<%= link_to "投稿", new_tanka_path(:dai_id => @dai.id) , class: "btn btn-large btn-default" %>
 	<% end %>
 <% end %>
 <% if @dai.fase == 2 %>
-	<%= link_to "投票", vote_dai_path , class: "btn btn-sm btn-default" %>
+	<%= link_to "投票", vote_dai_path , class: "btn btn-large btn-default" %>
 <% end %>
 <% if @dai.fase == 3 %>
-	<%= link_to "一覧", tankas_path(:dai_id => @dai.id) , class: "btn btn-sm btn-default" %>
+	<%= link_to "一覧", tankas_path(:dai_id => @dai.id) , class: "btn btn-large btn-default" %>
 <% end %>
-	<%= link_to "戻る", root_path, class: "btn btn-sm btn-default" %>
 <% if (@dai.user == current_user or current_user.admin) and @dai.fase < 3 %>
-	&nbsp;<%= link_to "管理", edit_dai_path(@dai.id) , class: "btn btn-sm btn-warning" %>
+	&nbsp;<%= link_to "管理", edit_dai_path(@dai.id) , class: "btn btn-large btn-warning" %>
 <% end %>
-
+	<%= link_to "戻る", root_path, class: "btn btn-large btn-default" %>
 </div>

@@ -28,6 +28,8 @@
       <%= f.hidden_field :exposed, value: true %>
 
       <%= f.submit "投稿", class: "btn btn-large btn-default" %>
+      <%= link_to "削除" , @tanka , method: :delete, class: "btn btn-large btn-danger", data: { confirm: '削除してもよろしいですか？' } %>
+      
     <% end %>
   </div>
 </div>

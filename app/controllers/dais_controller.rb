@@ -108,6 +108,18 @@ before_action :voter_judge!, only: [:vote]
     @dai = Dai.find(params[:id])  
   
   end
+
+  def destroy
+
+        @dai = Dai.find(params[:id])
+
+    if @dai.destroy
+      redirect_to root_path, notice: "お題の削除が完了しました"
+    else
+      redirect_to :back, alert: "削除できませんでした"
+    end    
+    
+  end  
   
   def vote
     

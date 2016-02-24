@@ -62,6 +62,18 @@ before_action :edit_judge!, only: [:edit]
     @comment = @comments.build
 
   end
+
+  def destroy
+
+        @tanka = Tanka.find(params[:id])
+
+    if @tanka.destroy
+      redirect_to root_path, notice: "作品の削除が完了しました"
+    else
+      redirect_to :back, alert: "削除できませんでした"
+    end    
+    
+  end  
   
   def soul
     

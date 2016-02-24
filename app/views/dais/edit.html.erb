@@ -111,6 +111,9 @@ function connectcheck3( ischecked ) {
         <% end %>
 
     <br /><%= f.submit "更新", class: "btn btn-large btn-default" %>
+        <% if @dai.tankas.count == 0 %>
+            <%= link_to "削除" , @dai , method: :delete, class: "btn btn-large btn-danger", data: { confirm: '削除してもよろしいですか？' } %>
+        <% end %>        
         <%= f.submit "投稿を締め切る", class: "btn btn-sm btn-warning" if @dai.fase == 1 and @dai.all_select %>
         <%= f.submit "入選歌を確定し、投稿を締め切る", class: "btn btn-sm btn-warning" if @dai.fase == 1 and @dai.all_select == false %>
         <%= link_to "入選歌を確定する", proceed_dai_path(@dai) , class: "btn btn-sm btn-warning" if @dai.fase == 2 and @dai.selecting == true %>
