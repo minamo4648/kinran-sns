@@ -4,16 +4,21 @@
         「<%= @tanka.body%>」への一撰評<br />
         
         <%= form_for @issen do |f| %>
-        
-            <%= f.text_area :body, :size=>"50x6" %>
-            <%= f.hidden_field :tanka_id, :value => tanka.id %><br />
-            <font color="red">※「匿名希望」となるかもしれないので、作者の名前を入れずに書いてください</font><br />
-            <%= f.submit "一撰評を投稿（800字まで）", class: "btn btn-sm btn-default" %>
-        
+            <div class="form-group">
+                <div class="col-md-8">        
+                    <%= f.text_area :body, class: "form-control" %>
+                    <%= f.hidden_field :tanka_id, :value => tanka.id %><br />
+                    <font color="red">※「匿名希望」となるかもしれないので、作者の名前を入れずに書いてください</font><br />
+                    <%= f.submit "一撰評を投稿（800字まで）", class: "btn btn-sm btn-default" %>
+
         <% end %>
         
         <% if @tanka.issens.where('user_id = ?', current_user.id).present? %>
             <%= link_to "削除" , @issen , method: :delete, class: "btn btn-sm btn-default", data: { confirm: '削除してもよろしいですか？' } %>
         <% end %>
+
+                </div>
+            </div>
+
     </div>
 </div>

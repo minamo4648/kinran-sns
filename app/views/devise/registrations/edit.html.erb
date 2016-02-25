@@ -1,9 +1,10 @@
 <div class="row">
-  <div class="col-md-5 col-md-offset-3">
+  <div class="col-md-10 col-md-offset-1">
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
-
+  <div class="form-group">
+    <div class="col-md-offset-4 col-md-4">
       <%= f.label :name, "名前" %>
       <%= current_user.name %><br />
 
@@ -33,11 +34,14 @@
       
       <%= f.check_box :contributor %>
       <%= f.label :contributor, "投稿者" , checked_value: true, unchecked_value: false %>
+
     <% end %>
       
       <br />
 
       <%= f.submit "プロフィールを更新", class: "btn btn-large btn-default" %>
+    </div>  
+  </div>  
     <% end %>
 
 

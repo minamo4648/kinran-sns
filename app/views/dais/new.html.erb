@@ -58,7 +58,7 @@ function connectcheck3( ischecked ) {
       
     <%= form_for @dai do |f| %>
       <%#= render 'shared/error_messages', object: f.object %>
-
+    <div class="form-group">
       <%= f.label :title, "題" %>
       <%= f.text_field :title , class: "form-control" %>
       
@@ -126,6 +126,7 @@ function connectcheck3( ischecked ) {
 
     <br /><%= f.submit "出題", class: "btn btn-large btn-default" %>
 
+        </div>
     </div>
     
         <% end %>

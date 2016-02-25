@@ -3,10 +3,10 @@
 「<%= @tanka.body %>」へのコメントの修正
 
 <%= form_for @comment do |f| %>
-
-    <%= f.text_area :body, :size=>"50x3" %>
+<div class="form-group">
+    <%= f.text_area :body, class: "form-control", :size=>"50x3" %>
     <%= f.submit "コメントを投稿（140字まで）", class: "btn btn-sm btn-default" %>
-
+</div>
 <% end %>
 
 </div>

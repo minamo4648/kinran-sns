@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+before_action :authenticate_user!
+
   def create
       
     @tanka = Tanka.find(params[:comment][:tanka_id])
