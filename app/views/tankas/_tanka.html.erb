@@ -15,9 +15,9 @@
         <td>  
             金：<%= tanka.kin_cnt %>
             　蘭：<%= tanka.ran_cnt %>
-            　笑：<%= tanka.sho_cnt %>
+            　笑：<%= tanka.sho_cnt %>　
             <% if tanka.kin_cnt + tanka.ransho_cnt > 0 %>
-              <% link_to "一覧", voters_tanka_path(tanka) %>
+              <font size="2" ><%= link_to "投票者一覧", voters_tanka_path(tanka) %></font>
             <% end %>
         </td>  
       </tr>
