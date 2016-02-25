@@ -70,9 +70,12 @@
                 </td>
                 <td>
                     <% if t.dai.fase == 3 and t.selected %>
-                        金：<%= t.kin_cnt %> 
-                        蘭：<%= t.ran_cnt %> 
-                        笑：<%= t.sho_cnt %>
+                        金<%= t.kin_cnt %> 
+                        蘭<%= t.ran_cnt %> 
+                        笑<%= t.sho_cnt %>
+                        <% if t.kin_cnt + t.ransho_cnt > 0 %>
+                          <font size="2"><%= link_to "一覧", voters_tanka_path(t) %></font>
+                        <% end %>
                     <% end %>
                 </td>
                 <% if t.user == current_user %>

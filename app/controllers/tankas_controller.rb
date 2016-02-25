@@ -1,8 +1,10 @@
 class TankasController < ApplicationController
 
 before_action :authenticate_user!
+before_action :tanka_confirm!, only: [:edit, :show] 
 before_action :toko_judge!, only: [:new] 
 before_action :edit_judge!, only: [:edit] 
+
     
   def new
 
@@ -133,6 +135,16 @@ before_action :edit_judge!, only: [:edit]
     
   end
 
+  def voters
+    
+    @tanka = Tanka.find(params[:id])
+    @voterships = @tanka.voterships
+    @kins = @voterships.where(type: "Kin")
+    @rans = @voterships.where(type: "Ran")
+    @shos = @voterships.where(type: "Sho")
+    
+  end
+
   private
 
     def tanka_params
@@ -184,6 +196,14 @@ before_action :edit_judge!, only: [:edit]
       if @tanka.dai.fase != 1
           redirect_to root_path, alert: '投稿期間を過ぎました'
         return
+      end
+    
+    end
+    
+    def tanka_confirm!
+    
+      unless Tanka.find_by(id: params[:id]).present?
+        redirect_to root_path
       end
     
     end

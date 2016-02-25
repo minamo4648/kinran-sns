@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       get 'unsoul'
       get 'expose'
       get 'select'
+      get 'voters'
     end
   end
   resources :dais do

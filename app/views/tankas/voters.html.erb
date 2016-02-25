@@ -1,0 +1,26 @@
+<div class="container-fluid col-md-offset-1 col-md-10">
+    
+    <p>
+        <b>「<%= @tanka.body %>」への投票</b><br />
+        <%= link_to "戻る", :back %>
+    </p>
+    
+    <div class="col-md-3 inst">
+        「金」をくれた人<br /><br />
+        <% if @kins.present? %>
+            <%= render partial: 'voter', collection: @kins, as: :vote %>
+        <% end %>
+    </div>
+    <div class="col-md-3 col-md-offset-1 inst">
+        「蘭」をくれた人<br /><br />
+        <% if @rans.present? %>
+            <%= render partial: 'voter', collection: @rans, as: :vote %>
+        <% end %>
+    </div>
+    <div class="col-md-3 col-md-offset-1 inst">
+        「笑」をくれた人<br /><br />
+        <% if @shos.present? %>
+            <%= render partial: 'voter', collection: @shos, as: :vote %>
+        <% end %>
+    </div>
+</div>

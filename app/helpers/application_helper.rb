@@ -23,7 +23,7 @@ module ApplicationHelper
     
     def shorten(str, num)
 
-        if str.length >= num
+        if str.length > num
     
             str[0,num] + "..."
     

@@ -6,6 +6,17 @@
         <% if comment.user == comment.tanka.user %>
             <small>（作者）</small>
         <% end %>
+        
+        <% if comment.user.kin?(comment.tanka) %>
+            <font color="red">金</font>
+        <% end %>
+        <% if comment.user.ran?(comment.tanka) %>
+            <font color="red">蘭</font>
+        <% end %>
+        <% if comment.user.sho?(comment.tanka) %>
+            <font color="red">笑</font>
+        <% end %>
+        
         <%= comment.created_at.to_s(:wa) %>
         <br />&nbsp;<%= comment.body %>
         <% if comment.user == current_user %>

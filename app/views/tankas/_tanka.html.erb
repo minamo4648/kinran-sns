@@ -16,6 +16,9 @@
             金：<%= tanka.kin_cnt %>
             　蘭：<%= tanka.ran_cnt %>
             　笑：<%= tanka.sho_cnt %>
+            <% if tanka.kin_cnt + tanka.ransho_cnt > 0 %>
+              <% link_to "一覧", voters_tanka_path(tanka) %>
+            <% end %>
         </td>  
       </tr>
     <% end %>

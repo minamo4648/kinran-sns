@@ -1,7 +1,12 @@
 <div class="container-fluid col-md-offset-2 col-md-6">
 
 <h4>題：「<%= link_to @tanka.dai.title, @tanka.dai %>」</h4>
-
+<% if @tanka.kin_cnt + @tanka.ransho_cnt > 0 %>
+    金：<%= @tanka.kin_cnt %>　
+    蘭：<%= @tanka.ran_cnt %>　
+    笑：<%= @tanka.sho_cnt %>　
+    <%= link_to "投票者一覧", voters_tanka_path(@tanka) %>
+<% end %>
 <hr>
 
 <% if @tanka.issens.count > 0 %>
