@@ -23,6 +23,26 @@
     </div>
 
 <table class="table table-bordered">
+
+  <thead>
+    <% if @user == current_user %>
+    <tr>
+      <th class="col-md-2">題</th>
+      <th class="col-md-5">作品（コメント数）</th>
+      <th class="col-md-1">作成</th>
+      <th class="col-md-2">賞</th>
+      <th class="col-md-2">公開設定</th>
+    </tr>
+    <% else %>
+    <tr>
+      <th class="col-md-3">題</th>
+      <th class="col-md-6">作品（コメント数）</th>
+      <th class="col-md-1">作成</th>
+      <th class="col-md-2">賞</th>
+    </tr>    
+    <% end %>
+    
+  </thead>
     
     <% @tankas.each do |t| %>
 
@@ -31,8 +51,10 @@
             <tr>    
         
                 <td>
-                    <% if t.dai.present? %>
-                    「<%= t.dai.title %>」
+                    <% if @user == current_user %>
+                    「<%= link_to shorten(t.dai.title,6), t.dai %>」
+                    <% else %>
+                    「<%= link_to shorten(t.dai.title,12), t.dai %>」
                     <% end %>
                 </td>
             
@@ -53,9 +75,8 @@
                         笑：<%= t.sho_cnt %>
                     <% end %>
                 </td>
+                <% if t.user == current_user %>
                 <td>    
-                    <% if t.user == current_user %>
-                    
                         <% if t.exposed == true %>
                             <% if t.id == current_user.soultanka_id %>
                             
@@ -78,7 +99,7 @@
                     
                         <% end %>
                     
-                    <% end %></td>
+                    </td><% end %>
             
             </tr>
         
