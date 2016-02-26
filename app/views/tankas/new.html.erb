@@ -20,9 +20,8 @@
   <div class="col-md-6 col-md-offset-3 form-group">
     <%= form_for @tanka do |f| %>
 
-      <%= f.label :body, "短歌" %>
+      <%= f.label :body, "作品(60字まで)" %>
       <%= f.text_field :body , class: "form-control" %>
-      ※作品本体だけ入れられます（最大45字）<br />
       <%= f.hidden_field :dai_id, value: @dai_id %>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.hidden_field :exposed, value: true %>

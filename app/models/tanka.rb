@@ -1,6 +1,6 @@
 class Tanka < ActiveRecord::Base
 
-  validates :body, length: { maximum: 45 }, presence: true
+  validates :body, length: { maximum: 60 }, presence: true
 
   has_many :voterships, dependent: :destroy
   has_many :users, through: :voterships
