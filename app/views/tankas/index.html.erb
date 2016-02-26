@@ -26,18 +26,22 @@
         <div align="right"><%= render partial: "shared/namelink", locals: {user: @tankas.third.user} %>
         <%= render partial: "shared/name", locals: {user: @tankas.third.user} %>
         <%= render partial: "shared/vgg", locals: {user: @tankas.third.user} %></div><br /><br />
-                
-        <p id="seki">蘭</p><br />
-        <p><%= @ran_tanka.body %></p>
-        <div align="right"><%= render partial: "shared/namelink", locals: {user: @ran_tanka.user} %>
-        <%= render partial: "shared/name", locals: {user: @ran_tanka.user} %>
-        <%= render partial: "shared/vgg", locals: {user: @ran_tanka.user} %></div><br />
+
+        <% if @ran_tanka.ran_cnt > 0 %>            
+            <p id="seki">蘭</p><br />
+            <p><%= @ran_tanka.body %></p>
+            <div align="right"><%= render partial: "shared/namelink", locals: {user: @ran_tanka.user} %>
+            <%= render partial: "shared/name", locals: {user: @ran_tanka.user} %>
+            <%= render partial: "shared/vgg", locals: {user: @ran_tanka.user} %></div><br />
+        <% end %>
         
-        <p id="seki">笑</p><br />
-        <p><%= @sho_tanka.body %></p>
-        <div align="right"><%= render partial: "shared/namelink", locals: {user: @sho_tanka.user} %>
-        <%= render partial: "shared/name", locals: {user: @sho_tanka.user} %>
-        <%= render partial: "shared/vgg", locals: {user: @sho_tanka.user} %></div><br /> 
+        <% if @sho_tanka.sho_cnt > 0 %>    
+            <p id="seki">笑</p><br />
+            <p><%= @sho_tanka.body %></p>
+            <div align="right"><%= render partial: "shared/namelink", locals: {user: @sho_tanka.user} %>
+            <%= render partial: "shared/name", locals: {user: @sho_tanka.user} %>
+            <%= render partial: "shared/vgg", locals: {user: @sho_tanka.user} %></div><br /> 
+        <% end %>
     </div>    
 
 <% else %>
