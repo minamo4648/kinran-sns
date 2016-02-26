@@ -8,5 +8,6 @@
 # カスタムフォーマットを定義
 Time::DATE_FORMATS[:wa] = "%y年%-m月%-d日 %H時%M分"
 Time::DATE_FORMATS[:po] = "%y-%-m-%-d %H:%M"
+Time::DATE_FORMATS[:short] = "%-m/%-d %H:%M"
 Date::DATE_FORMATS[:default]      = "%-y年%-m月%-d日"
 Date::DATE_FORMATS[:date] = '%y/%-m/%-d'
