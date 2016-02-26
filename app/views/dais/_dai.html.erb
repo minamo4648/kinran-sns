@@ -23,6 +23,7 @@
                 <% else %>
                     <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
                     投票受付中
+                    <span class="badge pull-right"><%= Votership.where(dai_id: dai.id).pluck(:user_id).uniq.count %></span>
                 <% end %>
             <% else %>
             <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
