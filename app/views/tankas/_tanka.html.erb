@@ -1,5 +1,5 @@
     <% if tanka.selected == true %>
-    <% if tanka.exposed == false and Tanka.where('dai_id = ? and user_id = ?', tanka.dai.id , current_user.id ).count == 0 %>    
+    <%# if tanka.exposed == false and Tanka.where('dai_id = ? and user_id = ?', tanka.dai.id , current_user.id ).count == 0 %>    
       <tr>
         
         <td><%= link_to tanka.body, tanka %> 
@@ -22,5 +22,5 @@
             <% end %>
         </td>  
       </tr>
-    <% end %>
+    <%# end %>
     <% end %>
