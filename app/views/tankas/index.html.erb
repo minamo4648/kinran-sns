@@ -1,4 +1,8 @@
-<h2>題：「<%= @dai.title %>」</h2>
+<h2>題：「<%= @dai.title %>」
+
+<% if current_user == @dai.user %>
+    <%= link_to "講評", edit_dai_path(@dai) , class: "btn btn-large btn-default" %>
+<% end %></h2>
 
 <div class="container-fluid col-md-offset-1 col-md-10" >
 

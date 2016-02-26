@@ -65,46 +65,50 @@ function connectcheck3( ischecked ) {
           <br />
         <% end %>
 
-        <%= f.label :due, "投稿締切" %>
-        <%= f.datetime_select(
-            :due,
-            start_year: Time.zone.now.year,
-            end_year:   (Time.zone.now.year + 1),
-            include_blank: true,
-            minute_step: 10) %>
-      <label><input type="checkbox" name="no_due" value="checked" onclick="connectcheck(this.checked);" />締切を設定しない</label>
-      <br />
-      
-        <%= f.label :due, "投票締切" %>
-        <%= f.datetime_select(
-            :v_due,
-            start_year: Time.zone.now.year,
-            end_year:   (Time.zone.now.year + 1),
-            include_blank: true,
-            minute_step: 10) %>
-      <label><input type="checkbox" name="no_due2" value="checked" onclick="connectcheck3(this.checked);" />締切を設定しない</label>
-      <br /><br />
+            <% if @dai.fase < 3 %>
 
-        <%= f.label :target_grade, "投稿制限（学年）" %><%= " 設定なし" if @dai.target_grade== "0" %>
-        <%= @dai.target_grade if @dai.target_grade != "0" %>
-      <br />
-        <%= f.label :target_grade, "投稿制限（性別）" %>
-        <% case @dai.target_gender %>
-        <% when 1 %>
-            男子のみ
-        <% when 2 %>
-            女子のみ
-        <% else %>
-            設定なし
-        <% end %><br /><br />
+                <%= f.label :due, "投稿締切" %>
+                <%= f.datetime_select(
+                    :due,
+                    start_year: Time.zone.now.year,
+                    end_year:   (Time.zone.now.year + 1),
+                    include_blank: true,
+                    minute_step: 10) %>
+              <label><input type="checkbox" name="no_due" value="checked" onclick="connectcheck(this.checked);" />締切を設定しない</label>
+              <br />
+              
+                <%= f.label :due, "投票締切" %>
+                <%= f.datetime_select(
+                    :v_due,
+                    start_year: Time.zone.now.year,
+                    end_year:   (Time.zone.now.year + 1),
+                    include_blank: true,
+                    minute_step: 10) %>
+              <label><input type="checkbox" name="no_due2" value="checked" onclick="connectcheck3(this.checked);" />締切を設定しない</label>
+              <br /><br />
         
-      <%= f.check_box :all_select %>
-      <%= f.label :all_select, "全投稿作品を投票の対象にする" , checked_value: true, unchecked_value: false %>
+                <%= f.label :target_grade, "投稿制限（学年）" %><%= " 設定なし" if @dai.target_grade== "0" %>
+                <%= @dai.target_grade if @dai.target_grade != "0" %>
+              <br />
+                <%= f.label :target_grade, "投稿制限（性別）" %>
+                <% case @dai.target_gender %>
+                <% when 1 %>
+                    男子のみ
+                <% when 2 %>
+                    女子のみ
+                <% else %>
+                    設定なし
+                <% end %><br /><br />
+                
+              <%= f.check_box :all_select %>
+              <%= f.label :all_select, "全投稿作品を投票の対象にする" , checked_value: true, unchecked_value: false %>
+        
+              <%= f.check_box :vote_closed %>
+              <%= f.label :vote_closed, "投票できるのは投稿者だけ" , checked_value: true, unchecked_value: false %>
 
-      <%= f.check_box :vote_closed %>
-      <%= f.label :vote_closed, "投票できるのは投稿者だけ" , checked_value: true, unchecked_value: false %>
+            <% end %>
 
-        <% if @dai.fase == 2 and @dai.selecting == false %>
+        <% if @dai.fase >= 2 and @dai.selecting == false %>
           <br /><br /><%= f.label :comment2, "投票後のコメント（講評）" %>
           <%= f.text_area :comment2 , :maxlength => "2000" , :size => "20x10" ,class: "form-control" %>
           <br />
