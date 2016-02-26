@@ -6,15 +6,17 @@ class Notice < ActiveRecord::Base
     def note(users)
         #binding.pry
         if self.same_one.present?
-        if Noteship.find_by(notice_id: self.same_one.id).present?
-            self.same_one.unnote(User.where('id in (?)', users.pluck(:id) & self.same_one.users.pluck(:user_id)))
+            if Noteship.find_by(notice_id: self.same_one.id).present?
+                self.same_one.unnote(User.where('id in (?)', users.pluck(:id) & self.same_one.users.pluck(:user_id)))
+            end
         end
+        
         users.each do |user|
         
             noteships.find_or_create_by(user_id: user.id)
         
         end
-        end
+
 
     end
     
