@@ -1,13 +1,14 @@
     <% if tanka.selected == true %>
+    <% if tanka.exposed == false and Tanka.where('dai_id = ? and user_id = ?', tanka.dai.id , current_user.id ).count == 0 %>    
       <tr>
         
         <td><%= link_to tanka.body, tanka %> 
         <span class="badge pull-right"><%= Comment.where(tanka_id: tanka.id, deleted: false).count %></span></td>
         
-        
-        <td><%= render partial: "shared/namelink", locals: {user: tanka.user} %>
-        <%= render partial: "shared/name", locals: {user: tanka.user} %>
-        <%= render partial: "shared/gg", locals: {user: tanka.user} %></td>
+
+          <td><%= render partial: "shared/namelink", locals: {user: tanka.user} %>
+          <%= render partial: "shared/name", locals: {user: tanka.user} %>
+          <%= render partial: "shared/gg", locals: {user: tanka.user} %></td>
         
       </tr>
       
@@ -21,4 +22,5 @@
             <% end %>
         </td>  
       </tr>
+    <% end %>
     <% end %>
