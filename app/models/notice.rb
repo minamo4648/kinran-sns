@@ -17,7 +17,6 @@ class Notice < ActiveRecord::Base
         
         end
 
-
     end
     
     def same_one
