@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222063305) do
+ActiveRecord::Schema.define(version: 20160226014329) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "body",                       null: false
@@ -77,16 +77,17 @@ ActiveRecord::Schema.define(version: 20160222063305) do
 
   create_table "tankas", force: :cascade do |t|
     t.string   "body"
-    t.boolean  "exposed",    default: true
+    t.boolean  "exposed",      default: true
     t.integer  "user_id"
     t.integer  "dai_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.boolean  "selected",   default: true
-    t.integer  "kin_cnt",    default: 0
-    t.integer  "ran_cnt",    default: 0
-    t.integer  "sho_cnt",    default: 0
-    t.integer  "ransho_cnt", default: 0
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.boolean  "selected",     default: true
+    t.integer  "kin_cnt",      default: 0
+    t.integer  "ran_cnt",      default: 0
+    t.integer  "sho_cnt",      default: 0
+    t.integer  "ransho_cnt",   default: 0
+    t.datetime "submitted_at", default: '2016-02-26 01:45:36'
   end
 
   add_index "tankas", ["dai_id"], name: "index_tankas_on_dai_id"

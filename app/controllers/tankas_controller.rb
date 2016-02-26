@@ -15,8 +15,9 @@ before_action :edit_judge!, only: [:edit]
   end
   
   def create
-      
+    
     @tanka = current_user.tankas.build(tanka_params)
+    @tanka.submitted_at = Time.zone.now
     
     if @tanka.save
       redirect_to root_path, notice: "投稿が完了しました"
@@ -36,6 +37,7 @@ before_action :edit_judge!, only: [:edit]
   def update
       
     @tanka = Tanka.find(params[:id])
+    @tanka.submitted_at = Time.zone.now    
     
     if @tanka.update(tanka_params)
       redirect_to root_path, notice: "投稿が完了しました"
@@ -50,9 +52,9 @@ before_action :edit_judge!, only: [:edit]
       @dai = Dai.find(params[:dai_id])
       @dai.vote_count #フェイズ切り替わりのときだけのほうがよい
 
-      @tankas = Dai.find(params[:dai_id]).tankas.where(selected: true).order(kin_cnt: :desc, ransho_cnt: :desc, updated_at: :asc)
-      @ran_tanka = Dai.find(params[:dai_id]).tankas.order(ran_cnt: :desc, kin_cnt: :desc, ransho_cnt: :desc, updated_at: :asc).first
-      @sho_tanka = Dai.find(params[:dai_id]).tankas.order(sho_cnt: :desc, kin_cnt: :desc, ransho_cnt: :desc, updated_at: :asc).first
+      @tankas = Dai.find(params[:dai_id]).tankas.where(selected: true).order(kin_cnt: :desc, ransho_cnt: :desc, submitted_at: :asc)
+      @ran_tanka = Dai.find(params[:dai_id]).tankas.order(ran_cnt: :desc, kin_cnt: :desc, ransho_cnt: :desc, submitted_at: :asc).first
+      @sho_tanka = Dai.find(params[:dai_id]).tankas.order(sho_cnt: :desc, kin_cnt: :desc, ransho_cnt: :desc, submitted_at: :asc).first
 
   end  
   
@@ -148,7 +150,7 @@ before_action :edit_judge!, only: [:edit]
   private
 
     def tanka_params
-      params.require(:tanka).permit(:body, :dai_id, :exposed)
+      params.require(:tanka).permit(:body, :dai_id, :exposed, :submitted_at)
     end
 
     def comment_params
