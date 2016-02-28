@@ -1,6 +1,8 @@
 <div class="container-fluid col-md-offset-1 col-md-10" >
 
-<% page_entries_info @users %>    
+<%#= page_entries_info @users %>    
+
+<%= "全#{@users.count}件" %>
 
 <%= paginate @users %>
     
@@ -9,5 +11,37 @@
 <tr><th>ID</th><th>名前</th><th>学年</th><th>属性</th><th>最終ログイン</th></tr>
 <%= render @users %>
 </table>
+
+<hr>
+
+<b>検索</b>
+
+<%= search_form_for @q do |f| %>
+
+    <div class="form-group col-md-4">
+
+          <%# start 特定の文字列で始まる商品名で検索 %>
+          <%= f.label :name_cont, "名前" %>
+          <%= f.search_field :name_cont , class: "form-control" %>
+          <br />
+        
+          <%= f.label :nickname_cont, "ペンネーム" %>
+          <%= f.search_field :nickname_cont , class: "form-control" %>
+          <br />
+          
+          <%= f.label :grade_eq , "学年" %>
+          <%= f.search_field :grade_eq , class: "form-control" %>
+          <br />
+        
+          <%= f.label :gender_eq , "性別" %>
+          <label><%= f.radio_button :gender_eq , "" %>指定なし</label>
+          <label><%= f.radio_button :gender_eq , "1" %>男</label>
+          <label><%= f.radio_button :gender_eq , "2" %>女</label><br />
+        
+          <%= f.submit "検索", class: "btn btn-large btn-default" %>
+
+    </div>
+
+<% end %>
 
 </div>

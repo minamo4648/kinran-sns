@@ -39,8 +39,8 @@ gem 'bootstrap-sass'
   gem 'pry-byebug'
   gem 'i18n'
   gem 'byebug'
-
   gem 'taps'
+  gem 'ransack'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views

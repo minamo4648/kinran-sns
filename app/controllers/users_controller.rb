@@ -37,7 +37,10 @@ before_action :admin_only, only: [:edit, :update, :index]
   
   def index
     
-    @users = User.all.order(current_sign_in_at: :desc).page(params[:page])
+    #@users = User.order(current_sign_in_at: :desc).page(params[:page])
+
+    @q        = User.search(params[:q])
+    @users = @q.result(distinct: true).order(current_sign_in_at: :desc).page(params[:page])
     
   end
 
