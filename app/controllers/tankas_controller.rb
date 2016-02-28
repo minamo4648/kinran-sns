@@ -52,7 +52,7 @@ before_action :edit_judge!, only: [:edit]
       @dai = Dai.find(params[:dai_id])
       @dai.vote_count #フェイズ切り替わりのときだけのほうがよい
 
-      @tankas = Dai.find(params[:dai_id]).tankas.where(selected: true).order(kin_cnt: :desc, ransho_cnt: :desc, submitted_at: :asc)
+      @tankas = Dai.find(params[:dai_id]).tankas.where(selected: true).order(kin_cnt: :desc, ransho_cnt: :desc, submitted_at: :asc, id: :asc)
       @ran_tanka = Dai.find(params[:dai_id]).tankas.order(ran_cnt: :desc, kin_cnt: :desc, ransho_cnt: :desc, submitted_at: :asc).first
       @sho_tanka = Dai.find(params[:dai_id]).tankas.order(sho_cnt: :desc, kin_cnt: :desc, ransho_cnt: :desc, submitted_at: :asc).first
 
