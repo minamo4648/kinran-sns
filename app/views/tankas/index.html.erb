@@ -2,7 +2,13 @@
 
 <% if current_user == @dai.user %>
     <%= link_to "講評", edit_dai_path(@dai) , class: "btn btn-large btn-default" %>
-<% end %></h2>
+<% end %>
+
+<% if current_user.admin or @dai.user == current_user %>
+  <%= link_to "作品一覧をCSV形式でダウンロード", tankas_path(format: "csv", dai_id: @dai.id) , class: "btn btn-large btn-default" %>
+<% end %>
+
+</h2>
 
 <div class="container-fluid col-md-offset-1 col-md-10" >
 
@@ -93,6 +99,7 @@
   </tbody>
   
 </table>
+
 </div>
 </div>
 
