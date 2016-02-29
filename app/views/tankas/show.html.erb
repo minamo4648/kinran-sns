@@ -40,6 +40,9 @@
 
 </div>
 <div class="container-fluid col-md-2">
+    <% if current_user.admin %>
+		<%= link_to "編集", edit_tanka_path(id: @tanka.id , dai_id: @tanka.dai.id) , class: "btn btn-sm btn-warning" %>
+	<% end %>
     <% if (current_user.admin or current_user.grade == 99 or @tanka.dai.user == current_user) and @tanka.user != current_user %>
         <% if @tanka.issens.where('user_id = ?', current_user.id).present? %>
         	<%= link_to "一撰（推敲）", edit_issen_path(tanka_id: @tanka.id) , class: "btn btn-sm btn-warning" %>
