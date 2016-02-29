@@ -2,43 +2,42 @@
     <%#= link_to dai.title, dai %> <%#= dai.due.to_s(:wa) %>
 <!--</div>-->
 
-    <%# if judge_target(dai) %>
-    <% if true %>
+<% dai.fase_check! %>
 
-        <% dai.fase_check! %>
-
-      <tr>
-        <td><b><%= dai.genre_name %></b></td>  
-        <td><%= link_to shorten(dai.title,12) , dai %>
-        <span class="badge pull-right"><%= Tanka.where(dai_id: dai.id).count %></span></td>
-        <td>
-            <% case dai.fase %>
-            <% when 1 %>
-            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-              投稿受付中
-            <% when 2 %>
-                <% if dai.selecting %>
-                    <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-                    撰歌中
-                <% else %>
-                    <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
-                    投票受付中
-                    <span class="badge pull-right"><%= Votership.where(dai_id: dai.id).pluck(:user_id).uniq.count %></span>
-                <% end %>
-            <% else %>
-            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-              投票終了
-            <% end %>
-        </td>
-        <td>
-        <% if dai.fase == 1 and dai.due.present? %>
-            <%= dai.due.to_s(:wa) %>
-        <% elsif dai.fase == 2 and dai.v_due.present? %>    
-            <%= dai.v_due.to_s(:wa) %>
+<tr>
+<td><b><%= dai.genre_name %></b></td>  
+<td>
+    <% if current_user.admin %>
+        <%= dai.id %>
+    <% end %>            
+    <%= link_to shorten(dai.title,12) , dai %>
+<span class="badge pull-right"><%= Tanka.where(dai_id: dai.id).count %></span></td>
+<td>
+    <% case dai.fase %>
+    <% when 1 %>
+    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+      投稿受付中
+    <% when 2 %>
+        <% if dai.selecting %>
+            <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+            撰歌中
         <% else %>
-            ----------
+            <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+            投票受付中
+            <span class="badge pull-right"><%= Votership.where(dai_id: dai.id).pluck(:user_id).uniq.count %></span>
         <% end %>
-        </td>
-      </tr>
- 
-     <% end %>
+    <% else %>
+    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+      投票終了
+    <% end %>
+</td>
+<td>
+<% if dai.fase == 1 and dai.due.present? %>
+    <%= dai.due.to_s(:wa) %>
+<% elsif dai.fase == 2 and dai.v_due.present? %>    
+    <%= dai.v_due.to_s(:wa) %>
+<% else %>
+    ----------
+<% end %>
+</td>
+</tr>

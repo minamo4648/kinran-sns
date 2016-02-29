@@ -213,7 +213,7 @@ before_action :fase3_judge!, only: [:index]
 
     def fase3_judge!
     
-      @dai = Dai.find(params[:id])
+      @dai = Dai.find(params[:dai_id])
       
       if @dai.fase != 3 and current_user.admin == false
         redirect_to root_path
