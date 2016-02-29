@@ -26,13 +26,7 @@ before_action :admin_only, only: [:edit, :update, :index]
     @soultanka = Tanka.find_by(id: @user.soultanka_id)
     #@tankas = @user.tankas.order(created_at: :desc)
     @tankas = Tanka.joins(:dai).where(dais: {fase: 3}).where(user_id: @user.id).order(created_at: :desc)
-    @best_tanka = @tankas.where("kin_cnt >= ?", 1).order(kin_cnt: :desc, ransho_cnt: :desc, created_at: :asc).first if @tankas.where("kin_cnt >= ?", 1).count > 0
-    if @best_tanka.present? and @best_tanka.exposed == false
-      @best_tanka = nil
-    end
-
-
-
+    @best_tanka = @tankas.where(exposed: true).where("kin_cnt >= ?", 1).order(kin_cnt: :desc, ransho_cnt: :desc, created_at: :asc).first if @tankas.where("kin_cnt >= ?", 1).count > 0
 
   end
   
