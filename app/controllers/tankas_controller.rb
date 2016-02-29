@@ -4,6 +4,7 @@ before_action :authenticate_user!
 before_action :tanka_confirm!, only: [:edit, :show] 
 before_action :toko_judge!, only: [:new] 
 before_action :edit_judge!, only: [:edit] 
+before_action :fase3_judge!, only: [:index] 
 
     
   def new
@@ -210,5 +211,15 @@ before_action :edit_judge!, only: [:edit]
     
     end
 
+    def fase3_judge!
+    
+      @dai = Dai.find(params[:id])
+      
+      if @dai.fase != 3 and current_user.admin == false
+        redirect_to root_path
+        return
+      end
+    
+    end
 
 end

@@ -2,7 +2,7 @@ class DaisController < ApplicationController
 
 before_action :authenticate_user!
 before_action :dai_judge!, only: [:show, :vote] 
-before_action :voter_judge!, only: [:vote]  
+before_action :voter_judge!, only: [:vote] 
     
   def new
     
