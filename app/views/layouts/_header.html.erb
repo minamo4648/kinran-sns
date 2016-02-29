@@ -52,7 +52,7 @@
                   <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu  notices_list" >
-                  <%= render partial: 'notices/notice', collection: current_user.notices.order(created_at: :desc).limit(10) %>    
+                  <%= render partial: 'notices/notice', collection: current_user.notices.order(created_at: :desc).limit(7) %>    
                 </ul>
               </li>
               <% end %>
