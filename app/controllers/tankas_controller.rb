@@ -38,7 +38,10 @@ before_action :fase3_judge!, only: [:index]
   def update
       
     @tanka = Tanka.find(params[:id])
-    @tanka.submitted_at = Time.zone.now    
+    
+    if @tanka.dai.fase == 1
+      @tanka.submitted_at = Time.zone.now    
+    end
     
     if @tanka.update(tanka_params)
       redirect_to root_path, notice: "投稿が完了しました"
@@ -175,7 +178,7 @@ before_action :fase3_judge!, only: [:index]
     
       @dai = Dai.find(params[:dai_id])
 
-      if @dai.fase != 1
+      if @dai.fase != 1 and current_user.admin == false
           redirect_to root_path, alert: '投稿期間を過ぎました'
         return
       end
@@ -196,7 +199,7 @@ before_action :fase3_judge!, only: [:index]
     
       end
 
-      if @tanka.dai.fase != 1
+      if @tanka.dai.fase != 1 and current_user.admin == false
           redirect_to root_path, alert: '投稿期間を過ぎました'
         return
       end

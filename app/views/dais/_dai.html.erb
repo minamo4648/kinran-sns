@@ -5,7 +5,15 @@
 <% dai.fase_check! %>
 
 <tr>
-<td><b><%= dai.genre_name %></b></td>  
+<td><b>
+    <% if dai.genre < 3 %>
+        <%= dai.genre_name %>
+    <% else %>
+        <font size="2">
+            <%= dai.genre_name %>
+        </font>
+    <% end %>
+    </b></td>  
 <td>
     <% if current_user.admin %>
         <%= dai.id %>

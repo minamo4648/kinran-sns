@@ -5,7 +5,7 @@
 		題：「<%= @dai.title %>」<font color="#ff00000">（<%=@dai.genre_name %>）</font>
 	</div>
 	<div class="panel-body">
-		<%= @dai.comment %>
+		<%= simple_format(@dai.comment) %>
 	</div>
 	<div class="panel-footer">
         <% if @dai.due.nil? %>
