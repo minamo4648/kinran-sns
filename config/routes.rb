@@ -26,6 +26,9 @@ Rails.application.routes.draw do
       get 'select'
       get 'voters'
     end
+    collection do
+      get 'look_for'
+    end       
   end
   resources :dais do
     member do

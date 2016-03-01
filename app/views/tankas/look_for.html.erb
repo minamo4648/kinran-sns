@@ -1,0 +1,66 @@
+<div class="container-fluid col-md-12">
+    
+<%= "全#{@tankas_all.count}件" %>
+
+<%= paginate @tankas %>    
+    
+<table class="table table-bordered">
+
+  <thead>
+    <tr>
+      <th class="col-md-3">題</th>
+      <th class="col-md-6">作品（コメント数）</th>
+      <th class="col-md-1">作成</th>
+      <th class="col-md-2">賞</th>
+    </tr>
+  </thead>
+    
+    <% @tankas.each do |t| %>
+
+            <tr>    
+        
+                <td>
+                    「<%= link_to shorten(t.dai.title,10), t.dai %>」
+                </td>
+            
+                <td>
+                    <%= link_to t.body, t %> 
+                </td>
+                <td>
+                    <%= t.updated_at.strftime("%y/%-m/%-d") %> 
+                </td>
+                <td>
+                    <% if t.dai.fase == 3 and t.selected %>
+                        金<%= t.kin_cnt %> 
+                        蘭<%= t.ran_cnt %> 
+                        笑<%= t.sho_cnt %>
+                        <% if t.kin_cnt + t.ransho_cnt > 0 %>
+                          <font size="2"><%= link_to "一覧", voters_tanka_path(t) %></font>
+                        <% end %>
+                    <% end %>
+                </td>
+            </tr>
+        
+    <% end %>
+        
+</table>    
+</div>
+
+<hr>
+
+<b>検索</b>
+
+<%= search_form_for @q, :url => look_for_tankas_path do |f| %>
+
+    <div class="form-group col-md-4">
+
+          <%# start 特定の文字列で始まる商品名で検索 %>
+          <%= f.label :body_cont, "作品に含まれる単語" %>
+          <%= f.search_field :body_cont , class: "form-control" %>
+          <br />
+
+          <%= f.submit "検索", class: "btn btn-large btn-default" %>
+
+    </div>
+    
+<% end %>

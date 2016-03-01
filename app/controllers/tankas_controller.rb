@@ -88,6 +88,19 @@ before_action :fase3_judge!, only: [:index]
     end    
     
   end  
+
+  def look_for
+
+
+  if params[:q].present?
+    @q      = Tanka.joins(:dai).where(dais: {fase: 3}).where(exposed: true).search(:body_cont_all => params[:q][:body_cont].split(/[ 　]/))
+  else
+    @q      = Tanka.joins(:dai).where(dais: {fase: 3}).where(exposed: true).search(params[:q])
+  end
+    @tankas_all = @q.result
+    @tankas = @tankas_all.order(updated_at: :desc).page(params[:page])
+    
+  end
   
   def soul
     
