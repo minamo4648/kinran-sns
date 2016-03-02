@@ -95,15 +95,15 @@ before_action :fase3_judge!, only: [:index]
   if params[:q].present?
     if params[:q][:dai_genre_eq] == ""    
         @q      = Tanka.joins(:dai).where(dais: {fase: 3}).where(exposed: true)
-        .search(:body_cont_all => params[:q][:body_cont].split(/[ 　]/)).order(submitted_at: :desc)
+        .search(:body_cont_all => params[:q][:body_cont].split(/[ 　]/))
     else
         @q      = Tanka.joins(:dai).where(dais: {fase: 3}).where(exposed: true)
-        .where(dais: {genre: params[:q][:dai_genre_eq]}).search(:body_cont_all => params[:q][:body_cont].split(/[ 　]/)).order(submitted_at: :desc)
+        .where(dais: {genre: params[:q][:dai_genre_eq]}).search(:body_cont_all => params[:q][:body_cont].split(/[ 　]/))
     end
   else
     @q      = Tanka.joins(:dai).where(dais: {fase: 3}).where(exposed: true).search(params[:q])
   end
-    @tankas_all = @q.result
+    @tankas_all = @q.result.order(submitted_at: :desc)
     @tankas = @tankas_all.page(params[:page])
     
   end
