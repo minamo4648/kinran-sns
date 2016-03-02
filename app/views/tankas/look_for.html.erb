@@ -70,7 +70,7 @@
                     <%= render partial: "shared/name", locals: {user: t.user} %> 
                 </td>
                 <td>
-                    <%= t.updated_at.strftime("%y/%-m/%-d") %> 
+                    <%= t.submitted_at.strftime("%y/%-m/%-d") %> 
                 </td>
                 <td>
                     <% if t.dai.fase == 3 and t.selected %>
