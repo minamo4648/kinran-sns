@@ -1,3 +1,41 @@
+<div class="col-md-offset-2 col-md-8 inst">
+
+※検索の対象になるのは、投票が終了していて、「公開」に設定されている作品のみです。
+
+</div>
+
+<div class="container-fluid col-md-12">
+
+<b>検索</b>
+
+<%= search_form_for @q, :url => look_for_tankas_path do |f| %>
+
+    <div class="form-group col-md-5">
+
+          <%# start 特定の文字列で始まる商品名で検索 %>
+          <%= f.label :body_cont, "作品に含まれる単語" %>
+          <%= f.search_field :body_cont , class: "form-control" %>
+          <br />
+
+      <%= f.label :dai_genre_eq , "種類" %>
+      <label><%= f.radio_button :dai_genre_eq, "", {:checked=>true} %>指定なし</label>      
+      <label><%= f.radio_button :dai_genre_eq, "0" %>短歌</label>
+      <label><%= f.radio_button :dai_genre_eq, "1" %>俳句</label>
+      <label><%= f.radio_button :dai_genre_eq, "2" %>川柳</label>
+      <label><%= f.radio_button :dai_genre_eq, "3" %>都々逸</label>
+      <label><%= f.radio_button :dai_genre_eq, "4" %>その他</label>
+      <br /><br />
+
+          <%= f.submit "検索", class: "btn btn-large btn-default" %>
+
+    </div>
+    
+<% end %>
+
+</div>
+
+<hr>
+
 <div class="container-fluid col-md-12">
     
 <%= "全#{@tankas_all.count}件" %>
@@ -8,8 +46,9 @@
 
   <thead>
     <tr>
-      <th class="col-md-3">題</th>
-      <th class="col-md-6">作品（コメント数）</th>
+      <th class="col-md-2">題</th>
+      <th class="col-md-5">作品（コメント数）</th>
+      <th class="col-md-2">作者</th>
       <th class="col-md-1">作成</th>
       <th class="col-md-2">賞</th>
     </tr>
@@ -25,6 +64,10 @@
             
                 <td>
                     <%= link_to t.body, t %> 
+                </td>
+                <td>
+                    <%= render partial: "shared/namelink", locals: {user: t.user} %>                     
+                    <%= render partial: "shared/name", locals: {user: t.user} %> 
                 </td>
                 <td>
                     <%= t.updated_at.strftime("%y/%-m/%-d") %> 
@@ -45,22 +88,3 @@
         
 </table>    
 </div>
-
-<hr>
-
-<b>検索</b>
-
-<%= search_form_for @q, :url => look_for_tankas_path do |f| %>
-
-    <div class="form-group col-md-4">
-
-          <%# start 特定の文字列で始まる商品名で検索 %>
-          <%= f.label :body_cont, "作品に含まれる単語" %>
-          <%= f.search_field :body_cont , class: "form-control" %>
-          <br />
-
-          <%= f.submit "検索", class: "btn btn-large btn-default" %>
-
-    </div>
-    
-<% end %>
