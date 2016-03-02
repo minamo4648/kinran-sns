@@ -103,7 +103,7 @@ before_action :fase3_judge!, only: [:index]
   else
     @q      = Tanka.joins(:dai).where(dais: {fase: 3}).where(exposed: true).search(params[:q])
   end
-    @tankas_all = @q.result.order(submitted_at: :desc)
+    @tankas_all = @q.result.order(dai_id: :desc, submitted_at: :desc)
     @tankas = @tankas_all.page(params[:page])
     
   end
