@@ -4,6 +4,8 @@
   </li>
 <% else %>
   <li>
+    <span class='pagenate_panel'>
     <%= link_to page, url, remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)) %>
+    </span>
   </li>
 <% end %>
