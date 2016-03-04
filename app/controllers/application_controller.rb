@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
   # def after_sign_out_path_for(resource)
   #   root_path
   # end
+  
+  helper_method :new_notices
+  
+    def new_notices
+      
+      return current_user.notices.where("notices.created_at > ?", 1.weeks.ago ).order(created_at: :desc).limit(7)
+      
+    end
 
     def listdais
   
