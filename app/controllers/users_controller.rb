@@ -36,7 +36,7 @@ before_action :admin_only, only: [:edit, :update, :index]
 
     @q      = User.search(params[:q])
     @users_all = @q.result(distinct: true)
-    @users = @users_all.order(current_sign_in_at: :desc).page(params[:page])
+    @users = @users_all.order(current_sign_in_at: :desc).page(params[:page]).per(5)
     
   end
 

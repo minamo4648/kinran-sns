@@ -188,5 +188,15 @@ hr.style-one {
 }
 
 .pagenate_panel{
-  color: #028760;  
+  color: #028760;
+}
+
+.pagination .active a { 
+  background-color: #028760;
+  border: 1px solid #028760;
+}
+
+.pagination .active a:hover { 
+  background-color: #028760; 
+  border: 1px solid #028760;  
 }
