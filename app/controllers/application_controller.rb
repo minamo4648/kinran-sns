@@ -20,7 +20,9 @@ class ApplicationController < ActionController::Base
   
     def new_notices
       
-      return current_user.notices.where("notices.created_at > ?", 1.weeks.ago ).order(created_at: :desc).limit(7)
+      Notice.where("created_at < ?", 1.months.ago ).destroy_all
+      
+      return current_user.notices.where("notices.created_at > ?", 2.weeks.ago ).order(created_at: :desc).limit(7)
       
     end
 
