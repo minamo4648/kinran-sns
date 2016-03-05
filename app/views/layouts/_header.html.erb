@@ -47,7 +47,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <% if Time.zone.now - current_user.noteships.order(created_at: :desc).first.created_at < 1.day %>
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <font color="#028760"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></font>
                   <% end %>
                   お知らせ
                   <span class="caret"></span>
