@@ -94,10 +94,12 @@ ActiveRecord::Schema.define(version: 20160306021415) do
   create_table "renga_voterships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "renga_id"
+    t.integer  "kogyo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "renga_voterships", ["kogyo_id"], name: "index_renga_voterships_on_kogyo_id"
   add_index "renga_voterships", ["renga_id"], name: "index_renga_voterships_on_renga_id"
   add_index "renga_voterships", ["user_id"], name: "index_renga_voterships_on_user_id"
 
