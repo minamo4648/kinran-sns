@@ -103,7 +103,8 @@ ActiveRecord::Schema.define(version: 20160306021415) do
 
   create_table "rengas", force: :cascade do |t|
     t.string   "body"
-    t.boolean  "selected",   default: false
+    t.boolean  "selected",   default: true
+    t.boolean  "picked",     default: false
     t.integer  "user_id"
     t.integer  "kogyo_id"
     t.datetime "created_at",                 null: false

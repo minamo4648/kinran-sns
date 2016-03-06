@@ -34,5 +34,41 @@ module ApplicationHelper
         end
     
     end
+
+    def i_to_kan(num)
+
+        x = ""
+
+        kansuuji = ["","一","二","三","四","五","六","七","八","九"]
+        
+        if num > 1 and num < 100
+
+            if num >= 10
+                
+                if num >= 20
+                
+                    x = kansuuji[num.div(10)]  + "十"
+                
+                else
+                
+                    x = "十"
+                
+                end
+            
+            end
+            
+            x = x + kansuuji[num.modulo(10)]
+
+        end        
+
+        return x        
+        
+    end
+    
+    def heisei(y)
+    
+        return y - 1988
+    
+    end
     
 end
