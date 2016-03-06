@@ -96,7 +96,6 @@ p {
     line-height: 1.8em;
     position: relative;
     overflow: auto;
-    height: 500px;
     //float: left;
     writing-mode: tb-rl;
     writing-mode: vertical-rl;
@@ -127,6 +126,7 @@ div.last-row label {
   padding: 20px 10px 10px 10px;
   background-color: #fff1cf;
   width: 750px;
+  height: 500px;
   margin: 0 auto;  
 }
 
@@ -204,3 +204,4 @@ hr.style-one {
   background-color: #028760; 
   border: 1px solid #028760;  
 }
+

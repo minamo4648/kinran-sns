@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pick_type: 
+  notice: MyString
+  place: 1
+  season: 1
+  hokku_name: MyString
+  next_due: 2016-03-06 01:57:48
+  voting_hour: 1.5
+  thinking_hour: 1.5
+
+two:
+  pick_type: 
+  notice: MyString
+  place: 1
+  season: 1
+  hokku_name: MyString
+  next_due: 2016-03-06 01:57:48
+  voting_hour: 1.5
+  thinking_hour: 1.5

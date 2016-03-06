@@ -40,6 +40,8 @@ Rails.application.routes.draw do
     end   
   end
   resources :issens
+  resources :rengas 
+  resources :kogyos
 
 #http://easyramble.com/cutomize-controllers-on-rails-devise.html
   
