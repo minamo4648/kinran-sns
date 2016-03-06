@@ -1,0 +1,52 @@
+<h1>連歌興行</h1>
+
+    <%= render 'shared/em', error_messages: @error_messages %>
+
+<div class="container-fluid col-md-12">
+
+  <div class="col-md-6 col-md-offset-3">
+    
+      
+    <%= form_for @kogyo do |f| %>
+
+    <div class="form-group">
+      
+      <%= fields_for @renga do |c| %>
+        <%= c.label :body, "発句" %>
+        <%= c.text_field :body , class: "form-control" %>
+      <% end %>      
+      
+      <label>発句の季節</label>
+      <label><%= f.radio_button :season, "0", {:checked=>true} %>春</label>
+      <label><%= f.radio_button :season, "1" %>夏</label>
+      <label><%= f.radio_button :season, "2" %>秋</label>
+      <label><%= f.radio_button :season, "3" %>冬</label>
+      <br /><br />
+
+        <%= f.label :next_due, "脇句締切" %>
+        <%= f.datetime_select(
+            :next_due,
+            start_year: Time.zone.now.year,
+            end_year:   (Time.zone.now.year + 1),
+            default:    Time.zone.today + 2,
+            minute_step: 10 ) %>
+      <label><input type="checkbox" name="no_due" value="checked" onclick="connectcheck(this.checked);" />締切を設定しない</label>
+      <br />
+      
+      <div class="col-md-5">
+        <%= f.label :thinking_hour, "三句目以降締切は" %>
+        <%= f.text_field :thinking_hour , class: "form-control" %>
+      </div>時間ごと
+      <div class="col-md-offset-7"></div>
+      <div>
+          <%= f.submit "連歌を始める", class: "btn btn-large btn-default" %>
+      </div>
+
+        </div>
+    </div>
+    
+        <% end %>
+    
+
+  </div>
+</div>
