@@ -1,5 +1,7 @@
 class KogyosController < ApplicationController
 
+before_action :authenticate_user!
+
     def new
     
         @kogyo = Kogyo.new
@@ -11,14 +13,19 @@ class KogyosController < ApplicationController
         @kogyo = Kogyo.new(kogyo_params)
 
         @renga = Renga.new(renga_params)
-        @renga.save
         
         
-        if @kogyo.save
+        unless @kogyo.save
+            redirect_to new_kogyo_path
+        end
+
+        if @renga.save
+            @renga.update(kogyo_id: Kogyo.last.id)
             redirect_to root_path, notice: "投稿が完了しました"
         else
             redirect_to new_kogyo_path
         end
+
     end
 
     private

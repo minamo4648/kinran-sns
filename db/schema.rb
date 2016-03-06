@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20160306021415) do
     t.string   "body"
     t.boolean  "selected",   default: true
     t.boolean  "picked",     default: false
+    t.integer  "place",                      null: false
     t.integer  "user_id"
     t.integer  "kogyo_id"
     t.datetime "created_at",                 null: false

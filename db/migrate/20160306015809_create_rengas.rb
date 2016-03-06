@@ -4,6 +4,7 @@ class CreateRengas < ActiveRecord::Migration
       t.string :body
       t.boolean :selected, default: true
       t.boolean :picked, default:false
+      t.integer :place, :null => false
       t.references :user, index: true, foreign_key: true      
       t.references :kogyo, index: true, foreign_key: true      
 

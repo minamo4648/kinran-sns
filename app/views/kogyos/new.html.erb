@@ -14,6 +14,9 @@
       <%= fields_for @renga do |c| %>
         <%= c.label :body, "発句" %>
         <%= c.text_field :body , class: "form-control" %>
+        <%= c.hidden_field :user_id, value: current_user.id %>
+        <%= c.hidden_field :place, value: 1 %> 
+        <%= c.hidden_field :picked, value: true %>
       <% end %>      
       
       <label>発句の季節</label>
@@ -33,12 +36,16 @@
       <label><input type="checkbox" name="no_due" value="checked" onclick="connectcheck(this.checked);" />締切を設定しない</label>
       <br />
       
-      <div class="col-md-5">
+      <div class="col-md-6">
         <%= f.label :thinking_hour, "三句目以降締切は" %>
-        <%= f.text_field :thinking_hour , class: "form-control" %>
-      </div>時間ごと
+        <div class="form-inline">
+          <%= f.text_field :thinking_hour , class: "form-control hours" %>時間ごと
+        </div>
+      </div>
       <div class="col-md-offset-7"></div>
-      <div>
+      <div class="col-md-12">
+          <%= f.hidden_field :user_id, value: current_user.id %>  
+          <%= f.hidden_field :place, value: 2 %>
           <%= f.submit "連歌を始める", class: "btn btn-large btn-default" %>
       </div>
 
