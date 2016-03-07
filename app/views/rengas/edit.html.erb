@@ -7,7 +7,7 @@
         <% end %>
         <b>前句：</b><%= @rengas.last.body %><br />
 
-      <%= f.label :body, "付句" %>
+      <%= f.label :body, "#{place_name(@renga.place)}　付句" %>
       <%= f.text_field :body , class: "form-control" %>
       <%= f.submit "投稿", class: "btn btn-large btn-default" %>
     <% end %>
