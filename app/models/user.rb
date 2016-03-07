@@ -124,7 +124,7 @@ class User < ActiveRecord::Base
   end
 
   def voted?(renga)
-    renga.voterships.include?(renga)
+    renga_voterships.pluck(:renga_id).include?(renga.id)
   end
 
 
