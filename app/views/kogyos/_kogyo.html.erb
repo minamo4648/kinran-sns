@@ -1,0 +1,13 @@
+<div>
+    <tr>
+        <td>
+            <%= link_to kogyo.rengas.find_by(place: 1).body, kogyo %>
+        </td>
+        <td>
+            <%= kogyo.created_at.to_s(:default) %>
+        </td>
+        <td>
+            <%= kogyo.rengas.find_by(place: 18).updated_at.to_s(:default) %>
+        </td>
+    </tr>
+</div>

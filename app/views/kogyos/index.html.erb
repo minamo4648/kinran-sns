@@ -1,0 +1,12 @@
+<div class="container-fluid col-md-offset-1 col-md-10" >
+
+<%= "全#{@kogyos.count}件" %>
+
+    <%= paginate @kogyos %>
+    
+<table class="table table-condensed">
+    <tr><th>発句</th><th>起首</th><th>満尾</th></tr>
+    <%= render @kogyos %>
+</table>
+
+</div>

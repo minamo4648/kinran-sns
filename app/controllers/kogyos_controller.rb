@@ -28,6 +28,19 @@ before_action :authenticate_user!
 
     end
 
+    def index
+    
+        @kogyos = Kogyo.where(place: 19).order(created_at: :desc).page(params[:page])
+    
+    end
+    
+    def show
+    
+        @kogyo = Kogyo.find(params[:id])
+        @rengas = @kogyo.rengas.where(picked: true).order(place: :asc)
+    
+    end
+
     private
 
         def kogyo_params
