@@ -9,21 +9,34 @@ before_action :authenticate_user!
         
     end
 
-  def create
-    
-    @renga = current_user.rengas.build(renga_params)
-    
-    if @renga.save
-        
-        if Kogyo.last.pick_type == 1
-            Kogyo.last.update(place: Kogyo.last.place + 1)
-        end
-      redirect_to root_path, notice: "投稿が完了しました"
-    else
-      redirect_to new_renga_path
+    def create
+      
+      @renga = current_user.rengas.build(renga_params)
+      
+      if @renga.save
+          
+          if Kogyo.last.pick_type == 1
+              Kogyo.last.update(place: Kogyo.last.place + 1)
+          end
+        redirect_to root_path, notice: "投稿が完了しました"
+      else
+        redirect_to new_renga_path
+      end
+  
     end
-
-  end
+    
+    def edit
+    
+      @renga = Renga.find(params[:id])
+      @rengas = Renga.where(kogyo_id: Kogyo.last.id, picked: true).order(place: :asc)
+    
+    end
+    
+    def index
+    
+      @rengas = Renga.where(kogyo_id: Kogyo.last.id, place: Kogyo.last.place)
+    
+    end
 
   private
 

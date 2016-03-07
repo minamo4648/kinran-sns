@@ -114,6 +114,21 @@ class User < ActiveRecord::Base
     sho_tankas.include?(tanka)
   end
 
+
+  def vote_renga(renga)
+    
+    ex = renga_voterships.joins(:renga).where(rengas: {place: Kogyo.last.place}).find_by(user_id: self.id, kogyo_id: Kogyo.last.id)
+    ex.destroy if ex
+    
+    renga_voterships.find_or_create_by(renga_id: renga.id, kogyo_id: Kogyo.last.id)
+  end
+
+  def voted?(renga)
+    renga.voterships.include?(renga)
+  end
+
+
+
   # allow users to update their accounts without passwords
   # http://easyramble.com/user-account-update-without-password-on-devise.html
   def update_without_current_password(params, *options)

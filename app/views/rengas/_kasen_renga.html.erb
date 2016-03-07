@@ -13,5 +13,10 @@
 <% end %>
 
 <%= renga.body %>　　　
-<%= render partial: "shared/name", locals: {user: User.find(renga.user_id)} %>
+
+<% if renga.place == 1 and renga.kogyo.hokku_name.present? %>
+    <%= renga.kogyo.hokku_name %>
+<% else %>
+    <%= render partial: "shared/name", locals: {user: User.find(renga.user_id)} %>
+<% end %>
 <br />

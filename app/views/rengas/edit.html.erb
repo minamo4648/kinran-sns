@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 form-group">
+    <%= form_for @renga do |f| %>
+
+        <% if @rengas.last.place >= 2 %>
+            <b>打越：</b><%= @rengas.last(2).first.body %><br />
+        <% end %>
+        <b>前句：</b><%= @rengas.last.body %><br />
+
+      <%= f.label :body, "付句" %>
+      <%= f.text_field :body , class: "form-control" %>
+      <%= f.submit "投稿", class: "btn btn-large btn-default" %>
+    <% end %>
+  </div>
+</div>
+
+<%= render partial: "kogyos/kasen" , locals: {rengas: @rengas} %>
+

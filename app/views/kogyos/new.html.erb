@@ -11,21 +11,38 @@
 
     <div class="form-group">
       
-      <%= fields_for @renga do |c| %>
-        <%= c.label :body, "発句" %>
-        <%= c.text_field :body , class: "form-control" %>
-        <%= c.hidden_field :user_id, value: current_user.id %>
-        <%= c.hidden_field :place, value: 1 %> 
-        <%= c.hidden_field :picked, value: true %>
-      <% end %>      
-      
-      <label>発句の季節</label>
-      <label><%= f.radio_button :season, "0", {:checked=>true} %>春</label>
-      <label><%= f.radio_button :season, "1" %>夏</label>
-      <label><%= f.radio_button :season, "2" %>秋</label>
-      <label><%= f.radio_button :season, "3" %>冬</label>
-      <br /><br />
+      <div class ="col-md-12">
+        <%= fields_for @renga do |c| %>
+          <%= c.label :body, "発句" %>
+          <%= c.text_field :body , class: "form-control" %>
+          <%= c.hidden_field :user_id, value: current_user.id %>
+          <%= c.hidden_field :place, value: 1 %> 
+          <%= c.hidden_field :picked, value: true %>
+        <% end %>      
+        
+        <label>発句の季節</label>
+        <label><%= f.radio_button :season, "0", {:checked=>true} %>春</label>
+        <label><%= f.radio_button :season, "1" %>夏</label>
+        <label><%= f.radio_button :season, "2" %>秋</label>
+        <label><%= f.radio_button :season, "3" %>冬</label>
+        <br /><br />
+      </div>
 
+      <div class ="col-md-8">
+        <%= f.label :hokku_name, "発句の作者（自分で詠んだ場合は空欄のままで）" %>
+        <%= f.text_field :hokku_name , class: "form-control" %>
+        <br />
+      </div>
+      
+      <div class="col-md-12">
+        <label>付句の決定</label>
+        <label><%= f.radio_button :pick_type, "0", {:checked=>true} %>亭主の撰</label>
+        <label><%= f.radio_button :pick_type, "1" %>出勝（早い者勝ち）</label>
+        <label><%= f.radio_button :pick_type, "2" %>投票</label>
+        <br /><br />
+      </div>  
+      
+      <div class="col-md-12">
         <%= f.label :next_due, "脇句締切" %>
         <%= f.datetime_select(
             :next_due,
@@ -33,16 +50,17 @@
             end_year:   (Time.zone.now.year + 1),
             default:    Time.zone.today + 2,
             minute_step: 10 ) %>
-      <label><input type="checkbox" name="no_due" value="checked" onclick="connectcheck(this.checked);" />締切を設定しない</label>
-      <br />
+        <br /><br />
+      </div>
       
       <div class="col-md-6">
-        <%= f.label :thinking_hour, "三句目以降締切は" %>
+        <%= f.label :thinking_hour, "脇句決定以降締切は" %>
         <div class="form-inline">
           <%= f.text_field :thinking_hour , class: "form-control hours" %>時間ごと
         </div>
+        <br />
       </div>
-      <div class="col-md-offset-7"></div>
+      
       <div class="col-md-12">
           <%= f.hidden_field :user_id, value: current_user.id %>  
           <%= f.hidden_field :place, value: 2 %>
