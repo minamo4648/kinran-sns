@@ -4,6 +4,7 @@ before_action :authenticate_user!
     
     def new
         
+        @kogyo = Kogyo.last
         @rengas = Renga.where(kogyo_id: Kogyo.last.id, picked: true).order(place: :asc)
         @renga = Renga.new
         
@@ -27,6 +28,7 @@ before_action :authenticate_user!
     
     def edit
     
+      @kogyo = Kogyo.last
       @renga = Renga.find(params[:id])
       @rengas = Renga.where(kogyo_id: Kogyo.last.id, picked: true).order(place: :asc)
     
@@ -35,6 +37,14 @@ before_action :authenticate_user!
     def index
     
       @rengas = Renga.where(kogyo_id: Kogyo.last.id, place: Kogyo.last.place)
+    
+    end
+    
+    def vote
+    
+      current_user.vote_renga(Renga.find(params[:id]))
+    
+      redirect_to :back
     
     end
 

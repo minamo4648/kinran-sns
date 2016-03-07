@@ -40,7 +40,11 @@ Rails.application.routes.draw do
     end   
   end
   resources :issens
-  resources :rengas 
+  resources :rengas do
+    member do
+      get 'vote'
+    end
+  end
   resources :kogyos
 
 #http://easyramble.com/cutomize-controllers-on-rails-devise.html

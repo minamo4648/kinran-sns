@@ -3,6 +3,14 @@
         <%= renga.body %>
     </td>
     <td>
-        投票
+        <% if current_user.voted?(renga) %>
+        
+            <font color = "red">選択</font>
+    
+        <% else %>
+        
+            <%= link_to "選択" , vote_renga_path(id: renga.id) %>
+    
+        <% end %>
     </td>
 </tr>
