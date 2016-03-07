@@ -1,0 +1,17 @@
+<% if renga.place >= 8 and renga.place <= 10 %>
+    <span class="koi">
+        <%= place_name(renga.place) -%>
+    </span>
+<% else %>
+    <%= place_name(renga.place) -%>
+<% end %>
+
+<% if renga.place.modulo(2) == 1 -%>
+　　
+<% else %>
+　　　
+<% end %>
+
+<%= renga.body %>　　　
+<%= render partial: "shared/name", locals: {user: User.find(renga.user_id)} %>
+<br />

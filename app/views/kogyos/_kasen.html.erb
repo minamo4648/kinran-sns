@@ -1,0 +1,22 @@
+
+<div class="container-fluid col-md-offset-1 col-md-10" >
+    <div class="vertical kasen">
+        <p class="kishu"><%= wareki(Kogyo.find(rengas.first.kogyo_id).created_at) %>起首</p>
+        <div class="omote">
+            <%= render partial: "rengas/kasen_renga", collection: rengas.limit(6) , as: :renga %>
+        </div>   
+    </div>    
+</div>    
+
+<% if rengas.count > 6 %>
+    <div class="container-fluid col-md-offset-1 col-md-10" >
+        <div class="vertical kasen">
+            <div class="ura">
+                <%= render partial: "rengas/kasen_renga", collection: rengas.offset(6) , as: :renga %>    
+            </div>
+            <% if Renga.where(kogyo_id: Kogyo.last.id, place: 18, picked: true).present? %>
+                <p class="kishu"><%= wareki(rengas.find_by(place: 18).updated_at) %>満尾</p>
+            <% end %>
+        </div>    
+    </div>    
+<% end %>

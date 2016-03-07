@@ -1,33 +1,24 @@
-<div class="container-fluid col-md-offset-1 col-md-10" >
-    <div class="vertical kasen">
-        <p class="kishu">平成●●年●月●●日起首</p>
-        <div class="omote">    
-            発句　　ああああああああああああああああああああああ（作品）　　（作者の名前）<br />
-            脇　　　　いいいいいいいいいいいい（作品）　　（作者の名前）<br />
-            三　　　ああああああああああああああああああああああ（作品）　　（作者の名前）<br />
-            四　　　　いいいいいいいいいいいい（作品）　　（作者の名前）<br />
-            月　　　ああああああああああああああああああああああ（作品）　　（作者の名前）<br />
-            折端　　　いいいいいいいいいいいい（作品）　　（作者の名前）<br />
-        </div>   
-    </div>    
-</div>    
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 form-group">
+    <%= form_for @renga do |f| %>
 
-<div class="container-fluid col-md-offset-1 col-md-10" >
-    <div class="vertical kasen">
-        <div class="ura">    
-            折立　　ああああああああああああああああああああああ（作品）　　（作者の名前）<br />
-            <span class="koi">二</span>　　　　いいいいいいいいいいいい（作品）　　（作者の名前）<br />
-            <span class="koi">三</span>　　　ああああああああああああああああああああああ（作品）　　（作者の名前）<br />
-            <span class="koi">四</span>　　　　いいいいいいいいいいいい（作品）　　（作者の名前）<br />
-            五　　　ああああああああああああああああああああああ（作品）　　（作者の名前）<br />
-            六　　　　いいいいいいいいいいいい（作品）　　（作者の名前）<br />
-            七　　　ああああああああああああああああああああああ（作品）　　（作者の名前）<br />
-            八　　　　いいいいいいいいいいいい（作品）　　（作者の名前）<br />
-            九　　　ああああああああああああああああああああああ（作品）　　（作者の名前）<br />
-            十　　　　いいいいいいいいいいいい（作品）　　（作者の名前）<br />
-            花　　　ああああああああああああああああああああああ（作品）　　（作者の名前）<br />
-            挙句　　　いいいいいいいいいいいい（作品）　　（作者の名前）<br />
-        </div>   
-        <p class="kishu">平成●●年●月●●日満尾</p>
-    </div>    
-</div>    
+        <% if @rengas.last.place >= 2 %>
+            <b>打越：</b><%= @rengas.last(2).first.body %><br />
+        <% end %>
+        <b>前句：</b><%= @rengas.last.body %><br />
+
+      <%= f.label :body, "付句" %>
+      <%= f.text_field :body , class: "form-control" %>
+      <%= f.hidden_field :place, value: Kogyo.last.place %>
+      <%= f.hidden_field :kogyo_id, value: Kogyo.last.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <% if Kogyo.last.pick_type == 1 %>
+        <%= f.hidden_field :picked, value: true %>
+      <% end %>
+      <%= f.submit "投稿", class: "btn btn-large btn-default" %>
+    <% end %>
+  </div>
+</div>
+
+<%= render partial: "kogyos/kasen" , locals: {rengas: @rengas} %>
+
