@@ -58,17 +58,17 @@ ActiveRecord::Schema.define(version: 20160306021415) do
   add_index "issens", ["user_id"], name: "index_issens_on_user_id"
 
   create_table "kogyos", force: :cascade do |t|
-    t.integer  "pick_type",     default: 1
+    t.integer  "pick_type",     default: 0
     t.string   "notice"
     t.integer  "place",         default: 1
     t.integer  "season",        default: 0
     t.string   "hokku_name"
     t.datetime "next_due"
-    t.float    "voting_hour"
+    t.boolean  "voting",        default: false
     t.float    "thinking_hour", default: 48.0
     t.integer  "user_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "kogyos", ["user_id"], name: "index_kogyos_on_user_id"

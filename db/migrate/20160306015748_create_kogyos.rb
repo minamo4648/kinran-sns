@@ -7,7 +7,7 @@ class CreateKogyos < ActiveRecord::Migration
       t.integer :season, default: 0
       t.string :hokku_name
       t.datetime :next_due
-      t.float :voting_hour
+      t.boolean :voting, default: false
       t.float :thinking_hour, default: 48
       t.references :user, index: true, foreign_key: true
 

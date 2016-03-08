@@ -59,8 +59,12 @@ before_action :authenticate_user!
         
         @top_renga.update(picked: true)
         @kogyo.update(place: @kogyo.place + 1)
+    
+        if @kogyo.pick_type == 0    
+            @kogyo.update(next_due: Time.zone.now + @kogyo.thinking_hour.hour)
+        end
 
-        redirect_to root_path
+        redirect_to :back
     
     end
 

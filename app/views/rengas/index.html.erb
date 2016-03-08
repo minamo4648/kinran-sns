@@ -3,7 +3,7 @@
     
 	<p class="right_btn">
 	    <% if current_user.id == @kogyo.user_id and RengaVotership.joins(:renga).where(rengas: {kogyo_id: @kogyo.id, place:@kogyo.place}).present? %>
-	        <%= link_to "付句を確定する", advance_kogyo_path(id: @kogyo.id), class: "btn btn-large btn-warning" %>
+	        <%= link_to "締切を前倒しして付句を確定する", advance_kogyo_path(id: @kogyo.id), class: "btn btn-large btn-warning" %>
 	    <% end %>
 	    
 	    <%= link_to "戻る", root_path, class: "btn btn-large btn-default" %>
