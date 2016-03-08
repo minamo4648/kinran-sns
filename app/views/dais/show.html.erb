@@ -30,40 +30,39 @@
 		<% end %>
 	</div>
 	<div class="panel-footer">
-	<% if current_user.tankas.where(dai_id: @dai.id).present? %>
-		投稿済：　<b><%= current_user.tankas.where(dai_id: @dai.id).take.body %></b><br />
-	<% end %>
+		<% if current_user.tankas.where(dai_id: @dai.id).present? %>
+			投稿済：　<b><%= current_user.tankas.where(dai_id: @dai.id).take.body %></b><br />
+		<% end %>
         <% if @dai.due.nil? %>
             締切設定なし
         <% else %>    
             締切：　<%= @dai.due.to_s(:wa) %>
         <% end %>
+		
+		<div class="right_btn">
+		<% if @dai.fase == 1 %>
+			<% if current_user.tankas.where(dai_id: @dai.id).present? %>
+				<%= link_to "推敲", edit_tanka_path(id: current_user.tankas.where(dai_id: @dai.id).first.id , dai_id: @dai.id) , class: "btn btn-large btn-default" %>
+			<% else %>
+				<%= link_to "投稿", new_tanka_path(:dai_id => @dai.id) , class: "btn btn-large btn-default" %>
+			<% end %>
+		<% end %>
+		<% if @dai.fase == 2 %>
+			<%= link_to "投票", vote_dai_path , class: "btn btn-large btn-default" %>
+		<% end %>
+		<% if @dai.fase == 3 %>
+			<%= link_to "一覧", tankas_path(:dai_id => @dai.id) , class: "btn btn-large btn-default" %>
+		<% end %>
+		<% if (@dai.user == current_user or current_user.admin) and @dai.fase < 3 %>
+			&nbsp;<%= link_to "管理", edit_dai_path(@dai.id) , class: "btn btn-large btn-warning" %>
+		<% end %>
+			<%= link_to "戻る", root_path, class: "btn btn-large btn-default" %>
+		</div>
+        
 	</div>
-</div>
-
-<div class="col-md-10 col-md-offset-2">
 
 
-	
-</div>
+		
 
-<div class="col-md-4 col-md-offset-8">
-	
-<% if @dai.fase == 1 %>
-	<% if current_user.tankas.where(dai_id: @dai.id).present? %>
-		<%= link_to "推敲", edit_tanka_path(id: current_user.tankas.where(dai_id: @dai.id).first.id , dai_id: @dai.id) , class: "btn btn-large btn-default" %>
-	<% else %>
-		<%= link_to "投稿", new_tanka_path(:dai_id => @dai.id) , class: "btn btn-large btn-default" %>
-	<% end %>
-<% end %>
-<% if @dai.fase == 2 %>
-	<%= link_to "投票", vote_dai_path , class: "btn btn-large btn-default" %>
-<% end %>
-<% if @dai.fase == 3 %>
-	<%= link_to "一覧", tankas_path(:dai_id => @dai.id) , class: "btn btn-large btn-default" %>
-<% end %>
-<% if (@dai.user == current_user or current_user.admin) and @dai.fase < 3 %>
-	&nbsp;<%= link_to "管理", edit_dai_path(@dai.id) , class: "btn btn-large btn-warning" %>
-<% end %>
-	<%= link_to "戻る", root_path, class: "btn btn-large btn-default" %>
+
 </div>
