@@ -120,6 +120,25 @@ before_action :voter_judge!, only: [:vote]
     end    
     
   end  
+
+  def look_for
+
+  if current_user.admin == true
+    @raw_dais = Dai.order(due: :desc)
+  else  
+    @raw_dais = Dai.order(due: :desc).where("target_gender = ? or target_gender = ?",0,current_user.gender)
+          .where("target_grade like ? or target_grade = ?",  "%" + current_user.grade.to_s,"0")
+  end
+
+  if params[:q].present?
+    @q      = @raw_dais.search(:title_cont_all => params[:q][:title_cont].split(/[ 　]/))
+  else
+    @q      = @raw_dais.search(params[:q])
+  end
+    @dais_all = @q.result.order(id: :desc)
+    @dais = @dais_all.page(params[:page]).per(15)
+    
+  end
   
   def vote
     

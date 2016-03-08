@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     end
     collection do
       get 'manage'
+      get 'look_for'  
     end   
   end
   resources :issens
