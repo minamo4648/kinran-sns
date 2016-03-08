@@ -1,3 +1,24 @@
+<div class="panel panel-default" id="kogyo_panel">
+	<div class="panel-heading">
+		発句：「<%= @rengas.first.body %>」
+	</div>
+	<div class="panel-body">
+		<p><%= simple_format(@kogyo.notice) %></p>
+		<p>出題：<%= render partial: "shared/name", locals: {user: @kogyo.user} %>
+		<%= render partial: "shared/gg", locals: {user: @kogyo.user} %></p>
+	</div>
+	<div class="panel-footer">
+  	<% if current_user.rengas.where(kogyo_id: @kogyo.id, place: @kogyo.place).present? %>
+  		<p>投稿済：　<b><%= current_user.rengas.where(kogyo_id: @kogyo.id, place: @kogyo.place).take.body %></b></p>
+  	<% end %>
+          <% if @kogyo.pick_type == 1 %>
+              出勝（早い者勝ち）の連歌です
+          <% else %>    
+              締切：　<%= @kogyo.next_due.to_s(:wa) %>
+          <% end %>
+	</div>
+</div>
+
 <div class="row">
   <div class="col-md-6 col-md-offset-3 form-group">
     <%= form_for @renga do |f| %>
@@ -9,10 +30,10 @@
 
       <%= f.label :body, "#{place_name(@rengas.last.place + 1)}　付句" %>
       <%= f.text_field :body , class: "form-control" %>
-      <%= f.hidden_field :place, value: Kogyo.last.place %>
-      <%= f.hidden_field :kogyo_id, value: Kogyo.last.id %>
+      <%= f.hidden_field :place, value: @kogyo.place %>
+      <%= f.hidden_field :kogyo_id, value: @kogyo.id %>
       <%= f.hidden_field :user_id, value: current_user.id %>
-      <% if Kogyo.last.pick_type == 1 %>
+      <% if @kogyo.pick_type == 1 %>
         <%= f.hidden_field :picked, value: true %>
       <% end %>
       <%= f.submit "投稿", class: "btn btn-large btn-default" %>

@@ -71,7 +71,7 @@ before_action :authenticate_user!
     private
 
         def kogyo_params
-            params.require(:kogyo).permit(:user_id, :place, :season, :hokku_name, :next_due, :voting_hour, :thinking_hour, :pick_type)
+            params.require(:kogyo).permit(:user_id, :place, :season, :hokku_name, :next_due, :voting_hour, :thinking_hour, :pick_type, :notice, :next_notice)
         end
 
         def renga_params

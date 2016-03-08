@@ -95,16 +95,19 @@
               <% end %>
               <li>
                 <% if kogyo_fase == 1 %>
-                  <%= link_to new_kogyo_path do %>
-                    <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>
-                    連歌
-                  <% end %>
+                  <% if current_user.holder == true %>
+                    <%= link_to new_kogyo_path do %>
+                      <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>
+                      連歌
+                    <% end %>
+                  <% end %>  
                 <% else %>
-                  <% if Kogyo.last.voting == true %>
+                  <% if Kogyo.last.voting == true and (Kogyo.last.pick_type == 2 or Kogyo.last.user == current.user ) %>
                     <%= link_to rengas_path do %>
                       <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
                       連歌
                     <% end %>
+                  <% elsif Kogyo.last.voting == true %>
                   <% else %>
                     <% if Renga.where(kogyo_id: Kogyo.last.id, user_id: current_user.id, place: Kogyo.last.place).present? %>
                         <%= link_to edit_renga_path(Renga.where(kogyo_id: Kogyo.last.id, user_id: current_user.id, place: Kogyo.last.place).take) do %>

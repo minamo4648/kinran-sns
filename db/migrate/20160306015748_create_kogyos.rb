@@ -2,7 +2,8 @@ class CreateKogyos < ActiveRecord::Migration
   def change
     create_table :kogyos do |t|
       t.integer :pick_type, default: 0
-      t.string :notice
+      t.string :notice, default: ""
+      t.string :next_notice
       t.integer :place, default: 1
       t.integer :season, default: 0
       t.string :hokku_name

@@ -64,6 +64,16 @@
       <div class="col-md-12">
           <%= f.hidden_field :user_id, value: current_user.id %>  
           <%= f.hidden_field :place, value: 2 %>
+          <%= f.hidden_field :notice, value: "★　「七七」で付句をします。
+★　脇句は、発句とワンセットになるよう、内容をある程度近づけます。
+★　発句と季節を揃えます。
+★　最後は名詞にします（体言止め）。
+★　俳句ではないので、「や」「かな」「けり」など、切れ字は用いません。" %>
+          <%= f.hidden_field :next_notice, value: "★　「五七五」で付句をします。
+★　発句が春か秋の場合は、同じ季節で、夏か冬の場合は無季とします。
+★　発句と内容がかぶらないようにします。
+★　「て」「に」「にて」「らん」「もなし」で終わらせます。
+★　俳句ではないので、「や」「かな」「けり」など、切れ字は用いません。" %>
           <%= f.submit "連歌を始める", class: "btn btn-large btn-default" %>
       </div>
 

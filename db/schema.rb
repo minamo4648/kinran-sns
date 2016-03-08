@@ -59,7 +59,8 @@ ActiveRecord::Schema.define(version: 20160306021415) do
 
   create_table "kogyos", force: :cascade do |t|
     t.integer  "pick_type",     default: 0
-    t.string   "notice"
+    t.string   "notice",        default: ""
+    t.string   "next_notice"
     t.integer  "place",         default: 1
     t.integer  "season",        default: 0
     t.string   "hokku_name"

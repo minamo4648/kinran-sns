@@ -76,22 +76,19 @@ module ApplicationHelper
             return 1
         elsif Kogyo.last.place >= 2 and Kogyo.last.place <= 18
         
-            if Kogyo.last.pick_type != 1
-                #binding.pry
-                if Kogyo.last.next_due < Time.zone.now
-                    if Kogyo.last.pick_type == 0 and Kogyo.last.voting == true
-                        Kogyo.last.update(next_due: Kogyo.last.next_due + 1.day)
-                    else
-                        if Kogyo.last.voting == true and Kogyo.last.rengas.where(place: Kogyo.last.place).count > 0
-                            advance_kogyo
-                        elsif Kogyo.last.voting == false and Kogyo.last.rengas.where(place: Kogyo.last.place).count > 0
-                            Kogyo.last.update(voting: true)
-                        end
-                        Kogyo.last.update(next_due: Kogyo.last.next_due + Kogyo.last.thinking_hour.hour)
+            if Kogyo.last.next_due < Time.zone.now and Kogyo.last.pick_type != 1
+                if Kogyo.last.pick_type == 0 and Kogyo.last.voting == true
+                    Kogyo.last.update(next_due: Kogyo.last.next_due + 1.day)
+                else
+                    if Kogyo.last.pick_type == 2 and Kogyo.last.voting == true and Kogyo.last.rengas.where(place: Kogyo.last.place).count > 0
+                        advance_kogyo
+                    elsif Kogyo.last.voting == false and Kogyo.last.rengas.where(place: Kogyo.last.place).count > 0
+                        Kogyo.last.update(voting: true)
                     end
+                    Kogyo.last.update(next_due: Kogyo.last.next_due + Kogyo.last.thinking_hour.hour)
                 end
             end
-        
+            
             return 2
         else
             return 1
