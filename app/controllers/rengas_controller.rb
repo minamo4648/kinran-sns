@@ -36,7 +36,8 @@ before_action :authenticate_user!
     
     def index
     
-      @rengas = Renga.where(kogyo_id: Kogyo.last.id, place: Kogyo.last.place)
+      @kogyo = Kogyo.last
+      @rengas = Renga.where(kogyo_id: @kogyo.id, place: @kogyo.place)
     
     end
     

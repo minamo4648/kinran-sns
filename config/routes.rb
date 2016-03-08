@@ -45,7 +45,11 @@ Rails.application.routes.draw do
       get 'vote'
     end
   end
-  resources :kogyos
+  resources :kogyos do
+    member do
+      get 'advance'
+    end
+  end
 
 #http://easyramble.com/cutomize-controllers-on-rails-devise.html
   

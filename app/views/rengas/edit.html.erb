@@ -11,8 +11,14 @@
       <%= f.text_field :body , class: "form-control" %>
       <%= f.submit "投稿", class: "btn btn-large btn-default" %>
     <% end %>
+    
+    <% if current_user.id == @kogyo.user_id and @kogyo.rengas.where(place: @kogyo.place).present? %>
+      <%= link_to "付句の選択", rengas_path, class: "btn btn-large btn-warning" %>
+    <% end %>
   </div>
 </div>
+
+
 
 <%= render partial: "kogyos/kasen" , locals: {rengas: @rengas} %>
 
