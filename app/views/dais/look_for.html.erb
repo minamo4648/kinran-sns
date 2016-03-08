@@ -1,0 +1,54 @@
+<div class="container-fluid col-md-offset-2 col-md-8">
+
+<b>検索</b>
+
+<%= search_form_for @q, :url => look_for_dais_path do |f| %>
+
+    <div class="form-group col-md-5">
+
+          <%# start 特定の文字列で始まる商品名で検索 %>
+          <%= f.label :title_cont, "題に含まれる単語" %>
+          <%= f.search_field :title_cont , class: "form-control" %>
+          <br />
+
+      <%= f.label :genre_eq , "種類" %>
+      <label><%= f.radio_button :genre_eq, "", {:checked=>true} %>指定なし</label>      
+      <label><%= f.radio_button :genre_eq, "0" %>短歌</label>
+      <label><%= f.radio_button :genre_eq, "1" %>俳句</label>
+      <label><%= f.radio_button :genre_eq, "2" %>川柳</label>
+      <label><%= f.radio_button :genre_eq, "3" %>都々逸</label>
+      <label><%= f.radio_button :genre_eq, "4" %>その他</label>
+      <br /><br />
+
+          <%= f.submit "検索", class: "btn btn-large btn-default" %>
+
+    </div>
+    
+<% end %>
+
+</div>
+
+<div class="container-fluid col-md-offset-2 col-md-8">
+    
+    <%= "全#{@dais_all.count}件" %>
+    
+    <%= paginate @dais %>    
+
+    <table class="table table-bordered">
+        
+      <thead>
+        <tr>
+          <th class="col-md-1"></th>
+          <th class="col-md-5">題（投稿数）</th>
+          <th class="col-md-3">状態</th>
+          <th class="col-md-3">締切</th>
+      </thead>
+    
+      <tbody>
+    
+    	<%= render @dais %>
+    
+      </tbody>
+      
+    </table>
+</div>

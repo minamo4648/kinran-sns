@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160226014329) do
+ActiveRecord::Schema.define(version: 20160306021415) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "body",                       null: false
@@ -57,6 +57,23 @@ ActiveRecord::Schema.define(version: 20160226014329) do
   add_index "issens", ["user_id", "tanka_id"], name: "index_issens_on_user_id_and_tanka_id", unique: true
   add_index "issens", ["user_id"], name: "index_issens_on_user_id"
 
+  create_table "kogyos", force: :cascade do |t|
+    t.integer  "pick_type",     default: 0
+    t.string   "notice",        default: ""
+    t.string   "next_notice"
+    t.integer  "place",         default: 1
+    t.integer  "season",        default: 0
+    t.string   "hokku_name"
+    t.datetime "next_due"
+    t.boolean  "voting",        default: false
+    t.float    "thinking_hour", default: 48.0
+    t.integer  "user_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "kogyos", ["user_id"], name: "index_kogyos_on_user_id"
+
   create_table "noteships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "notice_id"
@@ -74,6 +91,32 @@ ActiveRecord::Schema.define(version: 20160226014329) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  create_table "renga_voterships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "renga_id"
+    t.integer  "kogyo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "renga_voterships", ["kogyo_id"], name: "index_renga_voterships_on_kogyo_id"
+  add_index "renga_voterships", ["renga_id"], name: "index_renga_voterships_on_renga_id"
+  add_index "renga_voterships", ["user_id"], name: "index_renga_voterships_on_user_id"
+
+  create_table "rengas", force: :cascade do |t|
+    t.string   "body"
+    t.boolean  "selected",   default: true
+    t.boolean  "picked",     default: false
+    t.integer  "place",                      null: false
+    t.integer  "user_id"
+    t.integer  "kogyo_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "rengas", ["kogyo_id"], name: "index_rengas_on_kogyo_id"
+  add_index "rengas", ["user_id"], name: "index_rengas_on_user_id"
 
   create_table "tankas", force: :cascade do |t|
     t.string   "body"

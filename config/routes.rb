@@ -34,10 +34,10 @@ Rails.application.routes.draw do
     member do
       get 'vote'
       get 'proceed'
-      get 'look_for'  
     end
     collection do
       get 'manage'
+      get 'look_for'  
     end   
   end
   resources :issens
