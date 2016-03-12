@@ -21,8 +21,10 @@
         <% end %>
         
     </div>
-
+    <div class="vertical col-md-5"></div>
 <table class="table table-bordered">
+
+<div><%= paginate @tankas %></div>
 
   <thead>
     <% if @user == current_user %>
