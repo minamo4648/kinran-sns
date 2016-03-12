@@ -21,8 +21,10 @@
         <% end %>
         
     </div>
-
+    <div class="vertical col-md-5"></div>
 <table class="table table-bordered">
+
+<div><%= paginate @tankas %></div>
 
   <thead>
     <% if @user == current_user %>
@@ -59,13 +61,19 @@
                 </td>
             
                 <td>
-                    
-                    <%= link_to t.body, t %> 
+                    <% case t.dai.fase %>
+                    <% when 1 %>
+                        <%= link_to t.body, edit_tanka_path(id: t.id) %>
+                    <% when 2 %>
+                        <%= t.body %>
+                    <% when 3 %>
+                        <%= link_to t.body, t %>
+                    <% end %>
                     <span class="badge pull-right"><%= Comment.where(tanka_id: t.id, deleted: false).count %></span>
                 </td>
                 <td>
                     
-                    <%= t.updated_at.strftime("%-m/%-d") %> 
+                    <%= t.submitted_at.strftime("%-m/%-d") %> 
                 
                 </td>
                 <td>
