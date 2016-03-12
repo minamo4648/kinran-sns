@@ -59,8 +59,14 @@
                 </td>
             
                 <td>
-                    
-                    <%= link_to t.body, t %> 
+                    <% case t.dai.fase %>
+                    <% when 1 %>
+                        <%= link_to t.body, edit_tanka_path(id: t.id) %>
+                    <% when 2 %>
+                        <%= t.body %>
+                    <% when 3 %>
+                        <%= link_to t.body, t %>
+                    <% end %>
                     <span class="badge pull-right"><%= Comment.where(tanka_id: t.id, deleted: false).count %></span>
                 </td>
                 <td>
