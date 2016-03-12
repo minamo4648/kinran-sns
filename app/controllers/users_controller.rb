@@ -26,11 +26,11 @@ before_action :admin_only, only: [:edit, :update, :index]
     @soultanka = Tanka.find_by(id: @user.soultanka_id)
     #@tankas = @user.tankas.order(created_at: :desc)
     if @user == current_user
-      @tankas = Tanka.where(user_id: @user.id).page(params[:page])
+      @tankas = Tanka.where(user_id: @user.id).order(submitted_at: :desc).page(params[:page])
     else
-      @tankas = Tanka.joins(:dai).where(dais: {fase: 3}).where(exposed: true).where(user_id: @user.id).page(params[:page])
+      @tankas = Tanka.joins(:dai).where(dais: {fase: 3}).where(exposed: true).where(user_id: @user.id).order(submitted_at: :desc).page(params[:page])
     end
-    @best_tanka = @tankas.where(exposed: true).where("kin_cnt >= ?", 1).order(kin_cnt: :desc, ransho_cnt: :desc, created_at: :asc).first if @tankas.where("kin_cnt >= ?", 1).count > 0
+    @best_tanka = @tankas.where(exposed: true).where("kin_cnt >= ?", 1).reorder(kin_cnt: :desc, ransho_cnt: :desc, created_at: :asc).first if @tankas.where("kin_cnt >= ?", 1).count > 0
 
   end
   
