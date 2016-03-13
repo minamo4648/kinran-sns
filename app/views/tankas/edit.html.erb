@@ -1,8 +1,8 @@
 <h1>推敲</h1>
 
-<div class="panel panel-default">
+<div class="panel panel-default daipanel">
 	<div class="panel-heading">
-		題：「<%= @dai.title %>」<font color="#ff00000">（<%=@dai.genre_name %>）</font>
+		題：「<%= @dai.title %>」<span class="red">（<%=@dai.genre_name %>）</span>
 	</div>
 	<div class="panel-body">
 		<%= simple_format(@dai.comment) %>
@@ -20,7 +20,7 @@
   <div class="col-md-6 col-md-offset-3">
     <%= form_for @tanka do |f| %>
       <div class="form-group">
-        <%= f.label :body, "短歌" %>
+        <b>作品：</b><span class="red"><%= f.label :body, @dai.genre_name2 %></span>
         <%= f.text_field :body , class: "form-control" %>
   
         <%= f.submit "投稿", class: "btn btn-large btn-default" %>
