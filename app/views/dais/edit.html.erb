@@ -149,11 +149,11 @@ function connectcheck3( ischecked ) {
                 <td>
                         <% if t.selected == true %>
                         
-                            <span class="red"><%= link_to "入選", select_tanka_path(id: t.id.to_s, dai_id: params[:id]) %></span>
+                            <%= link_to "入選", select_tanka_path(id: t.id.to_s, dai_id: params[:id]), :style=>"color:red;" %>
                         
                         <% else %>
                         
-                            <span class="gray"><%= link_to "落選", select_tanka_path(id: t.id.to_s, dai_id: params[:id]) %></span>
+                            <%= link_to "落選", select_tanka_path(id: t.id.to_s, dai_id: params[:id]), :style=>"color:#999;" %>
                     
                         <% end %>
                 </td>
