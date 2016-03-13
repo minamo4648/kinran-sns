@@ -56,7 +56,7 @@
       一撰
       <% end %>
       》</p>
-      <p>　<%= @issen.tanka.body %></p>
+      <p>　<span class="min"><%= @issen.tanka.body %></span></p>
       <% if @issen.tanka.exposed %>
         <p Align="right"><%= render partial: "shared/namelink", locals: {user: @issen.tanka.user} %>
         <%= render partial: "shared/name", locals: {user: @issen.tanka.user} %>

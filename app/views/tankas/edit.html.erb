@@ -6,6 +6,9 @@
 	</div>
 	<div class="panel-body">
 		<%= simple_format(@dai.comment) %>
+		<br />
+		出題：<%= render partial: "shared/name", locals: {user: @dai.user} %>
+		<%= render partial: "shared/gg", locals: {user: @dai.user} %>
 	</div>
 	<div class="panel-footer">
         <% if @dai.due.nil? %>
