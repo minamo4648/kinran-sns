@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <%= render 'shared/em', error_messages: @error_messages %>    
     <div class="col-md-10 col-md-offset-2">
-        「<%= @tanka.body%>」への一撰評<br />
+        「<span class="min"><%= @tanka.body%></span>」への一撰評<br />
         
         <%= form_for @issen do |f| %>
             <div class="form-group">

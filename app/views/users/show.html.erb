@@ -10,11 +10,11 @@
     <div class="vertical col-md-offset-5 col-md-2">
         <% if @user.soultanka_id.present? %>
                 自撰　題「<%=@soultanka.dai.title %>」<br />
-                <p><%= @soultanka.body %></p>
+                <p><span class="min"><%= @soultanka.body %></span></p>
         <% end %>
         <% if @best_tanka.present? %>
                  <br />代表作　題「<%=@best_tanka.dai.title %>」<br />
-                <p><%= @best_tanka.body %></p>
+                <p><span class="min"><%= @best_tanka.body %></span></p>
         <% end %>
         <% if !@best_tanka.present? and ! @user.soultanka_id.present? %>
                  <br />（自撰・代表歌の掲示はありません）<br />
@@ -61,14 +61,16 @@
                 </td>
             
                 <td>
-                    <% case t.dai.fase %>
-                    <% when 1 %>
-                        <%= link_to t.body, edit_tanka_path(id: t.id) %>
-                    <% when 2 %>
-                        <%= t.body %>
-                    <% when 3 %>
-                        <%= link_to t.body, t %>
-                    <% end %>
+                    <span class="min">
+                        <% case t.dai.fase %>
+                        <% when 1 %>
+                            <%= link_to t.body, edit_tanka_path(id: t.id) %>
+                        <% when 2 %>
+                            <%= t.body %>
+                        <% when 3 %>
+                            <%= link_to t.body, t %>
+                        <% end %>
+                    </span>
                     <span class="badge pull-right"><%= Comment.where(tanka_id: t.id, deleted: false).count %></span>
                 </td>
                 <td>

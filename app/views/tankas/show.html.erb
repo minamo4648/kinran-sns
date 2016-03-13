@@ -51,7 +51,7 @@
         <% end %>
     <% end %>
     <div class="vertical onetanka" >
-        <p><%= @tanka.body %></p>
+        <p><span class="min"><%= @tanka.body %></span></p>
         <p Align="right"><%= render partial: "shared/namelink", locals: {user: @tanka.user} %>
             <%= render partial: "shared/name", locals: {user: @tanka.user} %>
         <%= render partial: "shared/vgg", locals: {user: @tanka.user} %></p>
