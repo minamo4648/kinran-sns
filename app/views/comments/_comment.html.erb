@@ -8,13 +8,13 @@
         <% end %>
         
         <% if comment.user.kin?(comment.tanka) %>
-            <font color="red">金</font>
+            <span class="red">金</span>
         <% end %>
         <% if comment.user.ran?(comment.tanka) %>
-            <font color="red">蘭</font>
+            <span class="red">蘭</span>
         <% end %>
         <% if comment.user.sho?(comment.tanka) %>
-            <font color="red">笑</font>
+            <span color="red">笑</span>
         <% end %>
         
         <%= comment.created_at.to_s(:wa) %>

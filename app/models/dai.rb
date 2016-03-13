@@ -24,6 +24,12 @@ class Dai < ActiveRecord::Base
     ["短歌","俳句","川柳","都々逸","その他"][genre]
   
   end
+
+  def genre_name2
+
+    ["短歌（五七五七七）","俳句（五七五）","川柳（五七五）","都々逸（七{3|4}七{4|3}七{3|4}五","その他"][genre]
+  
+  end
   
   def top3_ids
     
