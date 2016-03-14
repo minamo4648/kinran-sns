@@ -28,6 +28,24 @@ before_action :authenticate_user!
 
     end
 
+    def edit
+    
+        @kogyo = Kogyo.last
+        @rengas = @kogyo.rengas
+    
+    end
+
+    def update
+        @kogyo = Kogyo.last
+
+        if @kogyo.update(kogyo_params)
+            redirect_to root_path, notice: "投稿が完了しました"
+        else
+            redirect_to edit_kogyo_path(id Kogyo.last.id)
+        end
+
+    end
+
     def index
     
         @kogyos = Kogyo.where(place: 19).order(created_at: :desc).page(params[:page])
@@ -58,7 +76,8 @@ before_action :authenticate_user!
         @top_renga = Renga.where('id in (?)', @top_ids).order(updated_at: :asc).first
         
         @top_renga.update(picked: true)
-        @kogyo.update(place: @kogyo.place + 1)
+        @kogyo.update(place: @kogyo.place + 1, voting: false, notice: @kogyo.next_notice)
+        @kogyo.update(next_notice: view_context.tsukeku_notice(@kogyo.place + 1))
     
         if @kogyo.pick_type == 0    
             @kogyo.update(next_due: Time.zone.now + @kogyo.thinking_hour.hour)

@@ -94,6 +94,14 @@
                   <li>
                     <%= link_to "出題一覧", manage_dais_path %>
                   </li>
+                  <% if Kogyo.count > 0 %>
+                    <% if Kogyo.last.user == current_user %>                  
+                      <li role="separator" class="divider"></li>
+                      <li>
+                        <%= link_to "連歌管理", edit_kogyo_path(id: Kogyo.last.id) %>
+                      </li>
+                    <% end %>
+                  <% end %>
                 </ul>
               </li>
               <% end %>
@@ -106,7 +114,7 @@
                     <% end %>
                   <% end %>  
                 <% else %>
-                  <% if Kogyo.last.voting == true and (Kogyo.last.pick_type == 2 or Kogyo.last.user == current.user ) %>
+                  <% if Kogyo.last.voting == true and (Kogyo.last.pick_type == 2 or Kogyo.last.user == current_user ) %>
                     <%= link_to rengas_path do %>
                       <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
                       連歌

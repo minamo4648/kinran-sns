@@ -1,0 +1,71 @@
+<h1>連歌興行</h1>
+
+    <%= render 'shared/em', error_messages: @error_messages %>
+
+<div class="container-fluid col-md-12">
+
+  <div class="col-md-6 col-md-offset-3">
+    
+      
+    <%= form_for @kogyo do |f| %>
+
+    <div class="form-group">
+      
+      <div class ="col-md-12">
+        発句：<%= @kogyo.rengas.first.body %>
+      </div>
+
+      <div class="col-md-12">
+        <label>付句の決定</label>
+        <label><%= f.radio_button :pick_type, "0", {:checked=>true} %>亭主の撰</label>
+        <label><%= f.radio_button :pick_type, "1" %>出勝（早い者勝ち）</label>
+        <label><%= f.radio_button :pick_type, "2" %>投票</label>
+        <br /><br />
+      </div>  
+
+      <div class="col-md-12">
+        <%= f.label :next_due, "次の締切" %>
+        <%= f.datetime_select(
+            :next_due,
+            start_year: Time.zone.now.year,
+            end_year:   (Time.zone.now.year + 1),
+            default:    Time.zone.today + 2,
+            minute_step: 10 ) %>
+        <br /><br />
+      </div>
+      
+      <div class="col-md-6">
+        <%= f.label :thinking_hour, "締切" %>
+        <div class="form-inline">
+          <%= f.text_field :thinking_hour , class: "form-control hours" %>時間ごと
+        </div>
+        <br />
+      </div>
+      
+      <div class="col-md-12">
+
+      <div>
+        <%= f.label :notice, "付句の注意書き" %>
+        <%= f.text_area :notice, class: "form-control" , :size => "20x10" %>
+      </div>
+      
+      <div>
+        <%= f.label :next_notice, "次の付句の注意書き" %>
+        <%= f.text_area :next_notice, class: "form-control" , :size => "20x10" %>
+      </div>
+
+        <%= f.submit "更新", class: "btn btn-large btn-default" %>
+      </div>
+
+        </div>
+    </div>
+    
+        <% end %>
+    
+
+  </div>
+</div>
+
+
+<%= render partial: "kogyos/kasen" , locals: {rengas: @rengas} %>
+
