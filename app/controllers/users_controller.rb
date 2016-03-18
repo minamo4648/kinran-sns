@@ -30,7 +30,7 @@ before_action :admin_only, only: [:edit, :update, :index]
     else
       @tankas = Tanka.joins(:dai).where(dais: {fase: 3}).where(exposed: true).where(user_id: @user.id).order(submitted_at: :desc).page(params[:page])
     end
-    @best_tanka = @tankas.where(dais: {fase: 3}).where(exposed: true).where("kin_cnt >= ?", 1).reorder(kin_cnt: :desc, ransho_cnt: :desc, created_at: :asc).first if @tankas.where("kin_cnt >= ?", 1).count > 0
+    @best_tanka = @tankas.joins(:dai).where(dais: {fase: 3}).where(exposed: true).where("kin_cnt >= ?", 1).reorder(kin_cnt: :desc, ransho_cnt: :desc, created_at: :asc).first if @tankas.where("kin_cnt >= ?", 1).count > 0
 
   end
   
