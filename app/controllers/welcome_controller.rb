@@ -18,7 +18,7 @@ class WelcomeController < ApplicationController
   
   def send_message
 
-     UserMailer.petition(params[:body],params[:name],params[:email]).deliver_later
+     UserMailer.petition(params[:body],params[:name],params[:email]).deliver_now
      
      redirect_to root_path, notice: '送信しました'
       
