@@ -24,6 +24,11 @@
       <%= f.text_field :nickname , class: "form-control" %>
       
       <%= f.hidden_field :nickname_update, :value => Date.today %>
+
+      <div>
+      <%= f.check_box :mail_ok %>
+      <%= f.label :mail_ok, "メール配信を希望する" , checked_value: true, unchecked_value: false %>
+      </div>
       
     <% if current_user.admin %>  
       <%= f.check_box :admin %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306021415) do
+ActiveRecord::Schema.define(version: 20160318002148) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "body",                       null: false
@@ -44,6 +44,22 @@ ActiveRecord::Schema.define(version: 20160306021415) do
   end
 
   add_index "dais", ["user_id"], name: "index_dais_on_user_id"
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "issens", force: :cascade do |t|
     t.string   "body",       null: false
@@ -161,6 +177,7 @@ ActiveRecord::Schema.define(version: 20160306021415) do
     t.string   "nickname"
     t.date     "nickname_update"
     t.integer  "soultanka_id"
+    t.boolean  "mail_ok",                default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

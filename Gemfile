@@ -42,6 +42,10 @@ gem 'bootstrap-sass'
   gem 'taps'
   gem 'ransack'
 
+  gem "delayed_job"
+  gem "delayed_job_active_record"  
+  gem "daemons"
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
