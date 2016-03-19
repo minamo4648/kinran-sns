@@ -1,0 +1,28 @@
+<div>
+    <tr>
+        <td>
+            <%= user.id %>
+        </td>
+        <td>
+            <%= link_to user.name, edit_user_path(user) %>
+            <small><%= "(#{user.nickname})" if user.nickname.present? %></small>
+        </td>
+        <td>
+            <%= user.current_sign_in_at.to_s(:wa) %>
+        </td>
+        <td>
+            <%= user.last_mail.to_s(:wa) if user.last_mail.present? %>
+        </td>
+        <td>
+            <% if user.mail_ok %>
+                <% if user.mail_to %>
+                    <%= link_to "送信", mailing_user_path(user) , :style=>"color:#c9171e;" %>
+                <% else %>
+                    <%= link_to "送信", mailing_user_path(user) , :style=>"color:#95949a;" %>
+                <% end %>
+            <% else %>    
+                <% user.mail_to = false %>
+            <% end %>
+        </td> 
+    </tr>
+</div>

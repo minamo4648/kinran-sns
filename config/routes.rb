@@ -10,11 +10,15 @@ Rails.application.routes.draw do
   get   'vote_redo' , to: 'voterships#redo'
   get   'inquiry' , to: 'welcome#inquiry'
   post  'inquiry' , to: 'welcome#send_message'
+  get   'invite' , to: 'users#invite'  
   resources :voterships, only: [:create, :destroy]
   resources :users  do
     collection do
       get 'import_csv_new'
       post 'import_csv'
+    end  
+    member do
+      get 'mailing'
     end
   end
   resources :comments

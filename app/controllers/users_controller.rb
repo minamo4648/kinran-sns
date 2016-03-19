@@ -55,21 +55,43 @@ before_action :admin_only, only: [:edit, :update, :index]
     redirect_to import_csv_new_path
   end
 
+  def invite
+
+    @q      = User.search(params[:q])
+    @users_all = @q.result(distinct: true)
+    @users = @users_all.order(current_sign_in_at: :asc).page(params[:page])
+  
+  end
+  
+  def mailing
+
+    @user = User.find(params[:id])
+    
+    if @user.mail_to
+      @user.update(mail_to: false)
+    else
+      @user.update(mail_to: true)
+    end
+    
+    redirect_to :back
+    
+  end
+
 private
 
     def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation,
-            :nickname, :nickname_update, :admin, :gender, :grade ,:holder, :contributor)
+            :nickname, :nickname_update, :admin, :gender, :grade ,:holder, :contributor, :mail_ok)
     end
 
     def account_update_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation,
-          :nickname, :nickname_update, :admin, :gender, :grade ,:holder, :contributor)
+          :nickname, :nickname_update, :admin, :gender, :grade ,:holder, :contributor, :mail_ok)
     end
 
     def account_update
       params.require(:user).permit(:name, :email, :password, :password_confirmation,
-          :nickname, :nickname_update, :admin, :gender, :grade ,:holder, :contributor)
+          :nickname, :nickname_update, :admin, :gender, :grade ,:holder, :contributor, :mail_ok)
     end
     
     def admin_only
