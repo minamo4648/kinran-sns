@@ -10,7 +10,6 @@ class UserMailer < ApplicationMailer
     @name= name
     @email= email
 
-
     mail to: "minamo.kawano@nifty.com"
   end
 end
