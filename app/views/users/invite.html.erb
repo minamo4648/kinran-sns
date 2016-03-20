@@ -1,3 +1,15 @@
+<div class="container-fluid col-md-offset-3 col-md-6 invitation" >
+
+    <p>題名：<%= @invitation.subject %></p>
+    <p>本文：<%= @invitation.body %></p>
+
+    <div class = "right_btn">
+        <%= link_to "編集", edit_invitation_path(:id => @invitation.id) , class: "btn btn-large btn-default" %>
+        <%= link_to "送信", mysend_invitations_path(:id => @invitation.id) , class: "btn btn-large btn-default" %>
+    </div>
+
+</div>    
+
 <div class="container-fluid col-md-offset-1 col-md-10" >
 
 <%#= page_entries_info @users %>    

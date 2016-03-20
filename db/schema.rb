@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319221146) do
+ActiveRecord::Schema.define(version: 20160319234418) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "body",                       null: false
@@ -60,6 +60,13 @@ ActiveRecord::Schema.define(version: 20160319221146) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
+  create_table "invitations", force: :cascade do |t|
+    t.string   "subject",    default: "KAKAIより"
+    t.string   "body",       default: "こんにちは。短歌投稿サイトKAKAIです。"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+  end
 
   create_table "issens", force: :cascade do |t|
     t.string   "body",       null: false

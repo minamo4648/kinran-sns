@@ -57,6 +57,7 @@ before_action :admin_only, only: [:edit, :update, :index]
 
   def invite
 
+    @invitation = Invitation.last
     @q      = User.search(params[:q])
     @users_all = @q.result(distinct: true)
     @users = @users_all.order(current_sign_in_at: :asc).page(params[:page])

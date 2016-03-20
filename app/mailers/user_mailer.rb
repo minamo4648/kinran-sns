@@ -12,4 +12,19 @@ class UserMailer < ApplicationMailer
 
     mail to: "minamo.kawano@nifty.com"
   end
+  
+  def invitation(body,name,email,subject,tanka)
+    
+    @body = body
+    @name = name
+    @email = email
+    @tanka = tanka
+
+    @dais1 = Dai.where(fase: 1).order(due: :desc).limit(5)
+    @dais2 = Dai.where(fase: 2).order(v_due: :desc).limit(5)
+
+    mail to: email, subject: subject
+
+  end
+    
 end

@@ -1,0 +1,45 @@
+<%= @name %>さま
+
+<%= simple_format(@body) %>
+
+<p>―――――――――――――――――――――――――――――――</p>
+
+<p>★最近の人気の一首：</p>
+<p>
+<%= @tanka.body %>
+
+<% if @tanka.user.nickname.present? %>
+    <%= @tanka.user.nickname %>
+<% else %>
+    <%= @tanka.user.name %>
+<% end %>
+</p>
+
+<% if @dais1.count > 0 %>
+<p>○現在投稿できるお題：</p>
+
+    <% @dais1.each do |dai| %>
+    
+        「<%= dai.title %>」（<%= dai.genre_name %>）
+        締切：<%= dai.due.to_s(:wa) %><br />
+    
+    <% end %>
+<% end %>
+
+<% if @dais2.count > 0 %> 
+<p>○現在投票できるお題（多くの場合投稿していなくても投票できます）：</p>
+
+    <% @dais2.each do |dai| %>
+    
+        「<%= dai.title %>」（<%= dai.genre_name %>）
+        締切：<%= dai.v_due.to_s(:wa) %><br />
+    
+    <% end %>
+<% end %>
+
+<p>※今後メールのお知らせを希望しない場合は、サイト内の「プロフィール編集」から「メール配信を希望する」のチェックをオフにして下さい。</p>
+
+<p>
+◆短歌投稿サイト　KAKAI
+<a href="http://kinrantanka.herokuapp.com/">http://kinrantanka.herokuapp.com/</a>
+</p>

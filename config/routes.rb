@@ -42,10 +42,14 @@ Rails.application.routes.draw do
     collection do
       get 'manage'
       get 'look_for'  
-    end   
+    end
   end
   resources :issens
-
+  resources :invitations do
+    collection do
+      get 'mysend'
+    end
+  end
 #http://easyramble.com/cutomize-controllers-on-rails-devise.html
   
 
