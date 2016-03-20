@@ -20,7 +20,7 @@ class InvitationsController < ApplicationController
 
         @users = User.where(mail_to: true)
         @invitaiton = Invitation.find(params[:id])
-        @tankas = Tanka.where('submitted_at > ?' , 1.month.ago).order(kin_cnt: :desc, ransho_cnt: :desc, submitted_at: :asc).limit(10)
+        @tankas = Tanka.joins(:dai).where(dais: {fase: 3}).where(exposed: true).where('submitted_at > ?' , 1.month.ago).order(kin_cnt: :desc, ransho_cnt: :desc, submitted_at: :asc).limit(10)
 
         @users.each do |user|
       
