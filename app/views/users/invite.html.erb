@@ -16,6 +16,12 @@
 
 <%= "全#{@users_all.count}件" %>
 
+<% if User.where(mail_to: true).count > User.count / 2 %>
+    <%= link_to "全員の送信を取り消す", all_mailing_users_path, class: "btn btn-large btn-default" %>
+<% else %>    
+    <%= link_to "全員に送信をつける", all_mailing_users_path, class: "btn btn-large btn-default" %>
+<% end %>
+
     <%= paginate @users %>
     
 <table class="table table-condensed">

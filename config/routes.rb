@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :users  do
     collection do
       get 'import_csv_new'
+      get 'all_mailing'
       post 'import_csv'
     end  
     member do

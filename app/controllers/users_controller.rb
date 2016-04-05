@@ -78,6 +78,18 @@ before_action :admin_only, only: [:edit, :update, :index]
     
   end
 
+  def all_mailing
+
+    if User.where(mail_to: true).count > User.count / 2
+      User.update_all(mail_to: false)
+    else
+      User.update_all(mail_to: true)
+    end
+    
+    redirect_to :back
+    
+  end
+
 private
 
     def user_params
