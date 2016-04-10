@@ -23,7 +23,7 @@
   <div class="col-md-6 col-md-offset-3 form-group">
     <%= form_for @tanka do |f| %>
 
-      <b>作品：</b><span class="red"><%= f.label :body, @dai.genre_name2 %></span>
+      <b>作品（記名は不要です）：</b><span class="red"><%= f.label :body, @dai.genre_name2 %></span>
       <%= f.text_field :body , class: "form-control" %>
       <%= f.hidden_field :dai_id, value: @dai_id %>
       <%= f.hidden_field :user_id, value: current_user.id %>
